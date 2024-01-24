@@ -18,6 +18,7 @@ import AdminLayout from '@/layouts/AdminLayout.vue'
 import postListGuard from '@/middlewares/postListGuard'
 import commonGuard from '@/middlewares/common'
 import adminGuard from '@/middlewares/adminGuard'
+import postDetailGuard from '@/middlewares/postDetailGuard'
  
 const routes = [
     {
@@ -32,12 +33,13 @@ const routes = [
                 path: '',
                 name: 'AllPosts',
                 component: AllPosts,
-                beforeEnter: postListGuard,
+                beforeEnter: postListGuard
             },
             {
                 path: ':id',
                 name: 'Post',
                 component: PostDetail,
+                beforeEnter: postDetailGuard
             },
         ]
     },

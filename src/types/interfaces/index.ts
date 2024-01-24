@@ -59,6 +59,8 @@ export interface PostState {
     total: number | null;
     // 페이지네이션 목록
     pageList: Page[];
+    // 현재 게시물
+    currentPost: null | Post;
 }
 
 export interface TagState {

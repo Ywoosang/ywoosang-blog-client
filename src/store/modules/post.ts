@@ -1,12 +1,13 @@
 import { Module, MutationTree, ActionTree, GetterTree } from 'vuex';
 import { RootState, PostState, Post } from '@/types/interfaces';
-import { getPublicPosts, getPosts } from '@/services/api/post';
+import { getPublicPosts, getPosts, getPost, getPublicPost } from '@/services/api/post';
 import { UsersRole } from '@/types/enums';
 
 const state: PostState = {
   postList : [],
   total: null,
-  pageList: []
+  pageList: [],
+  currentPost: null
 };
 
 export const mutations: MutationTree<PostState> = {
@@ -27,6 +28,9 @@ export const mutations: MutationTree<PostState> = {
           currentPage
         }
       });
+  },
+  SET_CURRENT_POST(state, post) {
+    state.currentPost = post;
   }
 };
 
@@ -45,15 +49,31 @@ export const actions: ActionTree<PostState, RootState> = {
       commit('SET_TOTAL', total);
       commit('SET_PAGE_LIST', { total, page, limit })
     } catch(e) {
-      throw e;
+      console.log(e);
     }
   },
+  async fetchPost({ commit }, payload) {
+    try {
+      let response;
+      const { userRole, id } = payload;
+      if(userRole == UsersRole.ADMIN) {
+        response = await getPost(id);
+      } else {
+        response = await getPublicPost(id);
+      }
+      const post = response.data;
+      commit('SET_CURRENT_POST', post);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 };
 
 const getters: GetterTree<PostState, RootState>  = {
   getPostList: (state: PostState) => state.postList,
   getTotal: (state: PostState) => state.total,
-  getPageList: (state: PostState) =>  state.pageList
+  getPageList: (state: PostState) =>  state.pageList,
+  getCurrentPost: (state: PostState) => state.currentPost
 };
 
 const postModule: Module<PostState, RootState> = {

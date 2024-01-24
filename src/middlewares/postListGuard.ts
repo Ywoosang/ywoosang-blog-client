@@ -1,4 +1,3 @@
-
 export default async function (to, from, next) {
     const page = to.query.page;
     const limit = to.query.limit;

@@ -46,7 +46,7 @@ export default defineComponent({
     margin: 5px 0 0 0;
 }
 .post .description {
-    margin-bottom: 20px;
+    margin: 5px 0;
 }
 .post .tags {
     display: flex;
@@ -54,8 +54,8 @@ export default defineComponent({
 }
 .post .tag {
     cursor:pointer;
-    margin-right: 10px;
-    margin-bottom: 10px;
+    margin-right: 2px;
+    margin-bottom: 2px;
     padding: 5px 10px;
     border-radius: 5px;
     border: 1px solid black;
@@ -70,7 +70,12 @@ export default defineComponent({
 
 /* 데스크톱 */
 @media (min-width: 1340px) {
-    .post {
+    .post .tag{
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+    .post .description {
+        margin-bottom:15px;
     }
 }
 </style>
