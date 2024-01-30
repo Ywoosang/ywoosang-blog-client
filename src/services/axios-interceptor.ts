@@ -40,7 +40,6 @@ service.interceptors.response.use(
                     error.config!.headers.Authorization = `Bearer ${newAccessToken}`;
                     return axios.request(error.config!);
                 } catch (refreshError) {
-                    console.log('refresh 토큰 만료')
                     return Promise.reject(refreshError); 
                 }
             }

@@ -31,13 +31,26 @@ export interface Tag {
     posts?: Post[]
 }
 
+export interface Comment {
+    id: number;
+    content: string;
+    parentCommentId: number | null;
+    replyTo: User;
+    user: User;
+    post: Post;
+    parentComment: Comment | null;
+    replies: Comment[];
+    createdAt: Date;
+    updatedAt: Date;
+}
+
 export interface Page {
     currentPage: number;
     page: number;
 }
 
 export interface AuthState {
-    isLoggedIn: boolean;
+    isLoggedIn: boolean | null;
 }
 
 export interface SidebarState {
@@ -71,6 +84,10 @@ export interface TagState {
 export interface CategoryState {
     category: null | Category,
     pageList: Page[];
+}
+
+export interface CommentState {
+    comments: any;
 }
 
 export interface RootState {

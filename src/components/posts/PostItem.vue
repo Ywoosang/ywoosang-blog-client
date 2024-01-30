@@ -1,6 +1,7 @@
 <template>
     <div class="post-container">
         <article class="post" v-for="post in posts" :key="post.id">
+            <div class="delete-btn" @click="deletePost(post.id)" v-if="getUserRole == 'ADMIN'">삭제</div>
             <h2><router-link :to="{
                 name: 'Post',
                 params: {
@@ -10,7 +11,7 @@
             <p class="timestamp">{{ formatDate(post.createdAt) }}</p>
             <p class="description">{{ post.description }}</p>
             <div class="tags">
-                <router-link :to="`/tags/@${tag.name}`" class="tag" v-for="tag in post.tags" :key="tag.id">{{ tag.name }}</router-link>
+                <router-link :to="`/tag/${tag.id}`" class="tag" v-for="tag in post.tags" :key="tag.id">{{ tag.name }}</router-link>
             </div>
         </article>
     </div>
@@ -19,11 +20,27 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { formatDate } from '@/utils';
+import { deletePost } from '@/services/api/post'
+import { mapGetters } from "vuex";
 
 export default defineComponent({
     props: ['posts'],
     methods: {
+        async deletePost(id:number) {
+            try{
+                const confirmed = window.confirm('정말로 삭제하시겠습니까?');
+                if (confirmed) {
+                    await deletePost(id)
+                }
+                location.reload();
+            } catch (e) {
+                console.log(e);
+            }
+        },
         formatDate
+    },
+    computed: {
+        ...mapGetters('users',['getUserRole'])
     }
 })
 </script>

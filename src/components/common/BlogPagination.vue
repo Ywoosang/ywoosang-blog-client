@@ -20,6 +20,7 @@ export default defineComponent({
 .pagination {
   display: flex;
   justify-content: center;
+  padding:0px;
 }
 .pagination .page {
   padding: 0 3px;

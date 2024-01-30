@@ -10,7 +10,7 @@
       />
     </div>
     <div class="error-message">
-      <span v-if="!emailValid">올바른 이메일 형식이 아닙니다</span>
+      <span v-if="!emailValid">올바른 이메일 형식을 입력해 주세요.</span>
     </div>
     <div class="form-group">
       <label for="userLoginId">아이디:</label>
@@ -22,7 +22,7 @@
       />
     </div>
     <div class="error-message">
-      <span v-if="!userLoginIdValid">4~20자의 올바른 아이디를 입력하세요</span>
+      <span v-if="!userLoginIdValid">아이디는 4~20자여야 합니다.</span>
     </div>
     <div class="form-group">
       <label for="nickname">닉네임:</label>
@@ -34,7 +34,7 @@
       />
     </div>
     <div class="error-message">
-      <span v-if="!nicknameValid">2~10자의 올바른 닉네임을 입력하세요</span>
+      <span v-if="!nicknameValid">닉네임은 2~10자여야 합니다.</span>
     </div>
     <div class="form-group">
       <label for="password">비밀번호:</label>
@@ -42,12 +42,12 @@
         type="password"
         id="password"
         v-model="password"
-        placeholder="6~10자의 영문, 숫자, 특수문자(@!)여야 합니다."
+        placeholder="6~15자의 영문 또는 숫자 또는 특수문자(@!) 여야 합니다."
         autocomplete="off"
       />
     </div>
     <div class="error-message">
-      <span v-if="!passwordValid">6~10자 영문, 숫자, 특수문자(@!)를 각각 하나 이상 포함한 올바른 비밀번호를 입력하세요</span>
+      <span v-if="!passwordValid">비밀번호는 6~15자의 영문, 숫자, 특수문자(@!)만 가능합니다.</span>
     </div>
     <div class="form-group">
       <label for="passwordConfirm">비밀번호 확인:</label>
@@ -70,31 +70,51 @@
   </form>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { signUp } from '@/services/api/auth';
+import { AuthRegisterDto } from '@/types/dto';
+import { defineComponent } from 'vue';
+
+export default defineComponent({
 data() {
     return {
-      email: "",
-      userLoginId: "",
-      nickname: "",
-      password: "",
-      passwordConfirm: "",
-      emailValid: true,
-      userLoginIdValid: true,
-      nicknameValid: true,
-      passwordValid: true,
-      passwordConfirmValid: true
+      email: "" as string,
+      userLoginId: "" as string,
+      nickname: "" as string,
+      password: "" as string,
+      passwordConfirm: "" as string,
+      // 검증
+      emailValid: true as boolean,
+      userLoginIdValid: true as boolean,
+      nicknameValid: true as boolean,
+      passwordValid: true as boolean,
+      passwordConfirmValid: true as boolean
     };
   },
   methods: {
-    submitForm() {
-        this.validateEmail() 
-        this.validateUserLoginId()
-        this.validateNickname()
-        this.validatePassword()
-        this.validatePasswordConfirm();
-        if(!this.emailValid || !this.userLoginIdValid || !this.nicknameValid || !this.passwordValid || !this.passwordConfirmValid) return;
+    async submitForm() {
+        // this.validateEmail() 
+        // this.validateUserLoginId()
+        // this.validateNickname()
+        // this.validatePassword()
+        // this.validatePasswordConfirm();
+        // if(!this.emailValid || !this.userLoginIdValid || !this.nicknameValid || !this.passwordValid || !this.passwordConfirmValid) return;
+        try {
+          const data: AuthRegisterDto = {
+            email: this.email,
+            userLoginId: this.userLoginId,
+            nickname: this.nickname,
+            password: this.password,
+          }
+          const user = await signUp(data);
+          console.log(user);
+        } catch(e) {
+          console.log(e);
+          console.log(e);
+        }
         // axios 요청 처리
+        
+
     },
     validateEmail() {
       this.emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email);
@@ -107,7 +127,7 @@ data() {
     },
     validatePassword() {
       this.passwordValid =
-        /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@!])[A-Za-z\d@!]{6,10}$/.test(
+        /^[a-zA-Z0-9!@]{6,15}$/.test(
           this.password
         );
     },
@@ -118,7 +138,7 @@ data() {
       this.$router.push('/signin');
     }
   }
-};
+});
 </script>
 
 <style scoped>

@@ -6,6 +6,7 @@ import usersModule from './modules/users';
 import postModule from './modules/post';
 import tagModule from './modules/tag';
 import categoryModule from './modules/category';
+import commentModule from './modules/comment';
  
 const store: Store<RootState> = createStore({
     modules: {
@@ -14,7 +15,8 @@ const store: Store<RootState> = createStore({
         'users': usersModule,
         'post': postModule,
         'tag': tagModule,
-        'category': categoryModule
+        'category': categoryModule,
+        'comment': commentModule
     }
 });
 

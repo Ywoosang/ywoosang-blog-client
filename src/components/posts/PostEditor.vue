@@ -72,7 +72,8 @@ import "prismjs/themes/prism.css";
 import Editor from "@toast-ui/editor";
 import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight-all.js";
 import { uploadImageFile, createPost } from "@/services/api/post";
-import { createPostDto } from "@/types/dto";
+import { getCategories } from "@/services/api/category";
+import { CreatePostDto } from "@/types/dto";
 import { defineComponent } from "vue";
 import { AxiosResponse } from "axios";
 import { PostStatus } from "@/types/enums";
@@ -93,7 +94,13 @@ export default defineComponent({
       imageIds: [] as number[],
     };
   },
-  mounted() {
+  async mounted() {
+    try {
+      const { data } = await getCategories();
+      this.categories = data.categories;
+    } catch (e) {
+      console.log(e);
+    }
     this.editor = new Editor({
       el: document.querySelector("#editor") as HTMLElement,
       previewStyle: "vertical",
@@ -138,7 +145,6 @@ export default defineComponent({
           setText(`${baseURL}/files/${filename}`, "image");
           this.imageIds.push(imageId);
         }
-        this.$router.push("/");
       } catch (e: any) {
         alert("파일 업로드에 실패하였습니다");
         console.log(e.statusCode);
@@ -151,7 +157,7 @@ export default defineComponent({
       const content = this.editor!.getMarkdown();
       const { title, status, description, categoryId, tagNames, imageIds } =
         this;
-      const data: createPostDto = {
+      const data: CreatePostDto = {
         title,
         description,
         content,

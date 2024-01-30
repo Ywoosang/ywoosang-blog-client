@@ -66,7 +66,7 @@ export const actions: ActionTree<PostState, RootState> = {
     } catch (e) {
       console.log(e);
     }
-  }
+  },
 };
 
 const getters: GetterTree<PostState, RootState>  = {

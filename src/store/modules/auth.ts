@@ -3,7 +3,7 @@ import { signIn } from '@/services/api/auth';
 import { RootState, AuthState } from '@/types/interfaces';
 
 const state: AuthState = {
-  isLoggedIn: false,
+  isLoggedIn: null,
 };
 
 const mutations: MutationTree<AuthState> = {
@@ -14,16 +14,12 @@ const mutations: MutationTree<AuthState> = {
 
 const actions = {
   async fetchSignIn({ commit }, userData) {
-    try {
-      const response = await signIn(userData);
-      const { accessToken, refreshToken } = response.data;
-      localStorage.setItem('accessToken', accessToken);
-      localStorage.setItem('refreshToken', refreshToken);
-      commit('SET_IS_LOGGED_IN', true);
-      return response;
-    } catch (error) {
-      throw error;
-    }
+    const response = await signIn(userData);
+    const { accessToken, refreshToken } = response.data;
+    localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('refreshToken', refreshToken);
+    commit('SET_IS_LOGGED_IN', true);
+    return response;
   },
 };
 

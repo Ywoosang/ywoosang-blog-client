@@ -15,13 +15,9 @@ export const mutations: MutationTree<UsersState> = {
 
 export const actions: ActionTree<UsersState, RootState> = {
   async fetchUser({ commit }) {
-    try {
       const { data } = await getUser();
       commit('SET_USER', data);
       return data;
-    } catch (error) {
-      throw error;
-    }
   },
 };
 

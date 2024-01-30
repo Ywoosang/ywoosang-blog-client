@@ -15,18 +15,24 @@
       <router-link to="/auth/signup" class="r-btn btn-signup">회원가입</router-link>
     </div>
     <div class="user-profile" v-if="isLoggedIn">
-      <router-link to="/users/profile">내 프로필</router-link>
+      <router-link to="/users/profile" class="profile">내 프로필</router-link>
+      <router-link to="/admin" v-if="isAdmin" class="admin">관리</router-link>
     </div>
   </header>
 </template>
 
 <script>
 import { mapMutations, mapGetters } from "vuex";
+import { UsersRole } from '@/types/enums';
 
 export default {
   computed: {
+    isAdmin() {
+      return this.getUserRole == UsersRole.ADMIN;
+    },
     ...mapGetters("sidebar", ["getSidebarStatus"]),
     ...mapGetters("auth", ["isLoggedIn"]),
+    ...mapGetters("users", ["getUserRole"])
   },
   methods: {
     ...mapMutations("sidebar", ["SET_SIDEBAR"]),
@@ -91,6 +97,12 @@ header {
 .btn-signup {
   background-color: #010101;
   color: #fff;
+}
+
+.admin {
+  padding-left: 5px;
+  margin-left: 5px;
+  border-left: 2px solid black;
 }
 
 /* 태블릿 */

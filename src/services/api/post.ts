@@ -1,5 +1,5 @@
 import request from '@/services/axios-interceptor'
-import { createPostDto } from '@/types/dto'  
+import { CreatePostDto } from '@/types/dto'  
  
 
 export const uploadImageFile = (formData) => {
@@ -10,7 +10,7 @@ export const uploadImageFile = (formData) => {
     })
 }
 
-export const createPost = (data: createPostDto) => {
+export const createPost = (data: CreatePostDto) => {
     return request({
         url: '/posts',
         method: 'POST',
@@ -66,5 +66,12 @@ export const getPublicCount = () => {
     return request({
         url: '/posts/public/count',
         method: 'GET'
+    })
+}
+
+export const deletePost = (id: number) => {
+    return request({
+        url: `/posts/${id}`,
+        method: 'DELETE'
     })
 }

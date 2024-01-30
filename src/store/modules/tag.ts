@@ -43,7 +43,7 @@ export const actions: ActionTree<TagState, RootState> = {
       commit('SET_TAG', tag);
       commit('SET_PAGE_LIST', { total, page, limit })
     } catch(e) {
-      throw e;
+      console.log(e);
     }
   },
 };

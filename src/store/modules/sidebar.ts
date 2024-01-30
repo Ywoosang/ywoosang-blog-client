@@ -59,7 +59,6 @@ const getters: GetterTree<SidebarState, RootState> = {
 const actions: ActionTree<SidebarState, RootState> = {
   async fetchSideBar({ commit }, payload) {
     const userRole = payload;
-    console.log(userRole);
     const postCountPromise = userRole == UsersRole.ADMIN ? getTotalCount() : getPublicCount();
     const tagPromise = userRole === UsersRole.ADMIN ? getSidebarTags() : getSidebarPublicTags();
     const categoryPromise = userRole === UsersRole.ADMIN ? getSidebarCategories() : getSidebarPublicCategories();
@@ -73,10 +72,6 @@ const actions: ActionTree<SidebarState, RootState> = {
     const tags = tagResponse.data.tags;
     const categories = categoryResponse.data.categories;
     const postCount = postCountResponse.data.postCount;
-    console.log(tags);
-    // 버그
-    console.log(categories);
-    console.log(postCount);
     commit('SET_TOTAL_POST_COUNT', postCount);
     commit('SET_SIDEBAR_TAGS', tags);
     commit('SET_SIDEBAR_CATEGORIES', categories);

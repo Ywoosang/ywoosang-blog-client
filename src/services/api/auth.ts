@@ -7,3 +7,11 @@ export const signIn = (data) => {
         data
     })
 }
+
+export const signUp = (data) => {
+    return request({
+        url: '/auth/signup',
+        method: 'POST',
+        data
+    })
+}

@@ -17,14 +17,14 @@
           />
         </button>
       </div>
-      <div class="im profile">
+      <!-- <div class="im profile">
         <a href="#">프로필</a>
       </div>
       <div class="im portfolio">
         <a href="#">포트폴리오</a>
-      </div>
-      <div class="im portfolio">
-        <a href="#">깃허브</a>
+      </div> -->
+      <div class="im github">
+        <a href="#">GitHub <font-awesome-icon icon="fa-brands fa-square-github" /></a>
       </div>
     </div>
     <div class="category-header">
