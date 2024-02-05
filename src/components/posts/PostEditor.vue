@@ -91,7 +91,7 @@ export default defineComponent({
       status: "PUBLIC" as PostStatus,
       categoryId: null as null | number,
       tagNames: [] as string[],
-      imageIds: [] as number[],
+      fileNames: [] as string[],
     };
   },
   async mounted() {
@@ -111,7 +111,7 @@ export default defineComponent({
       plugins: [codeSyntaxHighlight],
       hooks: {
         addImageBlobHook: this.dropedImageUpload,
-      },
+      }
     });
   },
   methods: {
@@ -138,12 +138,10 @@ export default defineComponent({
         const response: AxiosResponse = await uploadImageFile(formData);
         if (response.status == 201) {
           const { data, config } = response;
-          const imageId = data.id;
-          const filename = data.filename;
-          console.log(imageId, filename);
+          const fileName = data.filename;
           const baseURL = config.baseURL;
-          setText(`${baseURL}/files/${filename}`, "image");
-          this.imageIds.push(imageId);
+          setText(`${baseURL}/static/temp/${fileName}`, "image");
+          this.fileNames.push(fileName);
         }
       } catch (e: any) {
         alert("파일 업로드에 실패하였습니다");
@@ -155,7 +153,7 @@ export default defineComponent({
     async uploadPost() {
       if (this.isUploading) return;
       const content = this.editor!.getMarkdown();
-      const { title, status, description, categoryId, tagNames, imageIds } =
+      const { title, status, description, categoryId, tagNames, fileNames } =
         this;
       const data: CreatePostDto = {
         title,
@@ -163,6 +161,7 @@ export default defineComponent({
         content,
         status,
       };
+
       if (categoryId) {
         data.categoryId = categoryId;
       }
@@ -171,8 +170,8 @@ export default defineComponent({
         data.tagNames = tagNames;
       }
 
-      if (imageIds) {
-        data.imageIds = imageIds;
+      if (fileNames) {
+        data.fileNames = fileNames;
       }
       console.log(data);
 
@@ -181,6 +180,8 @@ export default defineComponent({
         this.isUploading = true;
         const response = await createPost(data);
         console.log(response);
+        const post = response.data;
+        this.$router.push(`/post/${post.id}`);
       } catch (e) {
         console.log(e);
       } finally {

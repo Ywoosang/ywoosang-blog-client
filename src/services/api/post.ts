@@ -4,8 +4,8 @@ import { CreatePostDto } from '@/types/dto'
 
 export const uploadImageFile = (formData) => {
     return request({
-        url: '/files/upload',
-        method: "POST",
+        url: `/files/image`,
+        method: 'POST',
         data: formData
     })
 }

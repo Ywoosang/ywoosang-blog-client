@@ -1,13 +1,13 @@
 <template>
   <main>
     <post-item :posts="postList" />
-    <blog-pagination :pageList="getPageList"/>
+    <post-pagination :pageList="getPageList"/>
   </main>
 </template>
 
 <script lang='ts'>
 import PostItem from "@/components/posts/PostItem.vue";
-import BlogPagination from "@/components/common/BlogPagination.vue";
+import PostPagination from "@/components/posts/PostPagination.vue";
 import { defineComponent } from "vue";
 import { mapActions, mapGetters, mapMutations } from "vuex";
 
@@ -55,7 +55,7 @@ export default defineComponent({
   },
   components: {
     PostItem,
-    BlogPagination
+    PostPagination
   },
 });
 </script>

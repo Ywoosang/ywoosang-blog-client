@@ -4,12 +4,13 @@ import router from './router'
 import store from './store'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faBars, faXmark, faLock, faLockOpen,  } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faXmark, faLock, faLockOpen  } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare } from '@fortawesome/free-regular-svg-icons'
 import { faSquareGithub } from '@fortawesome/free-brands-svg-icons'
 import '@/styles/default.css';
 
 
-library.add(faBars, faXmark, faLock, faLockOpen, faSquareGithub)
+library.add(faBars, faXmark, faLock, faLockOpen, faSquareGithub, faPenToSquare);
 
 const app = createApp(App);
 

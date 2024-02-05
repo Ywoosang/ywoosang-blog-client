@@ -71,6 +71,7 @@ export default defineComponent({
     padding: 5px 8px;
     margin: 10px 0 0 0;
     border-left: 3px solid #ddd;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 .header {
     display:flex;
@@ -102,5 +103,9 @@ export default defineComponent({
 .date {
     font-size: 12px;
     color: rgb(99, 99, 99);
+}
+.info {
+    font-size: 17px;
+    font-weight: bold;
 }
 </style>

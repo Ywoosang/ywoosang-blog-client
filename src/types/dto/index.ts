@@ -7,7 +7,7 @@ export interface CreatePostDto {
     status: PostStatus;
     categoryId?: number;
     tagNames?: string[];
-    imageIds?: number[];
+    fileNames?: string[];
 }
 
 export interface AuthRegisterDto {

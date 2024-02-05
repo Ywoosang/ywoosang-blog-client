@@ -1,8 +1,8 @@
 <template>
     <div class="comment">
         <div class="header">
-            <router-link to="/user">{{ comment.user.nickname }}</router-link>
-            <div class="info" v-if="isAuthorized">
+            <router-link to="/user" class="info">{{ comment.user.nickname }}</router-link>
+            <div class="btn-wrapper" v-if="isAuthorized">
                 <button v-if="!editMode"  class="btn-top update-btn" @click="startEdit">수정</button>
                 <button class="btn-top delete-btn" @click="deleteComment({ comment })">삭제</button>
             </div>       
@@ -73,5 +73,13 @@ export default defineComponent({
     font-weight: 500;
     cursor: pointer;
     background: none;
+}
+.date {
+    font-size: 12px;
+    color: rgb(99, 99, 99);
+}
+.info {
+    font-size: 17px;
+    font-weight: bold;
 }
 </style>

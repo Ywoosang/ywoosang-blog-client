@@ -5,6 +5,7 @@ export interface User {
     email: string;
     userLoginId: string;
     nickname: string;
+    profileImage: string;
     description?: string;
     role: UsersRole;  
     status: UsersStatus;
@@ -64,7 +65,9 @@ export interface SidebarState {
 
 export interface UsersState {
     user: User | null;
+    publicProfile: Pick<User, 'id' | 'description' | 'nickname' | 'profileImage' | 'userLoginId'> | null;
 }
+
 
 export interface PostState {
     postList: null | Post[];

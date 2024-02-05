@@ -20,7 +20,6 @@ import { defineComponent } from "vue";
 import { mapActions } from "vuex";
 
 export default defineComponent({
-    // props: {'parentCommentId', 'replyToId', 'editMode'],
     props: {
         parentCommentId: {
             type: Number,

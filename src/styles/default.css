@@ -15,6 +15,7 @@ body {
     height: 100%;
 }
 
+
 #app {
     height: 100%;
 }
@@ -35,18 +36,12 @@ button {
 }
 
 input {
-    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
     /* 내용과 패딩을 포함한 전체 너비 설정 */
     width: 100%;
-    /* 부모 요소에 대해 100%의 너비를 가짐 */
-    padding: 10px;
-    /* 내부 여백 설정 */
-    border: 1px solid #ccc;
     /* 테두리 스타일 및 색상 설정 */
     border-radius: 5px;
     /* 테두리의 모서리를 둥글게 만듦 */
-    font-size: 16px;
-    /* 글꼴 크기 설정 */
 }
 
 /* Input 요소에 대한 포커스 스타일 */
@@ -58,8 +53,11 @@ input:focus {
 }
 
 textarea {
+    width: 100%;
+    font-family: 'Noto Sans KR', sans-serif;
     border: none;
     resize: none;
+    border-radius: 5px;
 }
 
 textarea:focus {

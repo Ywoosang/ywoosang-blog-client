@@ -1,15 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router'
+
 // Views
 import SignIn from '@/views/SignIn.vue'
 import SignUp from '@/views/SignUp.vue'
 import PostCreate from '@/views/PostCreate.vue'
 import AllPosts from '@/views/AllPosts.vue'
 import PostDetail from '@/views/PostDetail.vue'
-import UserProfile from '@/views/UserProfile.vue'
 import NotFound from '@/views/NotFound.vue'
 import AdminPage from '@/views/AdminPage.vue'
 import CategoryPosts from '@/views/CategoryPosts.vue'
 import TagPosts from '@/views/TagPosts.vue'
+import ProfilePage from '@/views/ProfilePage.vue'
+import ProfileManage from '@/views/ProfileManage.vue'
+
 // Layouts
 import BlogLayout from '@/layouts/BlogLayout.vue'
 import AdminLayout from '@/layouts/AdminLayout.vue'
@@ -19,6 +22,9 @@ import postListGuard from '@/middlewares/postListGuard'
 import commonGuard from '@/middlewares/common'
 import adminGuard from '@/middlewares/adminGuard'
 import postDetailGuard from '@/middlewares/postDetailGuard'
+import profileGuard from '@/middlewares/profileGuard'
+import profileManageGuard from '@/middlewares/profileManageGuard'
+// 
  
 const routes = [
     {
@@ -101,13 +107,18 @@ const routes = [
         ]
     },
     {
-        path: '/users',
+        path: '/profile',
         component: BlogLayout,
         children: [
             {
-                path: 'profile',
-                name: 'Profile',
-                component: UserProfile
+                path: ':userLoginId',
+                component: ProfilePage,
+                beforeEnter: profileGuard
+            },
+            {
+                path: ':userLoginId/manage',
+                component: ProfileManage,
+                beforeEnter: profileManageGuard
             }
         ]
     },

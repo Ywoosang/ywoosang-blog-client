@@ -1,0 +1,215 @@
+.profile-container {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-areas: 
+    "avatar detail"
+    "info info";
+    /* 첫 번째 열은 자동 크기, 두 번째 열은 1fr로 쭉 늘어남 */
+    grid-template-columns: auto 1fr; 
+    gap: 10px; 
+}
+
+.avatar-wrapper {
+  grid-area: avatar;
+  display: flex;
+  flex-direction: column;
+  padding-right: 1rem;
+}
+
+.avatar-wrapper .user-avatar {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.avatar-wrapper .update-nickname i {
+  font-size: 16px;
+  color:black;
+}
+
+.avatar-wrapper:hover .upload-layer {
+  display: flex;
+}
+
+.avatar-wrapper .upload-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.5);
+  display: none;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.avatar-wrapper .upload-layer input {
+  display: none;
+}
+
+.avatar-wrapper .update-image {
+  width: 120px;
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  background-color: #000;
+  color: white;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.avatar-wrapper .reset-image {
+  width: 120px;
+  font-size: 1.2rem;
+  background: none;
+  font-weight: bold;
+}
+
+/* 사용자 수정 부분 */
+
+.detail-wrapper {
+  grid-area: detail;
+  border-left: 1px solid #ddd;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding-left: 1rem;
+}
+.detail-wrapper div { 
+  width: 100%;
+}
+.detail-wrapper {
+  color: rgb(0, 0, 0);
+  /* Set text color to white */
+}
+
+.detail-wrapper textarea {
+  width: 100%;
+  resize: vertical;
+  margin-bottom: 10px;
+}
+
+/* 공통 스타일 */
+.update-btn {
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+}
+
+.save-btn {
+  font-size: 1.2rem;
+  border-radius: 5px;
+  margin-left: 1.2rem;
+  white-space: nowrap;
+}
+/*  */
+
+
+
+.nickname-wrapper div {
+  display:flex;
+  height: 70px;
+  align-items: flex-start;
+}
+
+.nickname-wrapper .view p{
+  margin: 0;
+  /* 세로 시작방향을 input 과 맞추기 위해 */
+  padding-top: 4px;
+  padding-left: 10px;
+  font-size: 2rem;
+  flex: 1;
+  font-weight: bold;
+  height: 60px;
+  border: 1px solid white;
+}
+
+.nickname-wrapper .edit input {
+  margin: 0;
+  padding-left: 10px;
+  font-size: 2rem;
+  flex: 1;
+  border: 1px solid #ddd;
+  font-weight: bold;
+  height: 60px;
+}
+
+ 
+/* 설명 */
+.description-wrapper * {
+  /* border: 1px solid red; */
+}
+
+.description-wrapper div {
+  height: 150px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.description-wrapper .view p {
+  margin: 0;
+  font-size:1rem;
+  padding: 10px;
+  flex: 1;
+  border: 1px solid white
+}
+
+.description-wrapper .edit textarea {
+  font-size: 1rem;
+  padding: 10px;
+  border: 1px solid #ddd;
+  flex:1;
+}
+
+/* .description-wrapper
+
+.description-wrapper  */
+
+
+ 
+
+
+/* 프로필 뷰어 부분 */
+
+.user-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+ 
+
+.user-nickname {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+}
+
+.user-email,
+.user-description,
+.user-role,
+.user-status {
+  margin-bottom: 10px;
+}
+
+/* 파일업로드 - 공통 */
+input[type="file"] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+}
+
+.info-wrapper {
+  grid-area: info;
+}
