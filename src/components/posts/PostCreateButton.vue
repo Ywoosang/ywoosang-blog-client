@@ -1,15 +1,10 @@
 <template>
-  <div>
-    <router-link to="/admin/create">새 글 작성</router-link>
-  </div>
+	<div>
+		<router-link to="/admin/create">새 글 작성</router-link>
+	</div>
 </template>
 
-<script>
-export default {
-
-}
+<script setup lang="ts">
 </script>
 
-<style>
-
-</style>
+<style></style>

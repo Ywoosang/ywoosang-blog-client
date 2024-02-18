@@ -1,111 +1,90 @@
 <template>
-    <div class="reply">
-        <div class="header">
-            <div class="info">{{ reply.user.nickname }}</div>  
-            <div class="btn-wrapper" v-if="isAuthorized">
-                <button v-if="!editMode" class="btn-top update-btn" @click="startEdit">수정</button>
-                <button class="btn-top delete-btn" @click="deleteReply({ reply })">삭제</button>
-            </div>
-        </div> 
-        <div class="date">{{ formatDate(reply.createdAt) }}</div>  
-        <reply-write v-if="editMode" :editMode="true" @close="endEdit" :id="reply.id" :isComment="false"/>                    
-        <div v-else class="content">
-            <router-link :to="'#'">
-                <span class="mention">@{{ reply.replyTo.nickname}}</span>
-                     {{ reply.content }}
-            </router-link>
-        </div>
-        <div class="tool">
-            <button class="create-btn" @click="openForm">답글 달기</button>
-        </div>
-        <reply-write v-if="replyMode"  @close="closeForm" :parentCommentId="reply.parentCommentId" :replyToId="reply.replyTo.id"/>
-    </div>
+	<div class="reply">
+		<div class="header">
+			<div class="image-wrapper">
+				<img :src="props.reply.user.profileImage" />
+			</div>
+			<div class="content-wrapper">
+				<router-link :to="'/profile/' + props.reply.user.userId" class="info">
+					<h4>{{ props.reply.user.nickname }}</h4>
+					<div class="date">{{ formatDate(props.reply.createdAt) }}</div>
+				</router-link>
+				<div class="btn-wrapper" v-if="isAuthorized">
+					<button v-if="!editMode" class="btn-top update-btn" @click="startEdit">
+						수정
+					</button>
+					<button class="btn-top delete-btn" @click="deleteReply">삭제</button>
+				</div>
+			</div>
+		</div>
+		<reply-write v-if="editMode" :editMode="true" @close="endEdit" :id="props.reply.id" :isComment="false"
+			:initialValue="props.reply.content" />
+		<div v-else class="content">
+			<div>
+				<router-link :to="'/profile/' + reply.replyTo.userId" class="mention">
+					@{{ reply.replyTo.nickname }}
+				</router-link>
+				<pre style="padding: 0; margin: 0">{{ reply.content }}</pre>
+			</div>
+		</div>
+		<div class="tool">
+			<button class="create-btn" @click="openForm">답글 달기</button>
+		</div>
+		<reply-write v-if="replyMode" @close="closeForm" :parentCommentId="reply.parentCommentId"
+			:replyToId="reply.replyTo.id" />
+	</div>
 </template>
 
-<script lang='ts'>
-import { defineComponent } from 'vue';
-import { mapGetters, mapActions } from 'vuex';
-import { formatDate } from '@/utils'
-import ReplyWrite from './ReplyWrite.vue'
+<script setup lang="ts">
+import { ref, computed } from 'vue';
+import { formatDate } from '@/utils';
+import { useStore } from 'vuex';
+import { Comment } from '@/types/interfaces';
+import ReplyWrite from './ReplyWrite.vue';
 
-export default defineComponent({
-    props: ['reply'],
-    components: {
-        ReplyWrite
-    },
-    data() {
-        return {
-            replyMode: false as boolean,
-            editMode: false as boolean
-        }
-    },
-    methods: {
-        formatDate,
-        openForm() {
-            this.replyMode = true;
-            this.editMode = false;
-        },
-        startEdit() {
-            this.editMode = true;
-            this.replyMode = false;
-        },
-        endEdit() {
-            this.editMode = false;
-        },
-        closeForm() {
-            this.replyMode = false;
-        },
-        ...mapActions('comment', ['deleteReply'])
-    },
-    computed: {
-        ...mapGetters('users', ['getUser']),
-        isAuthorized() {
-            return this.getUser && (this.reply.user.id === this.getUser.id || this.getUser.role === 'ADMIN');
-        }
-    }
+const props = defineProps<{
+	reply: Comment;
+}>();
+
+const store = useStore();
+const replyMode = ref(false);
+const editMode = ref(false);
+
+const user = computed(() => store.getters['users/getUser']);
+
+const openForm = () => {
+	replyMode.value = true;
+	editMode.value = false;
+};
+
+const startEdit = () => {
+	editMode.value = true;
+	replyMode.value = false;
+};
+
+const endEdit = () => {
+	editMode.value = false;
+};
+
+const closeForm = () => {
+	replyMode.value = false;
+};
+
+const deleteReply = async () => {
+	try {
+		await store.dispatch('comment/deleteReply', { reply: props.reply });
+	} catch (e) {
+		console.log(e);
+	}
+
+};
+
+const isAuthorized = computed(() => {
+	return (
+		user.value &&
+		(props.reply.user.id === user.value.id || user.value.role === 'ADMIN')
+	);
 });
 </script>
 
-<style scoped>
-.reply {
-    padding: 5px 8px;
-    margin: 10px 0 0 0;
-    border-left: 3px solid #ddd;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-}
-.header {
-    display:flex;
-    justify-content: space-between;    
-}
-.btn-top {
-    background: none;
-}
-.content {
-    font-size: 16px;
-    padding: 5px 0 10px 0;
-}
-.create-btn {
-    color: #000000;
-    font-weight: 500;
-    cursor: pointer;
-    background: none;
-}
-.mention {
-    background: #000000;
-    color: white;
-    font-weight: bold;
-    padding: 3px 5px 5px 3px;
-    line-height: 25px;
-    border-radius: 5px;
-    font-size: 12px;
-    vertical-align: center;
-}
-.date {
-    font-size: 12px;
-    color: rgb(99, 99, 99);
-}
-.info {
-    font-size: 17px;
-    font-weight: bold;
-}
-</style>
+<style src="@/styles/comment/item.css" scoped></style>

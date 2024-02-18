@@ -1,12 +1,7 @@
 <template>
-  <div class="container">
-      <router-view/>
-  </div>
+	<div class="container">
+		<router-view />
+	</div>
 </template>
 
-<script>
-</script>
- 
-
-<style scoped>
-</style>
+<style src="@/styles/layouts/admin.css" scoped></style>

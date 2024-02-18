@@ -1,83 +1,88 @@
 <template>
-  <article
-    class="side-bar"
-    :class="{
-      'sidebar-open': getSidebarStatus,
-      'sidebar-close': !getSidebarStatus,
-    }"
-  >
-    <div class="my-menu">
-      <div class="btn-wrapper">
-        <button class="to-home" @click="toHome">홈으로</button>
-        <button class="close-bar" v-on:click="SET_SIDEBAR">
-          <font-awesome-icon
-            :icon="['fas', 'xmark']"
-            class="close-icon"
-            v-if="getSidebarStatus"
-          />
-        </button>
-      </div>
-      <!-- <div class="im profile">
-        <a href="#">프로필</a>
-      </div>
-      <div class="im portfolio">
-        <a href="#">포트폴리오</a>
-      </div> -->
-      <div class="im github">
-        <a href="#">GitHub <font-awesome-icon icon="fa-brands fa-square-github" /></a>
-      </div>
-    </div>
-    <div class="category-header">
-      <h2>카테고리</h2>
-    </div>
-    <ul class="category-list">
-      <li>
-        <router-link to="/post">
-          <span class="category-name" :class="{ 'selected': !getSelectedCategoryId  }">전체보기</span>
-          <span class="category-count">({{ getPostCount }})</span>
-        </router-link>
-      </li>
-      <li v-for="(category, index) in getSidebarCategories" :key="index">
-        <router-link :to="'/category/' + category.id">
-          <span class="category-name" :class="{ 'selected': getSelectedCategoryId === category.id }">{{ category.name }}</span>
-          <span class="category-count">({{ category.postCount }})</span>
-        </router-link>
-      </li>
-    </ul>
-    <div class="tag-header">
-      <h2>태그({{ getSidebarTags.length }})</h2>
-    </div>
-    <ul class="tag-list">
-      <li v-for="(tag, index) in getSidebarTags" :key="index"  :class="{ 'selected': getSelectedTagId === tag.id }">
-        <router-link :to="'/tag/'+ tag.id">{{ tag.name }}</router-link>
-      </li>
-    </ul>
-  </article>
+	<article
+		class="side-bar"
+		:class="{
+			'sidebar-open': isSidebarOpen,
+			'sidebar-close': !isSidebarOpen,
+		}"
+	>
+		<div class="my-menu">
+			<div class="btn-wrapper">
+				<button class="to-home" @click="toHome">홈으로</button>
+				<button class="close-bar" @click="toggleSidebar" v-if="isSidebarOpen">
+					<img src="@/assets/images/xmark.png" class="close-icon" />
+				</button>
+			</div>
+			<div class="im github">
+				<a href="https://github.com/Ywoosang"
+					>GitHub <font-awesome-icon icon="fa-brands fa-square-github"
+				/></a>
+			</div>
+		</div>
+		<div class="category-header">
+			<h2>카테고리</h2>
+		</div>
+		<ul class="category-list">
+			<li>
+				<router-link to="/post">
+					<span class="category-name" :class="{ selected: !selectedCategoryId }"
+						>전체보기</span
+					>
+					<span class="category-count">({{ postCount }})</span>
+				</router-link>
+			</li>
+			<li v-for="category in sidebarCategories" :key="category.id">
+				<router-link :to="'/category/' + category.id">
+					<span
+						class="category-name"
+						:class="{ selected: selectedCategoryId === category.id }"
+						>{{ category.name }}</span
+					>
+					<span class="category-count">({{ category.postCount }})</span>
+				</router-link>
+			</li>
+		</ul>
+		<div class="tag-header">
+			<h2>태그({{ sidebarTags.length }})</h2>
+		</div>
+		<ul class="tag-list">
+			<li
+				v-for="tag in sidebarTags"
+				:key="tag.id"
+				:class="{ selected: selectedTagId === tag.id }"
+			>
+				<router-link :to="'/tag/' + tag.id">{{ tag.name }}</router-link>
+			</li>
+		</ul>
+	</article>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-import { mapMutations, mapGetters } from "vuex";
+<script setup lang="ts">
+import { computed } from 'vue';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 
-export default defineComponent({
-  computed: {
-    ...mapGetters("sidebar", [
-      "getSidebarStatus",
-      "getSidebarCategories",
-      "getSidebarTags",
-      "getSelectedCategoryId",
-      "getSelectedTagId",
-      "getPostCount"
-    ])
-  },
-  methods: {
-    ...mapMutations("sidebar", ["SET_SIDEBAR"]),
-    toHome() {
-      this.$router.push("/");
-    },
-  },
-});
+const router = useRouter();
+const store = useStore();
+
+const isSidebarOpen = computed(() => store.getters['sidebar/getSidebarStatus']);
+const sidebarCategories = computed(
+	() => store.getters['sidebar/getSidebarCategories'],
+);
+const sidebarTags = computed(() => store.getters['sidebar/getSidebarTags']);
+const selectedCategoryId = computed(
+	() => store.getters['sidebar/getSelectedCategoryId'],
+);
+const selectedTagId = computed(() => store.getters['sidebar/getSelectedTagId']);
+const postCount = computed(() => store.getters['sidebar/getPostCount']);
+
+const toggleSidebar = () => {
+	store.commit('sidebar/SET_SIDEBAR');
+};
+
+const toHome = () => {
+	router.push('/');
+};
 </script>
 
-<style src="@/styles/sidebar.css" scoped>
-</style>
+<style src="@/styles/sidebar.css" scoped></style>

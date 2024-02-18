@@ -1,0 +1,39 @@
+.wrapper {
+	margin: 10px 0 0 0;
+}
+
+textarea {
+	padding: 8px 10px;
+	border: 1px solid #ddd;
+	width: 100%;
+	min-height: 70px;
+	font-size: 1rem;
+	line-height: 1.75;
+	overflow-y: hidden;
+}
+
+.btn-wrapper {
+	text-align: right;
+}
+
+.create {
+	padding: 3px 7px;
+}
+
+.btn-wrapper .submit {
+	padding: 4px 10px;
+	background: #000000;
+	color: white;
+	border-radius: 5px;
+}
+
+.btn-wrapper .close {
+	padding: 4px 10px;
+	background: white;
+	border: 1px solid #ddd;
+	color: #000000;
+	border-radius: 5px;
+	margin-left: 3px;
+}
+ 
+ 

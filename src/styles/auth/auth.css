@@ -1,0 +1,131 @@
+* {
+  /* border: 1px solid red; */
+}
+
+/* 타이틀부분 */
+.wrapper {
+  margin: 1rem 0 2rem 0;
+}
+/*  */
+.title-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+.title-wrapper h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+.title-wrapper h2 {
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding-left: 0.5rem;
+}
+/*  */
+.signup-form {
+}
+body {
+    font-size: 12px;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+}
+.form-group label {
+  min-width: 80px;
+  line-height: 37px;
+  text-align: center;
+  padding: 4px;
+  font-size: 1rem;
+  background-color: rgb(0, 0, 0);
+  font-weight: bold;
+  color: white;
+  height: 47px;
+}
+.form-group input {
+  font-size: 1rem;
+  outline:none;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 0;
+  padding-left: 5px;
+  height: 47px;
+}
+
+.email-group {
+  position: relative;
+  margin-bottom: 50px;
+}
+.email-group input {
+  background: rgb(241, 241, 241);
+  color:rgb(44, 44, 44)
+} 
+.email-group .email-lock {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 8px;
+  font-size: 1.6rem;
+}
+ 
+.error-message {
+  height: 20px;
+  text-align: end;
+  font-size: 10px;
+  color: red;
+  margin-bottom: 30px;
+}
+
+.btn-wrapper {
+  text-align: center;
+}
+.btn-wrapper button {
+  margin: 0 auto;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 0 0 0 5px;
+  border: 1px solid #ddd;
+}
+.btn-wrapper .submit-btn {
+  background: black;
+  color : white;
+}
+.btn-wrapper .cancel-btn {
+  background: white;
+  color: rgb(74, 74, 74);
+}
+
+/* 태블릿 */
+@media (min-width: 820px) {
+  .wrapper {
+    margin: 5rem 0 3rem 0;
+  }
+}
+  
+/* 데스크톱 */
+@media (min-width: 1340px) {
+    .form-group input {
+        font-size: 0.8rem;
+    }
+    .form-group label {
+        font-size: 1.2rem;
+        min-width: 100px;
+        line-height: 37px;
+        text-align: center;
+    }
+    .error-message {
+      font-size: 12px;
+      color: red;
+    }
+    .title-wrapper h1{
+      font-size: 3rem;
+      margin: 1rem 0;
+    }
+    .title-wrapper h2{
+      font-size: 2.3rem;
+      margin: 1rem 0;
+      padding-left: 0.5rem;
+    }
+}

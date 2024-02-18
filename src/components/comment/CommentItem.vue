@@ -1,85 +1,100 @@
 <template>
-    <div class="comment">
-        <div class="header">
-            <router-link to="/user" class="info">{{ comment.user.nickname }}</router-link>
-            <div class="btn-wrapper" v-if="isAuthorized">
-                <button v-if="!editMode"  class="btn-top update-btn" @click="startEdit">수정</button>
-                <button class="btn-top delete-btn" @click="deleteComment({ comment })">삭제</button>
-            </div>       
-        </div>                
-        <div class="date">{{ formatDate(comment.createdAt) }}</div> 
-        <reply-write v-if="editMode" :editMode="true" @close="endEdit" :id="comment.id"/>                     
-        <div v-else class="content">{{ comment.content }} </div>
-        <div class="tool" @click="toggleOpen">
-        <button class="create-btn" @click="openForm">답글 달기</button>
-        </div>
-        <reply-write v-if="isOpen" @close="closeForm" :parentCommentId="comment.id" :replyToId="comment.user.id"/>
-    </div>
+	<div class="comment">
+		<div class="header">
+			<div class="image-wrapper">
+				<img :src="comment.user.profileImage" />
+			</div>
+			<div class="content-wrapper">
+				<router-link :to="'/profile/' + comment.user.userId" class="info">
+					<h4>{{ comment.user.nickname }}</h4>
+					<div class="date">{{ formatDate(comment.createdAt) }}</div>
+				</router-link>
+				<div class="btn-wrapper" v-if="isAuthorized">
+					<button
+						v-if="!editMode"
+						class="btn-top update-btn"
+						@click="startEdit"
+					>
+						수정
+					</button>
+					<button class="btn-top delete-btn" @click="deleteComment">
+						삭제
+					</button>
+				</div>
+			</div>
+		</div>
+		<reply-write
+			v-if="editMode"
+			:editMode="true"
+			@close="endEdit"
+			:id="comment.id"
+			:initialValue="comment.content"
+		/>
+		<div v-else class="content">
+			<pre style="padding: 0; margin: 0">{{ comment.content }} </pre>
+		</div>
+		<div class="tool">
+			<button class="create-btn" @click="openForm">답글 달기</button>
+		</div>
+		<reply-write
+			v-if="isOpen"
+			@close="closeForm"
+			:parentCommentId="comment.id"
+			:replyToId="comment.user.id"
+		/>
+	</div>
 </template>
 
-<script lang='ts'>
-import { defineComponent } from 'vue';
-import { mapGetters, mapActions } from 'vuex';
+<script setup lang="ts">
+import { ref, computed } from 'vue';
+import { useStore } from 'vuex';
 import ReplyWrite from './ReplyWrite.vue';
 import { formatDate } from '@/utils';
+import { Comment } from '@/types/interfaces';
 
-export default defineComponent({
-    props: ['comment'],
-    components: {
-        ReplyWrite,
-    },
-    data() {
-        return {
-            isOpen: false as boolean,
-            editMode: false as boolean
-        }
-    },
-    methods: {
-        ...mapActions('comment', ['deleteComment']),
-        formatDate,
-        openForm() { this.isOpen = true },
-        closeForm() { this.isOpen = false },
-        startEdit() {
-            this.editMode = true;
-        },
-        endEdit() {
-            this.editMode = false;
-        },
-    }, 
-    computed: {
-        ...mapGetters('users', ['getUser']),
-        isAuthorized() {
-            return this.getUser && (this.comment.user.id === this.getUser.id || this.getUser.role === 'ADMIN');
-        }
-    }
+// https://ko.vuejs.org/guide/components/props
+const props = defineProps<{
+	comment: Comment;
+}>();
+
+const comment: Comment = props.comment;
+
+const store = useStore();
+const isOpen = ref(false);
+const editMode = ref(false);
+
+const user = computed(() => store.getters['users/getUser']);
+
+const isAuthorized = computed(() => {
+	return (
+		user.value &&
+		(props.comment!.user.id === user.value.id || user.value.role === 'ADMIN')
+	);
 });
+
+const deleteComment = async() => {
+	try {
+		await store.dispatch('comment/deleteComment', { comment: props.comment });
+	} catch (e) {
+		console.log(e);
+	}
+};
+
+const openForm = () => {
+	isOpen.value = true;
+};
+
+const closeForm = () => {
+	isOpen.value = false;
+};
+
+const startEdit = () => {
+	editMode.value = true;
+};
+
+const endEdit = () => {
+	editMode.value = false;
+};
 </script>
 
-<style scoped>
-.header {
-    display:flex;
-    justify-content: space-between;    
-}
-.btn-top {
-    background: none;
-}
-.comment {
-    border-top: 1px solid #ddd;
-    margin: 10px 0;
-    padding: 10px 0px;
-}
-.create-btn {
-    color: black;
-    font-weight: 500;
-    cursor: pointer;
-    background: none;
-}
-.date {
-    font-size: 12px;
-    color: rgb(99, 99, 99);
-}
-.info {
-    font-size: 17px;
-    font-weight: bold;
-}
-</style>
+<style src="@/styles/comment/item.css" scoped></style>

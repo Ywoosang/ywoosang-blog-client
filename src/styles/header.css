@@ -1,6 +1,6 @@
 header {
-    z-index: 0;
-    background-color: #fff;
+    z-index: 2;
+    background-color: rgb(253, 253, 253);
     width: 100%;
     height: 84px;
     position: fixed;
@@ -25,21 +25,25 @@ header {
     font-weight:700;
     font-size:25px;
   }
-  /* .logo-container img {
-    max-height: 40px;
-  } */
+ 
+  * {
+    /* border: 1px solid red; */
+  }
   
   .user-actions {
     display: flex;
-    gap: 10px;
+    gap: 5px;
   }
   .side-bar-btn {
     cursor: pointer;
   }
+  .btn-group {
+    display: flex;
+  }
+
   .r-btn {
-    padding: 8px 16px;
-    background-color: #fff;
-    color: #007bff;
+    padding: 5px 12px;
+    font-size: 14px;
     text-decoration: none;
     border-radius: 4px;
   }
@@ -49,17 +53,27 @@ header {
   }
   .btn-signin {
     color: black;
+    background: transparent;
   }
   
   .btn-signup {
     background-color: #010101;
     color: #fff;
   }
+  .user-profile {
+    gap:0px;
+  }
   
   .admin {
-    padding-left: 5px;
-    margin-left: 5px;
-    border-left: 2px solid black;
+    padding: 0 3px;
+  }
+  .profile {
+    padding: 0 3px;
+  }
+  .logout {
+    background: none;
+    color: rgb(250, 49, 49);
+    padding: 0 3px;
   }
   
   /* 태블릿 */
@@ -73,10 +87,24 @@ header {
     .logo-container {
       display: block;
     }
+    .r-btn {
+      padding: 7px 14px;
+      font-size: 14px;
+    }
+    .user-actions {
+      gap: 10px;
+    }
   }
   
   @media (min-width: 1340px) {
     header {
       max-width: calc(1356px);
+    }
+    .r-btn {
+      padding: 8px 16px;
+      font-size: 16px;
+    }
+    .user-actions {
+      gap: 10px;
     }
   }

@@ -1,0 +1,222 @@
+/* * {
+  font-family: 'Noto Sans KR', sans-serif;
+} */
+
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: table;
+}
+
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.modal-container {
+  position: relative;
+  height: 100%;
+  margin: 0px auto;
+  padding: 20px 15px;
+  padding-top: 30%;
+  background-color: #fff;
+  display:flex;
+  flex-direction: column;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.modal-header h1 {
+  margin-top: 0;
+}
+
+.modal-body h4{
+    margin: 10px 0;
+}
+
+.modal-body .email {
+
+}
+
+.modal-body .email form{
+    display: flex;
+    height: 3rem;
+    width: 100%;
+}
+
+.modal-body .email form input {
+    border-radius:  0;
+    border: 2px solid black;
+    border-right: none;
+    padding-left: 10px;
+}
+
+.modal-body .email form button {
+    width: 6rem;
+    background: #000;
+    border-radius: 0;
+    color: white;
+    word-break: keep-all;
+    font-size: 1rem;
+    font-weight: 700;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+.modal-body .email .email-success {
+  height: 3rem;
+  width: 100%;
+  line-height: 3rem;
+  font-weight: 200;
+  font-family: 'Noto Sans KR', sans-serif;
+  background: rgb(241, 241, 241);
+  text-align: center;
+  position: relative;
+}
+
+.modal-body .email .email-success .check {
+  position:absolute;
+  left: 20px;
+  top: 50%;
+  font-size: 1.3rem;
+  transform: translateY(-50%);
+}
+
+.modal-body .social { 
+    margin-top: 2.5rem;
+}
+
+.modal-body .social .btn-group {
+  display:flex;
+  padding: 0 2rem;
+  justify-content: space-between;
+}
+
+.btn-group .btn {
+  display: flex;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  position: relative;
+}
+.btn-group .btn img {
+  position:absolute;
+  left: 50%;
+  top: 50%;
+}
+
+.btn-group .github {
+  background-color:rgb(58,58,58);
+  
+}
+.btn-group .github img {
+  width: 2.5rem;
+  height: 2.5rem;
+  transform: translate(-50%, -57%);
+}
+
+.btn-group .google {
+}
+
+.btn-group .google img {
+  width: 2.5rem;
+  height: 2.5rem;
+  transform: translate(-50%, -50%);
+}
+
+.btn-group .kakao {
+  background: rgb(250,225,0);
+}
+
+.btn-group .kakao img {
+  width: 2rem;
+  height: 2rem;
+  transform: translate(-48%, -47%);
+}
+/*  */
+
+.modal-footer {
+    flex:1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+.modal-footer span {
+  font-size: 1rem;
+}
+.modal-footer button {
+  background: transparent;
+  font-size: 1rem;
+  font-weight:bold
+}
+
+
+.modal-default-button {
+  position: absolute;
+  top: 5px; 
+  right: 5px;
+  padding: 0;
+  display: flex;
+  width: 2rem;
+  height: 2rem;
+  background: transparent;
+}
+
+.modal-default-button img {
+  width: 100%; /* 부모 요소인 버튼의 크기에 맞게 이미지 크기 조정 */
+  height: 100%; /* 부모 요소인 버튼의 크기에 맞게 이미지 크기 조정 */
+  object-fit: cover; /* 이미지가 버튼 안에 꽉 차도록 */
+}
+
+
+/*
+ * The following styles are auto-applied to elements with
+ * transition="modal" when their visibility is toggled
+ * by Vue.js.
+ *
+ * You can easily play with the modal transition by editing
+ * these styles.
+ */
+/* 
+.modal-enter {
+  opacity: 0;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+} */
+
+/* 태블릿 */
+@media (min-width: 820px) {
+    .modal-container {
+        width: 606px;
+        height: 530px;
+        padding-top: 3rem;
+    }
+    .modal-container .modal-default-button {
+      top: 5px;
+      right: 5px;
+      width: 30px;
+      font-size: 2rem;
+      font-weight: lighter;
+    }
+}
+  
+/* 데스크톱 */
+@media (min-width: 1340px) {
+    
+}
+

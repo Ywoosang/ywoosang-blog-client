@@ -2,6 +2,7 @@
 
 * {
     box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 html {
@@ -9,7 +10,6 @@ html {
 }
 
 body {
-    font-family: 'Noto Sans KR', sans-serif;
     line-height: 1.6;
     margin: 0;
     height: 100%;
@@ -51,6 +51,15 @@ input:focus {
     outline: none;
     /* 포커스 시 기본적으로 표시되는 외곽선 제거 */
 }
+
+input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+  }
 
 textarea {
     width: 100%;

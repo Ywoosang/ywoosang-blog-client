@@ -13,18 +13,21 @@
   grid-area: avatar;
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding-right: 1rem;
 }
 
 .avatar-wrapper .user-avatar {
   position: relative;
   display: flex;
-  justify-content: center;
-  width: 100px;
-  height: 100px;
+  width: 60px;
   border-radius: 50%;
   overflow: hidden;
   background-color: #333;
+}
+
+.avatar-wrapper .user-avatar img {
+  
 }
 
 .avatar-wrapper .update-nickname i {
@@ -55,9 +58,9 @@
 }
 
 .avatar-wrapper .update-image {
-  width: 120px;
+  width: 80px;
   margin-top: 1rem;
-  font-size: 1.2rem;
+  font-size: 0.8rem;
   background-color: #000;
   color: white;
   border-radius: 5px;
@@ -65,8 +68,8 @@
 }
 
 .avatar-wrapper .reset-image {
-  width: 120px;
-  font-size: 1.2rem;
+  width: 80px;
+  font-size: 0.8rem;
   background: none;
   font-weight: bold;
 }
@@ -76,9 +79,7 @@
 .detail-wrapper {
   grid-area: detail;
   border-left: 1px solid #ddd;
-  display: flex;
   flex: 1;
-  flex-direction: column;
   padding-left: 1rem;
 }
 .detail-wrapper div { 
@@ -89,27 +90,22 @@
   /* Set text color to white */
 }
 
-.detail-wrapper textarea {
-  width: 100%;
-  resize: vertical;
-  margin-bottom: 10px;
-}
-
 /* 공통 스타일 */
 .update-btn {
-  width: 1.5rem;
-  height: 1.5rem;
-  font-size: 1.5rem;
+  width: 0.8rem;
+  height: 0.8rem;
+  font-size: 0.8rem;
   display: flex;
   justify-content: center;
   align-items: center;
   background: transparent;
+  margin-left: 0.2rem;
 }
 
 .save-btn {
-  font-size: 1.2rem;
+  font-size: 0.8rem;
   border-radius: 5px;
-  margin-left: 1.2rem;
+  margin-left: 0.2rem;
   white-space: nowrap;
 }
 /*  */
@@ -122,26 +118,23 @@
   align-items: flex-start;
 }
 
-.nickname-wrapper .view p{
+.nickname-wrapper .view h2{
   margin: 0;
   /* 세로 시작방향을 input 과 맞추기 위해 */
-  padding-top: 4px;
   padding-left: 10px;
-  font-size: 2rem;
+  font-size: 1.2rem;
   flex: 1;
   font-weight: bold;
-  height: 60px;
   border: 1px solid white;
 }
 
 .nickname-wrapper .edit input {
   margin: 0;
   padding-left: 10px;
-  font-size: 2rem;
+  font-size: 1.2rem;
   flex: 1;
   border: 1px solid #ddd;
   font-weight: bold;
-  height: 60px;
 }
 
  
@@ -151,42 +144,44 @@
 }
 
 .description-wrapper div {
-  height: 150px;
   display: flex;
   align-items: flex-start;
 }
 
 .description-wrapper .view p {
   margin: 0;
-  font-size:1rem;
-  padding: 10px;
+  font-size:0.8rem;
   flex: 1;
-  border: 1px solid white
+  border: 1px solid white;
+  word-break: break-all;
 }
 
-.description-wrapper .edit textarea {
+textarea {
+  border: 1px solid #ddd;
+  width: 100%;
+  height: auto;
+  font-size: 0.8rem;
+  overflow-y: hidden;
+}
+
+/* .description-wrapper .edit textarea {
   font-size: 1rem;
   padding: 10px;
   border: 1px solid #ddd;
   flex:1;
-}
-
-/* .description-wrapper
-
-.description-wrapper  */
-
-
- 
+  width: 100%;
+  margin-bottom: 10px;
+  resize: none;
+  height: 120px;
+} */
 
 
 /* 프로필 뷰어 부분 */
-
 .user-avatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
- 
 
 .user-nickname {
   font-size: 1.5rem;
@@ -200,16 +195,114 @@
   margin-bottom: 10px;
 }
 
-/* 파일업로드 - 공통 */
-input[type="file"] {
-  position: absolute;
-  width: 0;
-  height: 0;
-  padding: 0;
-  overflow: hidden;
-  border: 0;
-}
 
+/* 아래부분 */
 .info-wrapper {
   grid-area: info;
+  margin-top: 2rem;
+}
+.info-wrapper * {
+  /* border: 1px solid red; */
+}
+
+.wrapper h3 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.title-wrapper {
+  display: flex;
+  align-items: center;
+  padding:0;
+}
+
+.status-wrapper {
+  margin-left: 7px;
+  color:white;
+  background: rgb(100, 219, 100);
+  font-size: 10px;
+  border-radius: 2px;
+  padding: 2px;
+}
+
+.content-wrapper {
+
+}
+.content-wrapper p {
+  font-size: 0.8rem;
+  margin:0;
+}
+
+ /* 태블릿 */
+@media (min-width: 820px) {
+}
+
+/* 데스크톱 */
+@media (min-width: 1340px) {
+  .avatar-wrapper .user-avatar {
+    width: 100px;
+  }
+
+  .avatar-wrapper .update-image {
+    width: 120px;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+  }
+  
+  .avatar-wrapper .reset-image {
+    width: 120px;
+    font-size: 1.2rem;
+  }
+
+  .nickname-wrapper .view h2 {
+    font-size: 2rem;
+    height: 60px;
+  }
+
+  .nickname-wrapper .edit input {
+    font-size: 2rem;
+    height: 60px;
+    padding-top: 4px;
+  }
+
+  .description-wrapper .view p {
+    font-size: 1rem;
+    padding: 10px;
+  }
+  
+  textarea {
+    font-size: 1rem;
+    padding: 8px 10px;
+  }
+
+  .update-btn {
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 1.5rem;
+  }
+
+  .save-btn {
+    font-size: 1.2rem;
+    margin-left: 0.5rem;
+  }
+
+  .info-wrapper {
+    margin-top: 2.3rem;
+  }
+
+  .wrapper h3 {
+    font-size: 1.2rem;
+  }
+
+  .content-wrapper p {
+    font-size: 16px;
+  }
+
+  .status-wrapper{
+    margin-left: 10px;
+    color:white;
+    background: rgb(100, 219, 100);
+    font-size: 12px;
+  }
+  
 }
