@@ -1,150 +1,150 @@
 .side-bar {
-    background: #fff;
-    padding: 0 10px;
-    width: 240px;
-    height: 100%;
-    position: fixed;
-    top: 84px;
-    left: -240px;
-    z-index:1;
-  }
-  .sidebar-open {
-    transition: 0.5s;
-    left: 0;
-  }
-  .sidebar-closed {
-    transition: 0.5s;
-    left: -240px;
-  }
-  
-  .my-menu {
-    margin-top: 10px;
-    text-align: center;
-  }
-  .my-menu .im {
-    margin-top: 5px;
-    border: 1px solid #ddd;
-    width: 100%;
-    display: flex;
-  }
-  .my-menu .im a {
-    flex: 1;
-    background: #010101;
-    color: white;
-  }
- 
+  background: #fff;
+  padding: 0 10px;
+  width: 240px;
+  height: 100%;
+  position: fixed;
+  top: 84px;
+  left: -240px;
+  z-index: 1;
+}
+.sidebar-open {
+  transition: 0.5s;
+  left: 0;
+}
+.sidebar-closed {
+  transition: 0.5s;
+  left: -240px;
+}
+
+.my-menu {
+  margin-top: 10px;
+  text-align: center;
+}
+.my-menu .im {
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  width: 100%;
+  display: flex;
+}
+.my-menu .im a {
+  flex: 1;
+  background: #010101;
+  color: white;
+}
+.my-menu * {
+  /* border: 1px solid red; */
+}
+.my-menu .btn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  width: 100%;
+}
+.to-home {
+  background: #ddd;
+  padding: 10px;
+  color: black;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+/* 사이드바 닫는 부분 */
+.close-bar {
+  padding: 0;
+  display: flex;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: transparent;
+}
+
+.close-bar img {
+  pointer-events: none;
+  width: 100%; /* 부모 요소인 버튼의 크기에 맞게 이미지 크기 조정 */
+  height: 100%; /* 부모 요소인 버튼의 크기에 맞게 이미지 크기 조정 */
+  object-fit: cover; /* 이미지가 버튼 안에 꽉 차도록 */
+}
+
+.profile {
+}
+.portfolio {
+}
+.github {
+}
+.category-header {
+  margin-top: 30px;
+}
+.category-header h2 {
+  color: black;
+  font-weight: 500;
+  font-size: 12px;
+  padding-left: 0px;
+  margin-bottom: 8px;
+}
+
+.category-list {
+  padding: 0;
+  margin: 0;
+}
+
+.category-list .selected {
+  font-weight: bold;
+}
+
+.category-list li {
+  margin-bottom: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+.category-name {
+}
+
+.category-count {
+  margin-left: 5px;
+  color: #888;
+}
+.tag-header {
+  margin-top: 30px;
+}
+.tag-header h2 {
+  color: black;
+  font-weight: 500;
+  font-size: 12px;
+  padding-left: 0px;
+  margin-bottom: 8px;
+}
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+}
+.tag-list li {
+  border: 1px solid black;
+  margin: 1px;
+  padding: 2px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+.tag-list li.selected {
+  background-color: black;
+}
+
+.tag-list li.selected a {
+  color: #ffffff !important;
+}
+
+/* 태블릿 */
+@media (min-width: 820px) {
   .btn-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 100%;
-    padding: 10px 0px 0px;
+    display: none;
   }
-  .to-home {
-    background: #ddd;
-    padding: 10px;
-    color: black;
-    margin-bottom: 10px;
-    border-radius: 5px;
+  .side-bar {
+    left: auto;
   }
-  /* 사이드바 닫는 부분 */
-  .close-bar {
-    padding: 0;
-    display: flex;
-    width: 1.5rem;
-    height: 1.5rem;
-    background: transparent;
-  }
-  
-  .close-bar img {
-    pointer-events: none;
-    width: 100%; /* 부모 요소인 버튼의 크기에 맞게 이미지 크기 조정 */
-    height: 100%; /* 부모 요소인 버튼의 크기에 맞게 이미지 크기 조정 */
-    object-fit: cover; /* 이미지가 버튼 안에 꽉 차도록 */
-  }
-  
-  
-  .profile {
-  }
-  .portfolio {
-  }
-  .github {
-  }
-  .category-header {
-    margin-top: 30px;
-  }
-  .category-header h2 {
-    color: black;
-    font-weight: 500;
-    font-size: 12px;
-    padding-left: 0px;
-    margin-bottom: 8px;
-  }
-  
-  .category-list {
-    padding: 0;
-    margin: 0;
-  }
-  
-  .category-list .selected {
-    font-weight: bold;
-  }
-  
-  .category-list li {
-    margin-bottom: 10px;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .category-name {
-  }
-  
-  .category-count {
-    margin-left: 5px;
-    color: #888;
-  }
-  .tag-header {
-    margin-top: 30px;
-  }
-  .tag-header h2 {
-    color: black;
-    font-weight: 500;
-    font-size: 12px;
-    padding-left: 0px;
-    margin-bottom: 8px;
-  }
-  .tag-list {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0;
-    padding: 0;
-  }
-  .tag-list li {
-    border: 1px solid black;
-    margin: 1px;
-    padding: 2px 10px;
-    border-radius: 5px;
-    font-size: 12px;
-  }
-  
-  .tag-list li.selected {
-    background-color: black;
-  }
-  
-  .tag-list li.selected a{
-    color: #ffffff !important;
-  }
-  
-  /* 태블릿 */
-  @media (min-width: 820px) {
-    .btn-wrapper {
-      display: none;
-    }
-    .side-bar {
-      left: auto;
-    }
-  }
-  
-  /* 데스크톱 */
-  @media (min-width: 1340px) {
-  }
+}
+
+/* 데스크톱 */
+@media (min-width: 1340px) {
+}
