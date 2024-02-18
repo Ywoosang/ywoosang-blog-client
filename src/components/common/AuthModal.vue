@@ -66,6 +66,7 @@ import { ModalStatus } from '@/types/enums';
 const store = useStore();
 
 const isEmailSent = ref(false);
+let isSending = false;
 const sentMessage = ref<string | null>(null);
 const email = ref<string | null>(null);
 const errorMessage = ref<string | null>(null);
@@ -82,6 +83,8 @@ const switchModalStatus = () => {
 
 const sendEmail = async () => {
 	try {
+		if (isSending) return;
+		isSending = true;
 		if (!email.value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
 			errorMessage.value = '이메일 형식을 입력하세요';
 			console.log('에러');
@@ -94,6 +97,7 @@ const sendEmail = async () => {
 		errorMessage.value = null;
 		sentMessage.value = data.message;
 		isEmailSent.value = true;
+		isSending = false;
 	} catch (e) {
 		console.log(e);
 	}
