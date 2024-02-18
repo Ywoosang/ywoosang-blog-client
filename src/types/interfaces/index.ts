@@ -69,12 +69,17 @@ export interface SidebarState {
 	postCount: number;
 }
 
+export interface HeaderState {
+	isDropdownOpen: boolean;
+}
+
 export interface UsersState {
 	user: User | null;
 	publicProfile: Pick<
 		User,
 		'id' | 'description' | 'nickname' | 'profileImage' | 'userId'
 	> | null;
+	activities: any
 }
 
 export interface Page {

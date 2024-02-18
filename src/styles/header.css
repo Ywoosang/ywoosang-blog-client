@@ -1,110 +1,172 @@
 header {
-    z-index: 2;
-    background-color: rgb(253, 253, 253);
-    width: 100%;
-    height: 84px;
-    position: fixed;
-    top: 0;
-    padding: 0 20px;
-    /* 헤더 가운데 정렬 */
-    margin: auto;
-    right: 0px;
-    left: 0px;
-    border: 1px solid #eeeeee;
-    border-top: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .logo-container {
-    display: none;
-  }
-  
-  .logo-container .logo{
-    font-family: "Noto Sans KR", sans-serif;
-    font-weight:700;
-    font-size:25px;
-  }
- 
-  * {
-    /* border: 1px solid red; */
-  }
-  
-  .user-actions {
-    display: flex;
-    gap: 5px;
+  z-index: 2;
+  background-color: rgb(253, 253, 253);
+  width: 100%;
+  height: 84px;
+  position: fixed;
+  top: 0;
+  padding: 0 20px;
+  /* 헤더 가운데 정렬 */
+  margin: auto;
+  right: 0px;
+  left: 0px;
+  border: 1px solid #eeeeee;
+  border-top: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .visible {
+  display: block;
+}
+
+.logo-container {
+  display: none;
+}
+
+.logo-container .logo {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 700;
+  font-size: 25px;
+}
+
+.side-bar-btn {
+  cursor: pointer;
+}
+
+/* 로그인 전 사용자 */
+.user-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.user-actions .r-btn {
+  padding: 5px 12px;
+  font-size: 14px;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.user-actions .r-btn:hover {
+  font-weight: bold;
+}
+
+.user-actions .btn-signin {
+  color: black;
+  background: transparent;
+}
+
+.user-actions .btn-signup {
+  background-color: #010101;
+  color: #fff;
+}
+
+/*  */
+
+* {
+  /* border: 1px solid red; */
+}
+
+/* 로그인 후 사용자 */
+.user-profile {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.user-profile .image-wrapper {
+  height: 80px;
+  display: flex;
+  align-items: center;
+}
+
+.user-profile .image-wrapper img {
+  object-fit: cover;
+  height: 60%;
+  border-radius: 50%;
+}
+
+.user-profile .menu-wrapper {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 84px;
+  right: 0;
+  background: #ffffff;
+  box-shadow: 0 0 8px rgb(0 0 0 / 10%);
+}
+.user-profile .menu-wrapper .menu {
+  display: flex;
+  flex-direction: column;
+  width: 12rem;
+}
+.menu .menu-item {
+  padding: 0.75rem 1rem;
+  background: #ffffff;
+  color: #000000;
+  text-align: start;
+  position: relative;
+  font-size: 1rem;
+}
+
+.menu .menu-item:hover {
+  background: #ddd;
+}
+
+.menu .menu-item .admin {
+  background: #000000;
+  color: white;
+  border-radius: 5px;
+  font-size: 0.7rem;
+  padding: 3px;
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  right: 4%;
+  transform: translateY(-50%);
+}
+
+.user-profile .btn-wrapper {
+  display: flex;
+  align-items: center;
+  background: transparent;
+}
+.user-profile .btn-wrapper .btn-down {
+  color: rgb(80, 80, 80);
+  font-size: 1.2rem;
+}
+
+/* 태블릿 */
+@media (min-width: 820px) {
+  header {
+    max-width: calc(1100px);
   }
   .side-bar-btn {
-    cursor: pointer;
+    display: none;
   }
-  .btn-group {
-    display: flex;
+  .logo-container {
+    display: block;
   }
-
   .r-btn {
-    padding: 5px 12px;
+    padding: 7px 14px;
     font-size: 14px;
-    text-decoration: none;
-    border-radius: 4px;
   }
-  
-  .r-btn:hover {
-    font-weight: bold;
+  .user-actions {
+    gap: 10px;
   }
-  .btn-signin {
-    color: black;
-    background: transparent;
+}
+
+@media (min-width: 1340px) {
+  header {
+    max-width: calc(1356px);
   }
-  
-  .btn-signup {
-    background-color: #010101;
-    color: #fff;
+  .r-btn {
+    padding: 8px 16px;
+    font-size: 16px;
   }
-  .user-profile {
-    gap:0px;
+  .user-actions {
+    gap: 10px;
   }
-  
-  .admin {
-    padding: 0 3px;
-  }
-  .profile {
-    padding: 0 3px;
-  }
-  .logout {
-    background: none;
-    color: rgb(250, 49, 49);
-    padding: 0 3px;
-  }
-  
-  /* 태블릿 */
-  @media (min-width: 820px) {
-    header {
-      max-width: calc(1100px);
-    }
-    .side-bar-btn {
-      display: none;
-    }
-    .logo-container {
-      display: block;
-    }
-    .r-btn {
-      padding: 7px 14px;
-      font-size: 14px;
-    }
-    .user-actions {
-      gap: 10px;
-    }
-  }
-  
-  @media (min-width: 1340px) {
-    header {
-      max-width: calc(1356px);
-    }
-    .r-btn {
-      padding: 8px 16px;
-      font-size: 16px;
-    }
-    .user-actions {
-      gap: 10px;
-    }
-  }
+}
