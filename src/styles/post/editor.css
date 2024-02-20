@@ -1,110 +1,117 @@
+html {
+  font-size: 16px;
+}
+
 .editor-wrapper {
-    display: flex;
-    flex-direction: column;
-  }
-  .post-title {
-    font-size: 30px;
-    font-weight: bold;
-    height: 70px;
-    border-radius: 0px;
-    border: none;
-  }
-  .post-description {
-    border: none;
-    height: 60px;
-    padding: 5px 10px;
-  }
-  
-  .public-btn,
-  .private-btn {
-    border: 1px solid #ddd;
-    background-color: #ffffff;
-    color: black;
-    margin: 5px;
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  .selected {
-    background-color: black;
-    color: white;
-  }
-  
-  .selection-container {
-    display: flex;
-    flex-direction: column;
-  }
-  .category-wrapper {
-    border-top: 1px solid #ddd;
-    display: flex;
-    align-items: center;
-  }
-  .category-wrapper h3 {
-    padding: 5px 25px 5px 10px;
-    width: 110px;
-  }
-  .category-wrapper .category-select {
-    background: #ffffff;
-    border: 1px solid #ddd;
-    min-width: 200px;
-    height: 36px;
-    line-height: 36px;
-    padding-left: 5px;
-    padding-top: 5px;
-    font-size: 20px;
-  }
-  .category-select:focus {
-    outline: none;
-    border: 1px solid black;
-  }
-  .tag-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  .tag-wrapper h3 {
-    padding: 5px 25px 5px 10px;
-    width: 110px;
-    height: 47px;
-    margin: 0;
-  }
-  .tag-wrapper .tag {
-    border: 1px solid #ddd;
-    background: #ffffff;
-    padding: 7px 10px;
-    border-radius: 8px;
-    margin-right: 3px;
-    margin: 2px 3px 2px 0;
-  }
-  .tag-wrapper .tag-input {
-    width: 200px;
-    border-radius: 0px;
-    box-sizing: border-box;
-    line-height: 40px;
-    padding-bottom: 5px;
-    height: 40px;
-    padding: 5px 7px 5px 7px;
-  }
-  
-  .button-container {
-    height: 50px;
-    padding: 10px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .button-container .exit-btn {
-    font-size: 20px;
-    background: none;
-    margin-left: 10px;
-  }
-  .button-container .submit-btn {
-    font-size: 20px;
-    border-radius: 3px;
-    padding: 5px 10px;
-    margin-right: 10px;
-  }
-  .toastui-editor-mode-switch .tab-item {
-    display: none !important;
-  }
+  display: flex;
+  flex-direction: column;
+}
+
+.post-title {
+  padding-left: 0.6rem;
+  font-size: 2rem; /* 32px */
+  font-weight: bold;
+  height: 4.4rem; /* 70px */
+  border-radius: 0;
+  border: none;
+}
+
+.post-description {
+  border: none;
+  height: 3.8rem; /* 60px */
+  padding: 0.3rem 0.6rem; /* 5px 10px */
+}
+
+.public-btn,
+.private-btn {
+  border: 0.1rem solid #ddd; /* 1px */
+  background-color: #ffffff;
+  color: black;
+  margin: 0.3rem; /* 5px */
+  padding: 0.6rem; /* 10px */
+  cursor: pointer;
+}
+
+.selected {
+  background-color: black;
+  color: white;
+}
+
+.selection-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.category-wrapper {
+  border-top: 0.1rem solid #ddd; /* 1px */
+  display: flex;
+  align-items: center;
+}
+
+.category-wrapper h3 {
+  padding: 0.3rem 1.6rem 0.3rem 0.6rem; /* 5px 25px 5px 10px */
+  width: 6.9rem; /* 110px */
+}
+
+.category-wrapper .category-select {
+  background: #ffffff;
+  border: 0.1rem solid #ddd; /* 1px */
+  min-width: 12.5rem; /* 200px */
+  height: 2.1rem; /* 33.6px */
+  line-height: 2.1rem; /* 33.6px */
+  padding-left: 0.3rem; /* 5px */
+  padding-top: 0.3rem; /* 5px */
+  font-size: 1.2rem; /* 19.2px */
+}
+
+.category-select:focus {
+  outline: none;
+  border: 0.1rem solid black; /* 1px */
+}
+
+.tag-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 1.3rem; /* 20px */
+}
+
+.tag-wrapper h3 {
+  padding: 0.3rem 1.6rem 0.3rem 0.6rem; /* 5px 25px 5px 10px */
+  width: 6.9rem; /* 110px */
+  height: 3rem; /* 47px */
+  margin: 0;
+}
+
+.tag-wrapper .tag {
+  border: 0.1rem solid #ddd; /* 1px */
+  background: #ffffff;
+  padding: 0.4rem 0.6rem; /* 7px 10px */
+  border-radius: 0.5rem; /* 8px */
+  margin-right: 0.2rem; /* 3px */
+  margin: 0.1rem 0.2rem 0.1rem 0; /* 2px 3px 2px 0 */
+}
+
+.tag-wrapper .tag-input {
+  width: 12.5rem; /* 200px */
+  border-radius: 0;
+  box-sizing: border-box;
+  line-height: 2.5rem; /* 40px */
+  padding-bottom: 0.3rem; /* 5px */
+  height: 2.5rem; /* 40px */
+  padding: 0.3rem 0.4rem 0.3rem 0.4rem; /* 5px 7px 5px 7px */
+}
+
+.button-container {
+  height: 3.1rem; /* 50px */
+  padding: 0.6rem 0; /* 10px */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button-container .exit-btn {
+  font-size: 1.3rem; /* 20px */
+  background: none;
+  margin-left: 0.6rem; /* 10px */
+}

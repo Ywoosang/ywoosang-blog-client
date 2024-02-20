@@ -1,12 +1,12 @@
 .profile-container {
   margin-top: 2rem;
   display: grid;
-  grid-template-areas: 
+  grid-template-areas:
     "avatar detail"
     "info info";
-    /* 첫 번째 열은 자동 크기, 두 번째 열은 1fr로 쭉 늘어남 */
-    grid-template-columns: auto 1fr; 
-    gap: 10px; 
+  /* 첫 번째 열은 자동 크기, 두 번째 열은 1fr로 쭉 늘어남 */
+  grid-template-columns: auto 1fr;
+  gap: 10px;
 }
 
 .avatar-wrapper {
@@ -14,6 +14,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   padding-right: 1rem;
 }
 
@@ -26,14 +27,14 @@
   background-color: #333;
 }
 
+/* 사용자 이미지 */
 .avatar-wrapper .user-avatar img {
-  
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.avatar-wrapper .update-nickname i {
-  font-size: 16px;
-  color:black;
-}
+/*  */
 
 .avatar-wrapper:hover .upload-layer {
   display: flex;
@@ -63,7 +64,6 @@
   font-size: 0.8rem;
   background-color: #000;
   color: white;
-  border-radius: 5px;
   font-weight: bold;
 }
 
@@ -75,26 +75,10 @@
 }
 
 /* 사용자 수정 부분 */
-
-.detail-wrapper {
-  grid-area: detail;
-  border-left: 1px solid #ddd;
-  flex: 1;
-  padding-left: 1rem;
-}
-.detail-wrapper div { 
-  width: 100%;
-}
-.detail-wrapper {
-  color: rgb(0, 0, 0);
-  /* Set text color to white */
-}
-
-/* 공통 스타일 */
-.update-btn {
-  width: 0.8rem;
-  height: 0.8rem;
-  font-size: 0.8rem;
+.detail-wrapper .update-btn {
+  width: 1.2rem;
+  height: 1.2rem;
+  font-size: 1.2rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -102,138 +86,82 @@
   margin-left: 0.2rem;
 }
 
-.save-btn {
+.detail-wrapper {
+  grid-area: detail;
+  border-left: 1px solid #ddd;
+  flex: 1;
+  color: #000;
+  padding-left: 1rem;
+}
+.detail-wrapper div {
+  width: 100%;
+}
+
+.detail-wrapper .update-btn .icon {
+  font-size: 1.2rem;
+  color: black;
+}
+
+.detail-wrapper .save-btn {
   font-size: 0.8rem;
   border-radius: 5px;
   margin-left: 0.2rem;
   white-space: nowrap;
 }
-/*  */
 
-
-
-.nickname-wrapper div {
-  display:flex;
-  height: 70px;
+.detail-wrapper .nickname-wrapper div {
+  display: flex;
   align-items: flex-start;
+  margin-bottom: 10px;
 }
 
-.nickname-wrapper .view h2{
+.detail-wrapper .nickname-wrapper .view h2 {
+  padding-left: 0;
   margin: 0;
-  /* 세로 시작방향을 input 과 맞추기 위해 */
-  padding-left: 10px;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   flex: 1;
   font-weight: bold;
   border: 1px solid white;
 }
 
-.nickname-wrapper .edit input {
+.detail-wrapper .nickname-wrapper .edit input {
   margin: 0;
-  padding-left: 10px;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   flex: 1;
   border: 1px solid #ddd;
   font-weight: bold;
 }
 
- 
 /* 설명 */
-.description-wrapper * {
+.detail-wrapper .description-wrapper * {
   /* border: 1px solid red; */
 }
 
-.description-wrapper div {
+.detail-wrapper .description-wrapper div {
   display: flex;
   align-items: flex-start;
 }
 
-.description-wrapper .view p {
+.detail-wrapper .description-wrapper .view p {
   margin: 0;
-  font-size:0.8rem;
+  font-size: 1rem;
   flex: 1;
+  color: rgb(80, 80, 80);
   border: 1px solid white;
   word-break: break-all;
 }
 
-textarea {
+.detail-wrapper .description-wrapper textarea {
+  margin: 0;
   border: 1px solid #ddd;
+  font-size: 1rem;
+  color: rgb(80, 80, 80);
   width: 100%;
   height: auto;
-  font-size: 0.8rem;
   overflow-y: hidden;
 }
 
-/* .description-wrapper .edit textarea {
-  font-size: 1rem;
-  padding: 10px;
-  border: 1px solid #ddd;
-  flex:1;
-  width: 100%;
-  margin-bottom: 10px;
-  resize: none;
-  height: 120px;
-} */
-
-
-/* 프로필 뷰어 부분 */
-.user-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.user-nickname {
-  font-size: 1.5rem;
-  margin-bottom: 5px;
-}
-
-.user-email,
-.user-description,
-.user-role,
-.user-status {
-  margin-bottom: 10px;
-}
-
-
-/* 아래부분 */
-.info-wrapper {
-  grid-area: info;
-  margin-top: 2rem;
-}
-.info-wrapper * {
-  /* border: 1px solid red; */
-}
-
-.wrapper h3 {
-  font-size: 1rem;
-  margin: 0;
-}
-
-.title-wrapper {
-  display: flex;
-  align-items: center;
-  padding:0;
-}
-
-.status-wrapper {
-  margin-left: 7px;
-  color:white;
-  background: rgb(100, 219, 100);
-  font-size: 10px;
-  border-radius: 2px;
-  padding: 2px;
-}
-
-.content-wrapper {
-
-}
-.content-wrapper p {
-  font-size: 0.8rem;
-  margin:0;
-}
-
- /* 태블릿 */
+/* 태블릿 */
 @media (min-width: 820px) {
 }
 
@@ -248,61 +176,46 @@ textarea {
     margin-top: 1rem;
     font-size: 1.2rem;
   }
-  
+
   .avatar-wrapper .reset-image {
     width: 120px;
     font-size: 1.2rem;
   }
 
-  .nickname-wrapper .view h2 {
+  .detail-wrapper .nickname-wrapper .view h2 {
     font-size: 2rem;
-    height: 60px;
   }
 
-  .nickname-wrapper .edit input {
+  .detail-wrapper .nickname-wrapper .edit {
+  }
+
+  .detail-wrapper .nickname-wrapper .edit input {
     font-size: 2rem;
-    height: 60px;
     padding-top: 4px;
   }
 
-  .description-wrapper .view p {
-    font-size: 1rem;
-    padding: 10px;
-  }
-  
-  textarea {
-    font-size: 1rem;
-    padding: 8px 10px;
+  .detail-wrapper .description-wrapper .view p {
+    font-size: 1.4rem;
+    padding: 8px 10px 0px 0px;
   }
 
-  .update-btn {
+  .detail-wrapper .description-wrapper textarea {
+    font-size: 1.4rem;
+    padding: 8px 10px 0px 0px;
+  }
+
+  .detail-wrapper .update-btn {
     width: 1.5rem;
     height: 1.5rem;
     font-size: 1.5rem;
   }
 
-  .save-btn {
+  .detail-wrapper .update-btn .icon {
+    font-size: 1.8rem;
+  }
+
+  .detail-wrapper .save-btn {
     font-size: 1.2rem;
     margin-left: 0.5rem;
   }
-
-  .info-wrapper {
-    margin-top: 2.3rem;
-  }
-
-  .wrapper h3 {
-    font-size: 1.2rem;
-  }
-
-  .content-wrapper p {
-    font-size: 16px;
-  }
-
-  .status-wrapper{
-    margin-left: 10px;
-    color:white;
-    background: rgb(100, 219, 100);
-    font-size: 12px;
-  }
-  
 }

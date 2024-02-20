@@ -1,0 +1,50 @@
+.info-wrapper {
+  grid-area: info;
+  margin-top: 2rem;
+}
+.info-wrapper > div {
+  margin-top: 30px;
+}
+
+.wrapper h3 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.wrapper .title-wrapper {
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.wrapper .content-wrapper {
+}
+.wrapper .content-wrapper p {
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+/* 태블릿 */
+@media (min-width: 820px) {
+  .wrapper h3 {
+    font-size: 1.2rem;
+  }
+  .wrapper .content-wrapper p {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 1340px) {
+  .info-wrapper {
+    margin-top: 2.3rem;
+  }
+
+  .wrapper h3 {
+    font-size: 1.4rem;
+  }
+
+  .wrapper .content-wrapper p {
+    font-size: 1.2rem;
+    margin: 0;
+  }
+}

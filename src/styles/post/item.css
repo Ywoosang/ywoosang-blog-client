@@ -1,65 +1,69 @@
 .post {
-    border: 1px solid #ddd;
-    padding: 10px 20px;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    font-size: 13px;
-    position:relative;
-  }
-  .post .admin-tool {
-    position:absolute;
-    display: flex;
-    right: 1rem;
-    top: 1rem;
-  }
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  position: relative;
+}
 
-  .post .admin-tool button{
-    padding:2px;
-    background: transparent;
-    color: #333;
+.post .admin-tool {
+  position: absolute;
+  display: flex;
+  right: 1rem;
+  top: 1rem;
+}
+
+.post .admin-tool button {
+  padding: 2px;
+  background: transparent;
+  color: #333;
+}
+
+.post h2 {
+  font-size: 1.4rem;
+  color: #333;
+  margin: 5px 0px 0px;
+}
+.post .timestamp {
+  color: #888;
+  margin: 5px 0 0 0;
+  font-size: 0.8rem;
+}
+.post .timestamp .update-date {
+  font-size: 0.8rem;
+}
+.post .description {
+  margin: 5px 0;
+  font-size: 1rem;
+}
+.post .tags {
+  display: flex;
+  flex-wrap: wrap;
+}
+.post .tag {
+  cursor: pointer;
+  margin-right: 2px;
+  margin-bottom: 2px;
+  padding: 0.2rem 0.7rem;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+/* 태블릿 */
+@media (min-width: 820px) {
+  .post {
+    font-size: 1rem;
   }
-  
-  .post h2 {
-      color: #333;
-      margin: 5px 0px 0px;
-  }
-  .post .timestamp {
-      color: #888;
-      margin: 5px 0 0 0;
-  }
-  .post .timestamp .update-date {
-    font-size: 10px;
+}
+
+/* 데스크톱 */
+@media (min-width: 1340px) {
+  .post .tag {
+    margin-right: 10px;
+    margin-bottom: 10px;
   }
   .post .description {
-      margin: 5px 0;
+    margin-bottom: 1rem;
   }
-  .post .tags {
-      display: flex;
-      flex-wrap: wrap;
-  }
-  .post .tag {
-      cursor:pointer;
-      margin-right: 2px;
-      margin-bottom: 2px;
-      padding: 5px 10px;
-      border-radius: 5px;
-      border: 1px solid black;
-  }
-  
-  /* 태블릿 */
-  @media (min-width: 820px) {
-     .post{
-          font-size: 16px;
-     }
-  }
-  
-  /* 데스크톱 */
-  @media (min-width: 1340px) {
-      .post .tag{
-          margin-right: 10px;
-          margin-bottom: 10px;
-      }
-      .post .description {
-          margin-bottom:15px;
-      }
-  }
+}

@@ -1,0 +1,62 @@
+.wrapper h3 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.wrapper .title-wrapper {
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.wrapper .status-wrapper {
+  margin-left: 7px;
+  color: white;
+  background: rgb(100, 219, 100);
+  font-size: 10px;
+  border-radius: 2px;
+  padding: 2px;
+}
+
+.wrapper .content-wrapper {
+}
+.wrapper .content-wrapper p {
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.activity-wrapper {
+  grid-area: info;
+  margin-top: 2rem;
+}
+
+.activity-wrapper .activity-list {
+  padding-left: 0;
+}
+
+.activity-wrapper > div {
+  margin-top: 30px;
+}
+
+.activity-list .activity {
+  border: 1px solid #ddd;
+  padding: 5px 10px;
+  margin: 3px 0px;
+}
+
+.activity .info {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.activity .info p {
+  margin: 0;
+}
+
+.activity .info .date {
+  color: rgb(77, 77, 77);
+}
+
+.activity .title {
+  font-size: 1.2rem;
+}

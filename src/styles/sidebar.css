@@ -1,19 +1,17 @@
 .side-bar {
   background: #fff;
-  padding: 0 10px;
   width: 240px;
   height: 100%;
   position: fixed;
-  top: 84px;
+  top: 5.5rem;
   left: -240px;
   z-index: 1;
+  padding-left: 0.3rem;
 }
 .sidebar-open {
-  transition: 0.5s;
   left: 0;
 }
 .sidebar-closed {
-  transition: 0.5s;
   left: -240px;
 }
 
@@ -76,7 +74,7 @@
 .category-header h2 {
   color: black;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 1.2rem;
   padding-left: 0px;
   margin-bottom: 8px;
 }
@@ -109,7 +107,7 @@
 .tag-header h2 {
   color: black;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 1.2rem;
   padding-left: 0px;
   margin-bottom: 8px;
 }
@@ -124,7 +122,7 @@
   margin: 1px;
   padding: 2px 10px;
   border-radius: 5px;
-  font-size: 12px;
+  font-size: 1rem;
 }
 
 .tag-list li.selected {
@@ -137,14 +135,17 @@
 
 /* 태블릿 */
 @media (min-width: 820px) {
+}
+
+/* 데스크톱 */
+@media (min-width: 1340px) {
   .btn-wrapper {
     display: none;
   }
   .side-bar {
     left: auto;
   }
-}
-
-/* 데스크톱 */
-@media (min-width: 1340px) {
+  .my-menu .btn-wrapper {
+    display: none;
+  }
 }

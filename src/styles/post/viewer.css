@@ -1,40 +1,43 @@
+.viewer-wrapper {
+  margin-bottom: 8rem;
+}
 ul.tag-list {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    padding: 0;
-    margin-bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0;
+  margin-bottom: 0;
 }
 
 .tag-list .tag {
-    border: 1px solid #ddd;
-    background: #ffffff;
-    padding: 4px 5px;
-    border-radius: 8px;
-    margin-right: 3px;
-    margin: 2px 3px 2px 0;
+  border: 1px solid #ddd;
+  background: #ffffff;
+  padding: 4px 5px;
+  border-radius: 8px;
+  margin-right: 3px;
+  margin: 2px 3px 2px 0;
 }
 
 .tag a {
-    padding: 2px 3px;
+  padding: 2px 3px;
 }
 
 .post-header {
-    margin: 0 0 2rem 0;
-    padding: 0 0 10px 0;
-    border-bottom: 1px solid #ddd;
+  margin: 0 0 2rem 0;
+  padding: 0 0 10px 0;
+  border-bottom: 1px solid #ddd;
 }
 
 .post-header h1 {
-    margin: 0 0 10px 0;
-    font-size: 2.2rem;
+  margin: 0 0 10px 0;
+  font-size: 2.2rem;
 }
 
 .created-date {
-    color: rgb(99, 99, 99);
-    margin-right: 12px;
+  color: rgb(99, 99, 99);
+  margin-right: 12px;
 }
 
 .updated-date {
-    color: rgb(75, 75, 75);
+  color: rgb(75, 75, 75);
 }
