@@ -16,8 +16,8 @@
 			<div class="nickname-wrapper">
 				<div class="view" v-if="!editMode.nickname">
 					<h2 class="nickname">{{ user.nickname }}</h2>
-					<button class="update-btn update-nickname" @click="editNickname">
-						<font-awesome-icon icon="fa-regular fa-pen-to-square" />
+					<button class="update-btn" @click="editNickname">
+						<font-awesome-icon icon="fa-regular fa-pen-to-square" class="icon" />
 					</button>
 				</div>
 				<div class="edit" v-else>
@@ -28,13 +28,13 @@
 			<div class="description-wrapper">
 				<div class="view" v-if="!editMode.description">
 					<p class="description">{{ user.description }}</p>
-					<button class="update-btn update-description" @click="editDescription">
-						<font-awesome-icon icon="fa-regular fa-pen-to-square" />
+					<button class="update-btn" @click="editDescription">
+						<font-awesome-icon icon="fa-regular fa-pen-to-square" class="icon" />
 					</button>
 				</div>
 				<div class="edit" v-else>
 					<textarea type="text" ref="descriptionTextarea" @input="adjustTextareaHeight"
-						v-model="editedUser.description" />
+						v-model="editedUser.description"></textarea>
 					<button @click="saveDescription" class="save-btn">저장</button>
 				</div>
 			</div>
@@ -47,6 +47,16 @@
 					</div>
 					<div class="content-wrapper">
 						<p class="user-email">{{ user.email }}</p>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div class="wrapper">
+					<div class="title-wrapper">
+						<h3>아이디</h3>
+					</div>
+					<div class="content-wrapper">
+						<p class="user-email">{{ user.userId }}</p>
 					</div>
 				</div>
 			</div>
@@ -170,4 +180,7 @@ const adjustTextareaHeight = () => {
 };
 </script>
 
-<style src="@/styles/users/profile.css" scoped></style>
+<style scoped>
+@import "@/styles/users/profile.css";
+@import "@/styles/users/edit.css";
+</style>

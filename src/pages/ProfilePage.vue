@@ -1,18 +1,13 @@
 <template>
 	<main>
 		<profile-info />
+		<activity-pagination />
 	</main>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import ProfileInfo from '@/components/users/ProfileInfo.vue';
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-	components: {
-		ProfileInfo,
-	},
-});
+import ActivityPagination from '@/components/users/ActivityPagination.vue';
 </script>
 
-<style></style>
+<style scoped></style>

@@ -103,3 +103,11 @@
   padding: 5px 5px 5px 0.4rem;
   margin-bottom: 0.5rem;
 }
+
+.btn-wrapper .update-btn {
+  color: rgb(51, 51, 51);
+}
+
+.btn-wrapper .delete-btn {
+  color: rgb(255, 114, 114);
+}

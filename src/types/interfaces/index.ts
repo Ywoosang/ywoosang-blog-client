@@ -79,7 +79,9 @@ export interface UsersState {
 		User,
 		'id' | 'description' | 'nickname' | 'profileImage' | 'userId'
 	> | null;
-	activities: any
+	activities: any;
+	pageList: any;
+	totalActivitiesCount: number;
 }
 
 export interface Page {

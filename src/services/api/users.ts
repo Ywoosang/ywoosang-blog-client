@@ -7,12 +7,20 @@ export const getUserProfile = () => {
 	});
 };
 
-export const getPublicUserProfile = (userLoginId: string) => {
+export const getPublicUserProfile = (userId: string) => {
 	return request({
-		url: `/users/public/profile/${userLoginId}`,
+		url: `/users/public/profile/${userId}`,
 		method: 'GET',
 	});
 };
+
+export const getUserActivities = (userId: string, payload) => {
+	const { page } = payload;
+	return request({
+		url: `/users/activities/${userId}?page=${page}`,
+		method:'GET'
+	})
+}
 
 export const updateUserProfileImage = formData => {
 	return request({

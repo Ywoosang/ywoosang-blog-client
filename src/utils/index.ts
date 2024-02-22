@@ -33,3 +33,12 @@ export const formatDate = (date: string) => {
 	  return `${diffInMinutes}분 전`;
 	}
 };
+
+export const validateNumbers = (...args: any[]): boolean => {
+    for (const arg of args) {
+        if (arg !== undefined && typeof arg !== 'number') {
+            return false;
+        }
+    }
+    return true;
+}
