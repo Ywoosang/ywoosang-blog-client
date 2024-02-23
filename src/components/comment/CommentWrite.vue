@@ -27,12 +27,17 @@ const submitComment = async () => {
 			content: content.value,
 			postId
 		};
-		await store.dispatch('comment/createComment', payload);
+		const commentId = await store.dispatch('comment/createComment', payload);
 		content.value = '';
 		const textarea = commentTextarea.value;
 		if (textarea) {
 			textarea.style.height = 'auto'; // 초기 높이로 설정
 		}
+		const createdComment = document.querySelector(`#comment${commentId}`);
+		if (createdComment) {
+			createdComment.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+		}
+
 	} catch (error: any) {
 		if (error.response && error.response.status === 401) {
 			store.dispatch('auth/openLoginModal');

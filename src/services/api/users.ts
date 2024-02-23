@@ -19,7 +19,7 @@ export const getUserActivities = (userId: string, payload) => {
 	return request({
 		url: `/users/activities/${userId}?page=${page}`,
 		method:'GET'
-	})
+	});
 }
 
 export const updateUserProfileImage = formData => {

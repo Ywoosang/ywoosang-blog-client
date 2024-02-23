@@ -18,10 +18,24 @@
 <script setup lang="ts">
 import CommentItem from './CommentItem.vue';
 import CommentReply from './ReplyItem.vue';
+import { onMounted } from 'vue';
 import { Comment } from '@/types/interfaces';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
 
 const props = defineProps({
 	comments: Array as () => Comment[]
+});
+
+onMounted(() => {
+	if (route.query.commentId) {
+		const commentId = route.query.commentId;
+		const comment = document.querySelector(`#comment${commentId}`);
+		if (comment) {
+			comment.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+		}
+	}
 });
 </script>
 

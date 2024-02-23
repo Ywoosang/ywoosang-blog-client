@@ -1,13 +1,14 @@
 <template>
-	<div class="reply">
+	<div class="reply" :id="`comment${reply.id}`">
 		<div class="header">
+			// https://yoyostudy.tistory.com/43
 			<div class="image-wrapper">
-				<img :src="props.reply.user.profileImage" />
+				<img :src="reply.user.profileImage" />
 			</div>
 			<div class="content-wrapper">
-				<router-link :to="'/profile/' + props.reply.user.userId" class="info">
-					<h4>{{ props.reply.user.nickname }}</h4>
-					<div class="date">{{ formatDate(props.reply.createdAt) }}</div>
+				<router-link :to="'/profile/' + reply.user.userId" class="info">
+					<h4>{{ reply.user.nickname }}</h4>
+					<div class="date">{{ formatDate(reply.createdAt) }}</div>
 				</router-link>
 				<div class="btn-wrapper" v-if="isAuthorized">
 					<button v-if="!editMode" class="btn-top update-btn" @click="startEdit">
@@ -17,13 +18,15 @@
 				</div>
 			</div>
 		</div>
-		<reply-write v-if="editMode" :editMode="true" @close="endEdit" :id="props.reply.id" :isComment="false"
-			:initialValue="props.reply.content" />
+		<reply-write v-if="editMode" :editMode="true" @close="endEdit" :id="reply.id" :isComment="false"
+			:initialValue="reply.content" />
 		<div v-else class="content">
-			<div>
-				<router-link :to="'/profile/' + reply.replyTo.userId" class="mention">
+			<div class="mention-wrapper">
+				<router-link :to="`/profile/${reply.replyTo.userId}`" class="mention">
 					@{{ reply.replyTo.nickname }}
 				</router-link>
+			</div>
+			<div>
 				<pre style="padding: 0; margin: 0">{{ reply.content }}</pre>
 			</div>
 		</div>
@@ -45,6 +48,8 @@ import ReplyWrite from './ReplyWrite.vue';
 const props = defineProps<{
 	reply: Comment;
 }>();
+
+const reply = props.reply;
 
 const store = useStore();
 const replyMode = ref(false);
@@ -72,7 +77,7 @@ const closeForm = () => {
 
 const deleteReply = async () => {
 	try {
-		await store.dispatch('comment/deleteReply', { reply: props.reply });
+		await store.dispatch('comment/deleteReply', { reply: reply });
 	} catch (e) {
 		console.log(e);
 	}
@@ -82,7 +87,7 @@ const deleteReply = async () => {
 const isAuthorized = computed(() => {
 	return (
 		user.value &&
-		(props.reply.user.id === user.value.id || user.value.role === 'ADMIN')
+		(reply.user.id === user.value.id || user.value.role === 'ADMIN')
 	);
 });
 </script>

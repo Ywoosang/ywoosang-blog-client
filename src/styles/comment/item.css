@@ -2,20 +2,24 @@
   display: flex;
 }
 
-.header .image-wrapper {
+.header .avatar-wrapper {
   display: flex;
   height: 3.4rem;
-  width: 2.9rem;
+  width: 3.4rem;
   align-items: center;
   position: relative;
+  padding:0px;
+  margin-right: 0.7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
 }
 
-.header .image-wrapper img {
-  position: absolute;
+.header .avatar-wrapper img {
   border-radius: 50%;
-  top: 50%;
-  transform: translateY(-54%);
-  height: 76%;
+  height: 100%;
+  width: 100%;
 }
 
 .header .content-wrapper {
@@ -40,6 +44,8 @@
 
 .header .content-wrapper .btn-wrapper .btn-top {
   background: none;
+  padding: 0 3px;
+  font-size: 1rem;
 }
 
 /* 내용 */

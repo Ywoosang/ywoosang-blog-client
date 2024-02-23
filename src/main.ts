@@ -10,6 +10,7 @@ import {
 	faLock,
 	faLockOpen,
 	faCheck,
+	faCaretDown
 } from '@fortawesome/free-solid-svg-icons';
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { faSquareGithub } from '@fortawesome/free-brands-svg-icons';
@@ -23,6 +24,7 @@ library.add(
 	faSquareGithub,
 	faPenToSquare,
 	faCheck,
+	faCaretDown
 );
 
 const app = createApp(App);

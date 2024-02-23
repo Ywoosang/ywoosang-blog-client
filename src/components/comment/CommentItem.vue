@@ -1,7 +1,7 @@
 <template>
-	<div class="comment">
+	<div class="comment" :id="`comment${comment.id}`">
 		<div class="header">
-			<div class="image-wrapper">
+			<div class="avatar-wrapper">
 				<img :src="comment.user.profileImage" />
 			</div>
 			<div class="content-wrapper">
@@ -10,11 +10,7 @@
 					<div class="date">{{ formatDate(comment.createdAt) }}</div>
 				</router-link>
 				<div class="btn-wrapper" v-if="isAuthorized">
-					<button
-						v-if="!editMode"
-						class="btn-top update-btn"
-						@click="startEdit"
-					>
+					<button v-if="!editMode" class="btn-top update-btn" @click="startEdit">
 						수정
 					</button>
 					<button class="btn-top delete-btn" @click="deleteComment">
@@ -23,25 +19,14 @@
 				</div>
 			</div>
 		</div>
-		<reply-write
-			v-if="editMode"
-			:editMode="true"
-			@close="endEdit"
-			:id="comment.id"
-			:initialValue="comment.content"
-		/>
+		<reply-write v-if="editMode" :editMode="true" @close="endEdit" :id="comment.id" :initialValue="comment.content" />
 		<div v-else class="content">
-			<pre style="padding: 0; margin: 0">{{ comment.content }} </pre>
+			{{ comment.content }}
 		</div>
 		<div class="tool">
 			<button class="create-btn" @click="openForm">답글 달기</button>
 		</div>
-		<reply-write
-			v-if="isOpen"
-			@close="closeForm"
-			:parentCommentId="comment.id"
-			:replyToId="comment.user.id"
-		/>
+		<reply-write v-if="isOpen" @close="closeForm" :parentCommentId="comment.id" :replyToId="comment.user.id" />
 	</div>
 </template>
 
@@ -72,7 +57,7 @@ const isAuthorized = computed(() => {
 	);
 });
 
-const deleteComment = async() => {
+const deleteComment = async () => {
 	try {
 		await store.dispatch('comment/deleteComment', { comment: props.comment });
 	} catch (e) {

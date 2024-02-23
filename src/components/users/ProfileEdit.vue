@@ -124,11 +124,14 @@ const handleFileChange = async (event) => {
 };
 
 const updateImage = async () => {
-	if (prevProfileImage.value != currentProfileImage.value) {
-		// actions
-		await store.dispatch('users/updateUser', { profileImage: currentProfileImage })
+	try {
+		if (prevProfileImage.value != currentProfileImage.value) {
+		await store.dispatch('users/updateUser', { profileImage: currentProfileImage.value })
 		prevProfileImage.value = user.value.profileImage;
 		currentProfileImage.value = user.value.profileImage;
+		}
+	} catch (e) {
+		console.log(e);
 	}
 };
 

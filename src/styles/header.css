@@ -1,7 +1,7 @@
 header {
   z-index: 2;
   background-color: rgb(253, 253, 253);
-  width: 100%;
+  width: 100vw;
   height: 5.5rem;
   position: fixed;
   top: 0;
@@ -28,7 +28,7 @@ header .visible {
 .logo-container .logo {
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 700;
-  font-size: 25px;
+  font-size: 1.8rem;
 }
 
 .side-bar-btn {
@@ -70,15 +70,16 @@ header .visible {
   position: relative;
 }
 
-.user-profile .image-wrapper {
+.user-profile .avatar-wrapper {
   height: 5rem;
   display: flex;
   align-items: center;
 }
 
-.user-profile .image-wrapper img {
+.user-profile .avatar-wrapper img {
   object-fit: cover;
-  height: 60%;
+  height: 3.2rem;
+	width:3.2rem;
   border-radius: 50%;
 }
 

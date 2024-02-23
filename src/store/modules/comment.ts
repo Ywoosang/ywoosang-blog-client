@@ -85,6 +85,7 @@ export const actions: ActionTree<CommentState, RootState> = {
 		};
 		const { data } = await createComment(createCommentDto);
 		commit('SET_NEW_COMMENT', data);
+		return data.id;
 	},
 	async createReply({ commit }, payload) {
 		const { parentCommentId, content, replyToId } = payload;
@@ -94,6 +95,7 @@ export const actions: ActionTree<CommentState, RootState> = {
 		};
 		const { data } = await createReply(parentCommentId, createReplyDto);
 		commit('SET_NEW_REPLY', data);
+		return data.id;
 	},
 	async deleteComment({ commit }, payload) {
 		const { comment } = payload;

@@ -19,7 +19,7 @@
 			</button>
 		</div>
 		<div class="user-profile" v-if="isLoggedIn && user">
-			<div class="image-wrapper">
+			<div class="avatar-wrapper">
 				<img :src="user.profileImage">
 			</div>
 			<button @click="toggleDropdown" class="btn-wrapper"><font-awesome-icon icon="fa-solid fa-caret-down"

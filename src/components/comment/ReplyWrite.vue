@@ -66,7 +66,11 @@ const submitReplay = async () => {
 			replyToId: props.replyToId,
 		};
 		if (!props.editMode) {
-			await store.dispatch('comment/createReply', payload);
+			const replyId = await store.dispatch('comment/createReply', payload);
+			const createdReply = document.querySelector(`#comment${replyId}`);
+			if (createdReply) {
+				createdReply.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+			}
 		} else {
 			if (props.isComment) {
 				await store.dispatch('comment/updateComment', payload);

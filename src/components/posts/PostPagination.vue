@@ -22,24 +22,4 @@ const props = defineProps({
 })
 </script>
 
-<style scoped>
-.pagination {
-	display: flex;
-	justify-content: center;
-	padding: 0px;
-}
-
-.pagination .page {
-	padding: 0 3px;
-}
-
-.pagination .page .current {
-	font-weight: bold;
-}
-
-/* 태블릿 */
-@media (min-width: 860px) {}
-
-/* 데스크톱 */
-@media (min-width: 1340px) {}
-</style>
+<style src="@/styles/common/pagination.css" scoped></style>

@@ -21,7 +21,8 @@
 .avatar-wrapper .user-avatar {
   position: relative;
   display: flex;
-  width: 60px;
+  width: 5rem;
+  height: 5rem;
   border-radius: 50%;
   overflow: hidden;
   background-color: #333;
@@ -168,7 +169,8 @@
 /* 데스크톱 */
 @media (min-width: 1340px) {
   .avatar-wrapper .user-avatar {
-    width: 100px;
+ 	width: 5.5rem;
+	height: 5.5rem;
   }
 
   .avatar-wrapper .update-image {

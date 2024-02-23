@@ -14,7 +14,6 @@ const state: PostState = {
 	pageList: [],
 	// 게시물 조회
 	post: null,
-	//
 	editingPost: null,
 };
 
@@ -70,16 +69,13 @@ export const actions: ActionTree<PostState, RootState> = {
 			response = await getPublicPost(id);
 		}
 		const post = response.data;
-		console.log('찍힘');
-		console.log(post);
 		commit('SET_CURRENT_POST', post);
+		return post;
 	},
 	async fetchEditingPost({ commit }, payload) {
 		const { id } = payload;
 		const response = await getPost(id);
 		const post = response.data;
-		console.log('찍힘');
-		console.log(post);
 		commit('SET_EDITING_POST', post);
 	},
 };
