@@ -1,55 +1,46 @@
 <template>
 	<main>
-		<post-item :posts="getPostList" />
-		<post-pagination :pageList="getPageList" />
+		<post-item :posts="postList" />
+		<post-pagination :pageList="pageList" />
 	</main>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import PostItem from '@/components/posts/PostItem.vue';
 import PostPagination from '@/components/posts/PostPagination.vue';
-import { defineComponent } from 'vue';
-import { mapActions, mapGetters, mapMutations } from 'vuex';
+import { onMounted, computed } from 'vue';
+import { useStore } from 'vuex';
+import { useRoute, onBeforeRouteUpdate } from 'vue-router';
 
-export default defineComponent({
-	async mounted() {
-		await this.setPostList();
-		this.SET_SELECTED_CATEGORY_ID(null);
-	},
-	watch: {
-		async $route(to, from) {
-			const toPage = to.query.page ? to.query.page : 1;
-			const toLimit = to.query.limit ? to.query.limit : 15;
-			const fromPage = from.query.page ? from.query.page : 1;
-			const fromLimit = from.query.limit ? from.query.limit : 15;
-			if (toPage !== fromPage || toLimit !== fromLimit) {
-				await this.setPostList();
-				this.SET_SELECTED_CATEGORY_ID(null);
-			}
-		},
-	},
-	computed: {
-		...mapGetters('post', ['getPostList', 'getPageList']),
-		...mapGetters('users', ['getUserRole']),
-	},
-	methods: {
-		...mapMutations('sidebar', ['SET_SELECTED_CATEGORY_ID']),
-		...mapActions('post', ['fetchPostList']),
-		async setPostList() {
-			const userRole = this.getUserRole;
-			let { page, limit } = this.$route.query;
-			page = page ? page : (1 as any);
-			limit = limit ? limit : (15 as any);
-			try {
-				await this.fetchPostList({ userRole, page, limit });
-			} catch (e) {
-				console.log(e);
-			}
-		},
-	},
-	components: {
-		PostItem,
-		PostPagination,
-	},
-});
+const store = useStore();
+const route = useRoute();
+
+// 처음 로딩시 게시물을 불러옴
+onMounted(async () => {
+	const page = route.query.page ? route.query.page : '1';
+	if (typeof page == 'string') {
+		await setPostList(page);
+		store.commit('sidebar/SET_SELECTED_CATEGORY_ID', null);
+	}
+})
+
+
+const postList = computed(() => store.getters['post/getPostList']);
+const pageList = computed(() => store.getters['post/getPageList']);
+const userRole = computed(() => store.getters['users/getUserRole']);
+
+const setPostList = async (page: string) => {
+	try {
+		await store.dispatch('post/fetchPostList', { userRole: userRole.value, page });
+	} catch (e) {
+		console.log(e);
+	}
+};
+
+onBeforeRouteUpdate(async (to, from) => {
+	if (to.query.page != from.query.page && typeof to.query.page == 'string') {
+		await setPostList(to.query.page);
+		store.commit('sidebar/SET_SELECTED_CATEGORY_ID(null)');
+	}
+})
 </script>

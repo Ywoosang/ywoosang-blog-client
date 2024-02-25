@@ -1,8 +1,7 @@
 <template>
 	<div class="reply" :id="`comment${reply.id}`">
 		<div class="header">
-			// https://yoyostudy.tistory.com/43
-			<div class="image-wrapper">
+			<div class="avatar-wrapper">
 				<img :src="reply.user.profileImage" />
 			</div>
 			<div class="content-wrapper">
@@ -76,12 +75,7 @@ const closeForm = () => {
 };
 
 const deleteReply = async () => {
-	try {
-		await store.dispatch('comment/deleteReply', { reply: reply });
-	} catch (e) {
-		console.log(e);
-	}
-
+	await store.dispatch('comment/deleteReply', { reply: reply });
 };
 
 const isAuthorized = computed(() => {

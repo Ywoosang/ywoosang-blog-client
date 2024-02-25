@@ -31,24 +31,22 @@ export const getPost = (postId: number) => {
 	});
 };
 
-export const getPublicPosts = (page, limit) => {
+export const getPublicPosts = (page) => {
 	return request({
 		url: `/posts/public`,
 		method: 'GET',
 		params: {
 			page,
-			limit,
-		},
+		}
 	});
 };
 
-export const getPosts = (page, limit) => {
+export const getPosts = (page) => {
 	return request({
 		url: '/posts',
 		method: 'GET',
 		params: {
 			page,
-			limit,
 		},
 	});
 };

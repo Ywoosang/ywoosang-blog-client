@@ -73,6 +73,11 @@ export interface HeaderState {
 	isDropdownOpen: boolean;
 }
 
+export interface ErrorState {
+	isModalOpen: boolean;
+	modalContent: string;
+}
+
 export interface UsersState {
 	user: User | null;
 	publicProfile: Pick<

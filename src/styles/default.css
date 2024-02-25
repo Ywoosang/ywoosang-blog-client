@@ -74,6 +74,14 @@ textarea:focus {
   outline: none;
 }
 
+/* transition  */
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.8s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
 /* Webkit 브라우저 (Chrome, Safari) 스크롤바 스타일링 */
 ::-webkit-scrollbar {
   width: 0.8rem;
@@ -85,7 +93,6 @@ textarea:focus {
   border-radius: 10px;
   border: 2px solid #000000;
 }
-/*  */
 
 /* toastui */
 .toastui-editor-contents pre {
@@ -102,7 +109,6 @@ textarea:focus {
   color: white;
   font-size: 1rem;
   width: 100%;
-
   background-color: transparent;
   white-space: pre; /* 줄바꿈 없이 공백을 유지하도록 설정 */
 }

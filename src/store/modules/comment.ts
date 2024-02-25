@@ -1,5 +1,4 @@
 import { Module, MutationTree, ActionTree, GetterTree } from 'vuex';
-import { RootState, CommentState } from '@/types/interfaces';
 import {
 	getComments,
 	createComment,
@@ -7,8 +6,10 @@ import {
 	deleteComment,
 	updateComment,
 } from '@/services/api/comment';
+import { RootState, CommentState, Comment } from '@/types/interfaces';
 import { CreateCommentDto, CreateReplyDto } from '@/types/dto';
-import { Comment } from '@/types/interfaces';
+import { validateCommentLength } from '@/utils';
+
 
 const state: CommentState = {
 	comments: [],
@@ -79,6 +80,7 @@ export const actions: ActionTree<CommentState, RootState> = {
 	},
 	async createComment({ commit }, payload) {
 		const { content, postId } = payload;
+		validateCommentLength(content);
 		const createCommentDto: CreateCommentDto = {
 			content,
 			postId,
@@ -89,6 +91,7 @@ export const actions: ActionTree<CommentState, RootState> = {
 	},
 	async createReply({ commit }, payload) {
 		const { parentCommentId, content, replyToId } = payload;
+		validateCommentLength(content);
 		const createReplyDto: CreateReplyDto = {
 			content,
 			replyToId,
@@ -109,12 +112,14 @@ export const actions: ActionTree<CommentState, RootState> = {
 	},
 	async updateReply({ commit }, payload) {
 		const { id, content } = payload;
+		validateCommentLength(content);
 		const response = await updateComment(id, { content });
 		const comment: Comment = response.data;
 		commit('UPDATE_REPLY', comment);
 	},
 	async updateComment({ commit }, payload) {
 		const { id, content } = payload;
+		validateCommentLength(content);
 		const response = await updateComment(id, { content });
 		const comment: Comment = response.data;
 		commit('UPDATE_COMMENT', comment);

@@ -8,7 +8,7 @@ export default async function (to, from, next) {
 		)
 	) {
 		// 숫자가 아닌 경우 404 페이지로 이동
-		next({ path: '/404', replace: true });
+		return next({ path: '/404', replace: true });
 	}
 	next();
 }

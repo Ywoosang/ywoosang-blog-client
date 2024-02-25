@@ -8,6 +8,7 @@ import tagModule from './modules/tag';
 import categoryModule from './modules/category';
 import commentModule from './modules/comment';
 import headerModule from './modules/header';
+import errorModule from './modules/error';
 
 const store: Store<RootState> = createStore({
 	modules: {
@@ -18,7 +19,8 @@ const store: Store<RootState> = createStore({
 		tag: tagModule,
 		category: categoryModule,
 		comment: commentModule,
-		header: headerModule
+		header: headerModule,
+		error: errorModule
 	},
 });
 

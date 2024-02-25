@@ -25,11 +25,10 @@ export const mutations: MutationTree<PostState> = {
 		state.postList = postList;
 	},
 	SET_PAGE_LIST(state, payload) {
-		const { total, page, limit } = payload;
+		const { total, page } = payload;
 		const currentPage = page ? page : 1;
-		const postsPerPage = limit ? limit : 1;
 		state.pageList = Array.from({
-			length: Math.ceil(total / postsPerPage),
+			length: Math.ceil(total / 8),
 		}).map((_, index) => {
 			return {
 				page: index + 1,
@@ -48,17 +47,17 @@ export const mutations: MutationTree<PostState> = {
 
 export const actions: ActionTree<PostState, RootState> = {
 	async fetchPostList({ commit }, payload) {
-		const { userRole, page, limit } = payload;
+		const { userRole, page } = payload;
 		let response;
 		if (userRole == UsersRole.ADMIN) {
-			response = await getPosts(page, limit);
+			response = await getPosts(page);
 		} else {
-			response = await getPublicPosts(page, limit);
+			response = await getPublicPosts(page);
 		}
 		const { posts, total } = response.data;
 		commit('SET_POST_LIST', posts);
 		commit('SET_TOTAL', total);
-		commit('SET_PAGE_LIST', { total, page, limit });
+		commit('SET_PAGE_LIST', { total, page });
 	},
 	async fetchPost({ commit }, payload) {
 		let response;

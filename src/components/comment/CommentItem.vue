@@ -58,11 +58,7 @@ const isAuthorized = computed(() => {
 });
 
 const deleteComment = async () => {
-	try {
-		await store.dispatch('comment/deleteComment', { comment: props.comment });
-	} catch (e) {
-		console.log(e);
-	}
+	await store.dispatch('comment/deleteComment', { comment: props.comment });
 };
 
 const openForm = () => {

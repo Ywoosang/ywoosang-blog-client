@@ -57,36 +57,28 @@ onMounted(() => {
 })
 
 const submitReplay = async () => {
-	try {
-		if (content.trim() == '') return alert('내용을 입력하세요');
-		const payload: any = {
-			parentCommentId: props.parentCommentId,
-			id: props.id,
-			content: content,
-			replyToId: props.replyToId,
-		};
-		if (!props.editMode) {
-			const replyId = await store.dispatch('comment/createReply', payload);
-			const createdReply = document.querySelector(`#comment${replyId}`);
-			if (createdReply) {
-				createdReply.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-			}
-		} else {
-			if (props.isComment) {
-				await store.dispatch('comment/updateComment', payload);
-			} else {
-				await store.dispatch('comment/updateReply', payload);
-			}
+	const payload: any = {
+		parentCommentId: props.parentCommentId,
+		id: props.id,
+		content: content,
+		replyToId: props.replyToId,
+	};
+	if (!props.editMode) {
+		const replyId = await store.dispatch('comment/createReply', payload);
+		const createdReply = document.querySelector(`#comment${replyId}`);
+		if (createdReply) {
+			createdReply.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 		}
-		content = '';
-		commentTextarea.value!.style.height = 'auto'; // 초기 높이로 설정
-		emits('close');
-	} catch (e: any) {
-		console.log(e.response);
-		if (e.response && e.response.status == 401) {
-			store.dispatch('auth/openLoginModal');
+	} else {
+		if (props.isComment) {
+			await store.dispatch('comment/updateComment', payload);
+		} else {
+			await store.dispatch('comment/updateReply', payload);
 		}
 	}
+	content = '';
+	commentTextarea.value!.style.height = 'auto'; // 초기 높이로 설정
+	emits('close');
 };
 
 const adjustTextareaHeight = () => {

@@ -35,12 +35,16 @@
 				</div>
 			</div>
 		</div>
+		<transition name="fade"> 
+		<error-modal v-if="isErrorModalOpen"></error-modal>
+			</transition>
 	</header>
 </template>
 
 <script setup lang="ts">
+import ErrorModal from './ErrorModal.vue';
 import { ModalStatus, UsersRole } from '@/types/enums';
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 
@@ -56,6 +60,7 @@ const isAdmin = computed(() => user.value?.role === UsersRole.ADMIN);
 const isSidebarOpen = computed(
 	() => store.getters['sidebar/getSidebarStatus'],
 );
+const isErrorModalOpen = computed(() => store.getters['error/isModalOpen']);
 
 const setSidebar = () => {
 	store.commit('sidebar/SET_SIDEBAR');
@@ -77,4 +82,5 @@ const signout = () => {
 };
 </script>
 
-<style src="@/styles/header.css" scoped></style>
+<style src="@/styles/header.css" scoped>
+</style>

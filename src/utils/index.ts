@@ -1,3 +1,5 @@
+import CommentError from '@/exceptions/comment';
+
 export const createSlug = (title: string) => {
 	return title.trim().split(' ').join('-');
 };
@@ -42,3 +44,15 @@ export const validateNumbers = (...args: any[]): boolean => {
     }
     return true;
 }
+
+
+export const validateCommentLength = (content: string): void => {
+	const maxLength = 20000;
+	if (content == "") {
+		throw new CommentError('댓글 내용을 입력해 주세요.');
+	}
+	if (content.length > maxLength) {
+		throw new CommentError('댓글 내용이 너무 깁니다.');
+	}
+} 
+
