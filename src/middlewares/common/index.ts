@@ -2,24 +2,26 @@ import { UsersRole } from '@/types/enums';
 import { useStore } from 'vuex';
 
 export default async function (to, from, next) {
-	const id = to.params.id;
 	// id 가 존재하지만 숫자가 아닌 경우
-	if (id && !/^\d+$/.test(id)) {
-		next({ name: 'NotFound' });
-	} else {
-		const store = useStore();
-		try {
-			await store.dispatch('users/fetchUser');
-			store.commit('auth/SET_IS_LOGGED_IN', true);
-		} catch (e) {
-			store.commit('auth/SET_IS_LOGGED_IN', false);
-		}
-		const userRole: UsersRole = store.getters['users/getUserRole'];
-		try {
-			await store.dispatch('sidebar/fetchSideBar', userRole);
-		} catch (e) {
-			console.log(e);
-		}
+	const store = useStore();
+	try {
+		const id = to.params.id;
+		if(to.meta.requiresAuth == false) return next();
+		if (id && !/^\d+$/.test(id)) return next({ name: 'NotFound' });
+		 
+		const user = await store.dispatch('users/fetchUser');
+		const isLoggedIn: boolean = user ? true : false;
+		store.commit('auth/SET_IS_LOGGED_IN', isLoggedIn);
+		next();
+	} catch(error: any) {
+		// 로그인이 만료된 경우
+		store.dispatch('auth/logout');
+		store.dispatch('auth/openLoginModal');
+		store.commit('error/SET_MODAL_CONTENT', error.response.data.message);
+		store.commit('error/SET_IS_MODAL_OPEN', true);
+ 
 	}
-	next();
+	const userRole: UsersRole = store.getters['users/getUserRole'];
+	await store.dispatch('sidebar/fetchSideBar', userRole);
+	next(); 
 }

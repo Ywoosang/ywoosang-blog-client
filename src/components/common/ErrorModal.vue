@@ -1,15 +1,15 @@
 <template>
-		<div class="modal">
-			<div class="modal-wrapper">
-				<div class="body">
-					<p class="content">{{ modalContent }}</p>
-					<div class="progress">
-						<div class="bar" :style="{ width: progressBarWidth }"></div>
-					</div>
-				</div>
-				<span class="close" @click="closeModal">&times;</span>
-			</div>
-		</div>
+    <div class="modal" style="z-index:1001">
+        <div class="modal-wrapper">
+            <div class="body">
+                <p class="content">{{ modalContent }}</p>
+                <div class="progress">
+                    <div class="bar" :style="{ width: progressBarWidth }"></div>
+                </div>
+            </div>
+            <span class="close" @click="closeModal">&times;</span>
+        </div>
+    </div>
 </template>
   
 <script setup lang="ts">
@@ -23,7 +23,7 @@ const progressBarWidth = computed(() => `${progressRef.value}%`);
 
 onMounted(() => {
     const interval = setInterval(() => {
-        progressRef.value -= 1.5;
+        progressRef.value -= 1;
         if (progressRef.value <= 0) {
             clearInterval(interval);
             store.commit('error/SET_IS_MODAL_OPEN', false);
@@ -41,9 +41,13 @@ const closeModal = () => {
  
   
 <style scoped>
+*{
+	/* border: 1px solid red;		 */
+}
 .modal {
+	z-index: 1001;
     position: absolute;
-    top: 6rem;
+    top: 5.7rem;
     right: 1rem;
     background-color: #000000;
     width: 20rem;
@@ -84,9 +88,9 @@ const closeModal = () => {
     top: 0;
     right: 0;
     color: white;
-    font-size: 1.4rem;
-    width: 2rem;
-    height: 2rem;
+    font-size: 1.2rem;
+    width: 1.7rem;
+    height: 1.7rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -97,8 +101,6 @@ const closeModal = () => {
 @media (min-width: 820px) {}
 
 @media (min-width: 1340px) {
-    .modal {
-        right: 0;
-    }
+ 
 }
 </style>

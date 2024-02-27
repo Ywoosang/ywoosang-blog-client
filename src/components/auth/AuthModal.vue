@@ -1,5 +1,4 @@
 <template>
-	<!-- 슬롯안에 들어갈 것들은 컴포넌트로 관리할 것 -->
 	<div class="modal-mask">
 		<div class="modal-wrapper">
 			<div class="modal-container">

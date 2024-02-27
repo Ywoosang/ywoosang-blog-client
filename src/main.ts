@@ -3,6 +3,7 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import CommentError from '@/exceptions/comment';
+import AuthError from '@/exceptions/auth';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import {
@@ -34,9 +35,11 @@ app.use(store);
 app.use(router);
 app.component('font-awesome-icon', FontAwesomeIcon);
 app.config.errorHandler = (error: any, vm, info) => {
+	console.log('에러')
+	console.log(error)
 	if(error instanceof CommentError) {
 		store.commit('error/SET_MODAL_CONTENT', error.message);
-		store.commit('error/SET_IS_MODAL_OPEN', true)
+		store.commit('error/SET_IS_MODAL_OPEN', true);
 	}
 	if (error.response) {
 		if(error.response.status === 401) {

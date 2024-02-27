@@ -6,11 +6,10 @@ export default async function (to, from, next) {
 	const store = useStore();
 	try {
 		await store.dispatch('auth/fetchLogin', hash);
-		console.log('로그인 가드 실행됌');
-		return next({ path: '/' });
 	} catch (e) {
-		// 사용자가 없는 경우 404 페이지로
-		console.log(e);
-		return next({ path: '/404', replace: true });
+		store.dispatch('auth/openLoginModal');
+		store.commit('error/SET_MODAL_CONTENT', '링크가 만료되었습니다. 다시 로그인해주세요.');
+		store.commit('error/SET_IS_MODAL_OPEN', true);
 	}
+	next({ path: '/' });
 }

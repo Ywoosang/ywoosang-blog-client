@@ -1,4 +1,5 @@
 import axios, { AxiosError } from 'axios';
+import AuthError from '@/exceptions/auth';
 
 const baseURL = process.env.VUE_APP_BACKEND_DOMAIN || 'http://localhost:3000';
 
@@ -30,20 +31,21 @@ service.interceptors.response.use(
 		if (error.response?.status === 401) {
 			const refreshToken = localStorage.getItem('refreshToken');
 			if (refreshToken) {
+				let response;
 				try {
 					// infinite loop 방지를 위해 service 객체를 이용치 말 것
-					const response = await axios.post(
+					response = await axios.post(
 						`${baseURL}/auth/refresh`,
 						{ refreshToken },
 						{
 							withCredentials: true,
-							timeout: 50000,
 						},
 					);
 					const newAccessToken = response.data.accessToken;
 					error.config!.headers.Authorization = `Bearer ${newAccessToken}`;
-					return axios.request(error.config!);
-				} catch (refreshError) {
+					response = await axios.request(error.config!);
+					return response;
+				} catch (refreshError: any) {
 					return Promise.reject(refreshError);
 				}
 			}

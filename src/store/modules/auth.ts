@@ -46,6 +46,10 @@ const actions = {
 		const { email } = response.data;
 		commit('SET_EMAIL', email);
 	},
+	logout({ commit }) {
+		localStorage.clear();
+		commit('auth/SET_IS_LOGGED_IN', false);
+	}
 };
 
 const getters: GetterTree<AuthState, RootState> = {

@@ -100,6 +100,9 @@ const routes: RouteRecordRaw[] = [
 	{
 		path: '/auth',
 		component: AdminLayout,
+		meta: {
+			requiresAuth: false // 로그인이 필요하지 않음
+		},
 		children: [
 			{
 				path: 'register',
@@ -112,6 +115,7 @@ const routes: RouteRecordRaw[] = [
 				name: 'Login',
 				beforeEnter: loginGuard,
 				component: SignIn,
+ 
 			},
 		],
 	},

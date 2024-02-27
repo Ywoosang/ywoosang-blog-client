@@ -51,7 +51,11 @@ export const mutations: MutationTree<UsersState> = {
 export const actions: ActionTree<UsersState, RootState> = {
 	async fetchUser({ commit }) {
 		const { data } = await getUserProfile();
-		commit('SET_USER', data);
+		const user = data;
+		if(user) {
+			commit('SET_USER', data);
+		}
+		return user;
 	},
 	async fetchUserActivities({ commit }, payload) {
 		const { page, userId } = payload;
