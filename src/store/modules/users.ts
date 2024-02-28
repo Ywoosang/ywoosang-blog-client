@@ -53,7 +53,7 @@ export const actions: ActionTree<UsersState, RootState> = {
 		const { data } = await getUserProfile();
 		const user = data;
 		if(user) {
-			commit('SET_USER', data);
+			commit('SET_USER', user);
 		}
 		return user;
 	},

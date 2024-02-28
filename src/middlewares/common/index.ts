@@ -11,17 +11,18 @@ export default async function (to, from, next) {
 		 
 		const user = await store.dispatch('users/fetchUser');
 		const isLoggedIn: boolean = user ? true : false;
+		const userRole: UsersRole = store.getters['users/getUserRole'];
+		await store.dispatch('sidebar/fetchSideBar', userRole);
 		store.commit('auth/SET_IS_LOGGED_IN', isLoggedIn);
-		next();
 	} catch(error: any) {
 		// 로그인이 만료된 경우
+		if(error.message && error.name == 'AxiosError') {
+			return next({ name: 'NotFound' });
+		}
 		store.dispatch('auth/logout');
 		store.dispatch('auth/openLoginModal');
 		store.commit('error/SET_MODAL_CONTENT', error.response.data.message);
 		store.commit('error/SET_IS_MODAL_OPEN', true);
- 
 	}
-	const userRole: UsersRole = store.getters['users/getUserRole'];
-	await store.dispatch('sidebar/fetchSideBar', userRole);
 	next(); 
 }

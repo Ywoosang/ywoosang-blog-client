@@ -48,7 +48,7 @@ const actions = {
 	},
 	logout({ commit }) {
 		localStorage.clear();
-		commit('auth/SET_IS_LOGGED_IN', false);
+		commit('SET_IS_LOGGED_IN', false);
 	}
 };
 

@@ -1,9 +1,9 @@
-class CommentError extends Error {
+class ServerError extends Error {
     constructor(message: string) {
       super(message);
-      this.name = 'CommentError';
+      this.name = 'ServerError';
       Error.captureStackTrace(this, this.constructor);
     }
 }
 
-export default CommentError;
+export default ServerError;

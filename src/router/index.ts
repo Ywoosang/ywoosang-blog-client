@@ -136,8 +136,24 @@ const routes: RouteRecordRaw[] = [
 		],
 	},
 	{
-		path: '/:catchAll(.*)',
-		component: NotFound,
+		path: '/404',
+		name: 'NotFound',
+		meta: {
+			requiresAuth: false
+		},
+		component: NotFound
+	},
+	{
+		path: '/404',
+		name: 'NotFound',
+		meta: {
+			requiresAuth: false
+		},
+		component: NotFound
+	},
+	{
+		path: '/:pathMatch(.*)',
+		redirect: '/404'
 	},
 ];
 
