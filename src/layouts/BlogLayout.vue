@@ -3,7 +3,8 @@
 		<blog-header />
 		<section class="section">
 			<blog-sidebar />
-			<router-view />
+			<router-view/>
+			<div class="filter" v-if="isSidebarOpen"></div>
 			<auth-modal :class="{ none: !isAuthModalOpen }" />
 		</section>
 		<error-modal></error-modal>
@@ -20,6 +21,7 @@ import { useStore } from 'vuex';
 
 const store = useStore();
 const isAuthModalOpen = computed(() => store.getters['auth/isModalOpen']);
+const isSidebarOpen = computed(() => store.getters['sidebar/getSidebarStatus']);
 </script>
 
 <style src="@/styles/layouts/blog.css" scoped></style>
