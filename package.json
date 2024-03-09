@@ -19,6 +19,7 @@
     "@toast-ui/editor-plugin-table-merged-cell": "^3.1.0",
     "axios": "^1.6.5",
     "core-js": "^3.35.0",
+    "uuid": "^9.0.1",
     "vue": "^3.4.11",
     "vue-router": "^4.2.5",
     "vuex": "^4.1.0"

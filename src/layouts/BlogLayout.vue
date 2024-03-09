@@ -6,9 +6,7 @@
 			<router-view />
 			<auth-modal :class="{ none: !isAuthModalOpen }" />
 		</section>
-		<transition name="fade"> 
-			<error-modal v-if="isErrorModalOpen"></error-modal>
-		</transition>
+		<error-modal></error-modal>
 	</div>
 </template>
 
@@ -21,7 +19,6 @@ import { computed } from 'vue';
 import { useStore } from 'vuex';
 
 const store = useStore();
-const isErrorModalOpen = computed(() => store.getters['error/isModalOpen']);
 const isAuthModalOpen = computed(() => store.getters['auth/isModalOpen']);
 </script>
 

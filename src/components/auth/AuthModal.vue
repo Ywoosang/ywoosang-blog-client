@@ -22,13 +22,9 @@
 								<font-awesome-icon class="check" icon="fa-solid fa-check" />
 								{{ sentMessage }}
 							</div>
-							<div class="error-message" v-if="errorMessage"
-								style="color: red; font-size: 12px; text-align: end">
-								{{ errorMessage }}
-							</div>
 						</section>
 						<section class="social">
-							<h4>소셜 계정으로 {{ modalContent.title }}</h4>
+							<!-- <h4>소셜 계정으로 {{ modalContent.title }}</h4>
 							<div class="btn-group">
 								<a href="" class="btn github">
 									<img src="@/assets/images/github.png" />
@@ -39,7 +35,7 @@
 								<a href="" class="btn kakao">
 									<img src="@/assets/images/kakao.png" />
 								</a>
-							</div>
+							</div> -->
 						</section>
 					</div>
 				</div>
@@ -85,8 +81,8 @@ const sendEmail = async () => {
 		if (isSending) return;
 		isSending = true;
 		if (!email.value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
-			errorMessage.value = '이메일 형식을 입력하세요';
-			console.log('에러');
+			store.commit('error/ADD_MODAL','이메일 형식을 입력해 주세요');
+			isSending = false;
 			return;
 		}
 		const authEmailDto = {
@@ -98,7 +94,6 @@ const sendEmail = async () => {
 		isEmailSent.value = true;
 		isSending = false;
 	} catch (e) {
-		console.log(e);
 	}
 };
 

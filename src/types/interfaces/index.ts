@@ -60,6 +60,11 @@ export interface AuthState {
 	email: string | null;
 }
 
+export interface ErrorContent {
+	content: string;
+	key: string;
+}
+
 export interface SidebarState {
 	isOpen: boolean;
 	categories: [];
@@ -74,8 +79,7 @@ export interface HeaderState {
 }
 
 export interface ErrorState {
-	isModalOpen: boolean;
-	modalContent: string;
+	modalList: ErrorContent[];
 }
 
 export interface UsersState {

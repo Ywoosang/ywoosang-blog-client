@@ -16,6 +16,12 @@ const mutations: MutationTree<AuthState> = {
 		state.isLoggedIn = isLoggedIn;
 	},
 	SET_IS_MODAL_OPEN(state, isModalOpen: boolean) {
+		if(isModalOpen) {
+			 document.body.style.overflow = 'hidden';
+		} else {
+			 document.body.style.overflow = '';
+		}
+		
 		state.isModalOpen = isModalOpen;
 	},
 	SET_MODAL_STATUS(state, status: ModalStatus) {
@@ -47,8 +53,8 @@ const actions = {
 		commit('SET_EMAIL', email);
 	},
 	logout({ commit }) {
-		localStorage.clear();
 		commit('SET_IS_LOGGED_IN', false);
+		localStorage.clear();
 	}
 };
 

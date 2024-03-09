@@ -1,23 +1,28 @@
 import { Module, MutationTree, GetterTree } from 'vuex';
 import { RootState, ErrorState } from '@/types/interfaces';
+import { v4 as uuidv4 } from "uuid"; // ES Modules
+
+const maxCount = 5;
 
 const state: ErrorState = {
-	isModalOpen: false,
-    modalContent: ''
+    modalList: []
 };
 
 const mutations: MutationTree<ErrorState> = {
-	SET_IS_MODAL_OPEN(state, isOpen: boolean) {
-		state.isModalOpen = isOpen;
-	},
-    SET_MODAL_CONTENT(state, content: string) {
-        state.modalContent = content;
-    }
+    ADD_MODAL(state, content: string) {
+		const key = uuidv4();
+        state.modalList.push({
+			key,
+			content
+		});
+    },
+	REMOVE_MODAL(state, key) {
+		state.modalList = state.modalList.filter((modal) => modal.key != key);
+	}
 };
 
 const getters: GetterTree<ErrorState, RootState> = {
-	isModalOpen: (state) => state.isModalOpen,
-    getModalContent: (state) => state.modalContent
+    getModalList: (state) => state.modalList
 };
  
 const errorModule: Module<ErrorState, RootState> = {
