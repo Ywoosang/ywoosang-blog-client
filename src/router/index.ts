@@ -7,6 +7,7 @@ import PostEdit from '@/pages/PostEdit.vue';
 import AllPosts from '@/pages/AllPosts.vue';
 import PostDetail from '@/pages/PostDetail.vue';
 import NotFound from '@/pages/NotFound.vue';
+import ServerError from '@/pages/ServerError.vue';
 import AdminPage from '@/pages/AdminPage.vue';
 import CategoryPosts from '@/pages/CategoryPosts.vue';
 import TagPosts from '@/pages/TagPosts.vue';
@@ -136,12 +137,12 @@ const routes: RouteRecordRaw[] = [
 		],
 	},
 	{
-		path: '/404',
-		name: 'NotFound',
+		path: '/503',
+		name: 'ServerError',
 		meta: {
 			requiresAuth: false
 		},
-		component: NotFound
+		component: ServerError
 	},
 	{
 		path: '/404',
