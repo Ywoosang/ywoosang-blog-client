@@ -71,6 +71,7 @@ const openModal = (status: ModalStatus) => {
 };
 
 const signout = () => {
+	store.commit('users/INIT_USER');
 	store.dispatch('auth/logout');
 };
 </script>

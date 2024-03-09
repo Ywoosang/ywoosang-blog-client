@@ -22,6 +22,13 @@ const state: UsersState = {
 };
 
 export const mutations: MutationTree<UsersState> = {
+	INIT_USER(state) {
+		state.user = null;
+		state.publicProfile = null;
+		state.pageList = [];
+		state.activities = [];
+		state.totalActivitiesCount = 0;
+	},
 	SET_USER(state, user: User) {
 		state.user = user;
 	},
