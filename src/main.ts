@@ -17,6 +17,7 @@ import {
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { faSquareGithub } from '@fortawesome/free-brands-svg-icons';
 import '@/styles/default.css';
+import '@/styles/tui.css';
 
 library.add(
 	faBars,
@@ -35,18 +36,15 @@ app.use(store);
 app.use(router);
 app.component('font-awesome-icon', FontAwesomeIcon);
 app.config.errorHandler = (error: any, vm, info) => {
-	console.log('에러')
-	console.log(error)
 	if(error instanceof CommentError) {
-		store.commit('error/SET_MODAL_CONTENT', error.message);
-		store.commit('error/SET_IS_MODAL_OPEN', true);
+		store.commit('error/ADD_MODAL', error.message);
 	}
 	if (error.response) {
 		if(error.response.status === 401) {
+			store.commit('error/ADD_MODAL', '로그인이 필요합니다.');
 			store.dispatch('auth/openLoginModal');
 		}
 	}
-	store.dispatch('auth/openLoginModal');
 	console.error('Global Error Handler', error, info);
 };
 

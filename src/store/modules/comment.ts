@@ -53,7 +53,6 @@ export const mutations: MutationTree<CommentState> = {
 		});
 	},
 	UPDATE_COMMENT(state, comment) {
-		console.log(comment);
 		state.comments = state.comments.map(c => {
 			if (c.id == comment.id) c.content = comment.content;
 			return c;
