@@ -9,8 +9,8 @@ export default async function (to, from, next) {
 		document.title = post.title;
 		const postId = store.getters['post/getPost'].id;
 		await store.dispatch('comment/fetchComments', { postId });
+		next();
 	} catch (e) {
-		return next({ path: '/404', replace: true });
+		next({ path: '/404', replace: true });
 	}
-	next();
 }

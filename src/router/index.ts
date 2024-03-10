@@ -32,10 +32,10 @@ import { RouteRecordRaw } from 'vue-router';
 const routes: RouteRecordRaw[] = [
 	{
 		path: '/',
-		redirect: '/post',
+		redirect: '/posts',
 	},
 	{
-		path: '/post',
+		path: '/posts',
 		component: BlogLayout,
 		children: [
 			{

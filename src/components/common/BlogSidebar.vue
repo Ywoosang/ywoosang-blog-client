@@ -18,7 +18,7 @@
 		</div>
 		<ul class="category-list">
 			<li>
-				<router-link to="/post">
+				<router-link to="/posts">
 					<span class="category-name" :class="{ selected: !selectedCategoryId }">전체보기</span>
 					<span class="category-count">({{ postCount }})</span>
 				</router-link>

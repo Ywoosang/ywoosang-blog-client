@@ -8,9 +8,10 @@
 						category.name
 					}}</span>
 					<input v-if="category.id === editingCategoryId" v-model="editedCategoryName"
-						@keyup.enter="confirmEdit(category.id)" @blur="cancelEdit" />
+						@keyup.enter="confirmEdit(category.id)"/>
 					<div class="btn-wrapper">
-						<button class="edit" @click="startEdit(category.id)">수정</button>
+						<button v-if="category.id === editingCategoryId"  class="confirm" @click="confirmEdit(category.id)">확인</button>
+						<button v-else class="edit" @click="startEdit(category.id)">수정</button>
 						<button class="remove" @click="removeCategory(category.id)">
 							삭제
 						</button>
@@ -38,20 +39,46 @@ import {
 import { ref, onMounted } from 'vue';
 import { Category } from '@/types/interfaces';
 
+// 새로 생성하는 카테고리 이름
 const newCategoryName = ref('');
 const categories = ref<Category[]>([]);
-let editingCategoryId: number | null = null;
-let editedCategoryName = '';
-
+// 수정중인 카테고리 id
+let editingCategoryId = ref<number | null>(null);
+// 
+const editedCategoryName  = ref('');
 onMounted(async () => {
+	const { data } = await getCategories();
+	categories.value = data.categories;
+});
+
+ 
+ 
+// 카테고리 이름 수정 시작
+const startEdit = (categoryId: number) => {
+	editingCategoryId.value = categoryId;
+	const category = categories.value.find(c => c.id === categoryId);
+	editedCategoryName.value = category!.name;
+};
+
+const confirmEdit = async (categoryId: number) => {
 	try {
-		const { data } = await getCategories();
-		categories.value = data.categories;
+		const name = editedCategoryName.value;
+		const data = { name };
+		await updateCategory(categoryId, data);
+		categories.value = categories.value.map(category => {
+			if (category.id === categoryId) {
+				category.name = name;
+			}
+			return category;
+		});
+		editingCategoryId.value = null;
+		editedCategoryName.value = '';
 	} catch (e) {
 		console.log(e);
 	}
-});
-
+};
+	
+	
 const uploadCategory = async () => {
 	const name = newCategoryName.value;
 	const data = { name };
@@ -72,35 +99,6 @@ const removeCategory = async (id: number) => {
 	} catch (e) {
 		console.log(e);
 	}
-};
-
-const startEdit = (categoryId: number) => {
-	editingCategoryId = categoryId;
-	const category = categories.value.find(c => c.id === categoryId);
-	editedCategoryName = category!.name;
-};
-
-const confirmEdit = async (categoryId: number) => {
-	try {
-		const name = editedCategoryName;
-		const data = { name };
-		await updateCategory(categoryId, data);
-		categories.value = categories.value.map(category => {
-			if (category.id === categoryId) {
-				category.name = name;
-			}
-			return category;
-		});
-		editingCategoryId = null;
-		editedCategoryName = '';
-	} catch (e) {
-		console.log(e);
-	}
-};
-
-const cancelEdit = () => {
-	editingCategoryId = null;
-	editedCategoryName = '';
 };
 </script>
 

@@ -17,7 +17,9 @@ export default async function (to, from, next) {
 	} catch(error: any) {
 		// 로그인이 만료된 경우
 		if(error.message && error.name == 'AxiosError') {
-			console.log(error);
+			if(error.message == "Network Error") {
+				return next({ name: 'ServerError'})
+			}
 			return next({ name: 'NotFound' });
 		}
 		store.dispatch('auth/logout');

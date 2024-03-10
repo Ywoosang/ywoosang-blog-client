@@ -45,6 +45,9 @@ main {
 
 /* 데스크톱 */
 @media (min-width: 1340px) {
+	.filter{
+		display: none;
+	}
   section {
     max-width: calc(1356px);
     margin: 0 auto;

@@ -135,9 +135,6 @@ header .visible {
 
 /* 태블릿 */
 @media (min-width: 820px) {
-  header {
-    max-width: calc(1000px);
-  }
   .r-btn {
     padding: 7px 14px;
     font-size: 14px;

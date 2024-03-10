@@ -167,7 +167,7 @@ const submitPost = async () => {
 	} else {
 		await uploadPost();
 	}
-	router.push(`/post/${postId}`);
+	router.push(`/posts/${postId}`);
 };
 
 const updatePost = async (id: number) => {

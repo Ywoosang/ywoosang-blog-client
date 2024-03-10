@@ -35,12 +35,12 @@
 				<li v-for="(activity, index) in userActivities" :key="index" class="activity">
 					<div class="info">
 						<p>게시물에 <router-link style="color: rgb(63, 63, 63); font-weight: bold;"
-								:to="`/post/${activity.post.id}?commentId=${activity.id}`">댓글</router-link>을
-							작성하였습니다.</p>
+								:to="`/posts/${activity.post.id}?commentId=${activity.id}`">댓글</router-link>을
+							작성했습니다.</p>
 						<div class="date">{{ formatDate(activity.createdAt) }}</div>
 					</div>
 					<div class="title">
-						<router-link :to="`/post/${activity.post.id}`" style="font-weight:bold;">{{ activity.post.title
+						<router-link :to="`/posts/${activity.post.id}`" style="font-weight:bold;">{{ activity.post.title
 						}}</router-link>
 					</div>
 				</li>

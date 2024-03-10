@@ -2,7 +2,7 @@
 	<div class="pagination-wrapper">
 		<ul class="pagination">
 			<li class="page" v-for="(pageItem, index) in props.pageList" :key="index">
-				<router-link :to="'post?page=' + pageItem.page"
+				<router-link :to="'posts?page=' + pageItem.page"
 					:class="{ current: pageItem.page == pageItem.currentPage }">{{ pageItem.page }}</router-link>
 			</li>
 		</ul>
