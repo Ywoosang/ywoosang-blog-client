@@ -1,41 +1,41 @@
 /* 제목 */
 .toastui-editor-contents > h1 {
-	font-size: 2.2rem;
-	margin: 1.8rem 0 1.4rem 0;
+  font-size: 2.2rem;
+  margin: 1.8rem 0 1.4rem 0;
 }
 
 .toastui-editor-contents > h2 {
-	font-size: 1.8rem;
-	margin: 1.6rem 0 1.2rem 0;
+  font-size: 1.8rem;
+  margin: 1.6rem 0 1.2rem 0;
 }
 
 .toastui-editor-contents > h3 {
-	font-size: 1.5rem;
-	margin: 1.4rem 0 1rem 0;
+  font-size: 1.5rem;
+  margin: 1.4rem 0 1rem 0;
 }
 .toastui-editor-contents > h4 {
-	font-size: 1.3rem;
-	margin: 1.2rem 0 0.8rem 0;
+  font-size: 1.3rem;
+  margin: 1.2rem 0 0.8rem 0;
 }
 
 .toastui-editor-contents > h1,
 .toastui-editor-contents > h2,
 .toastui-editor-contents > h3,
 .toastui-editor-contents > h4 {
-	border: 0;
-	padding: 0.5rem 0;
-	line-height: 2rem;
+  border: 0;
+  padding: 0.5rem 0;
+  line-height: 2rem;
 }
 
 /* 리스트 */
 .toastui-editor-contents ul > li::before {
-	margin-top: 0.8rem;
-	background-color: #222;
+  margin-top: 0.8rem;
+  background-color: #222;
 }
 
 .toastui-editor-contents ol > li::before {
-	margin-top: 0.1rem;
-	color: #222;
+  margin-top: 0.1rem;
+  color: #222;
 }
 
 /* 일반 게시글 내용 */
@@ -51,33 +51,33 @@
 .toastui-editor-contents code {
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 600;
-color: #ff4473;
-	background: transparent;
+  color: #ff4473;
+  background: transparent;
 }
 
 /* 마크다운 프리뷰 오른쪽 뷰어부분 */
 .toastui-editor-md-container .toastui-editor-md-preview {
-    overflow-y: auto;
-    padding: 0 25px;
-    height: 100%;
-    overflow-x: hidden;
+  overflow-y: auto;
+  padding: 0 25px;
+  height: 100%;
+  overflow-x: hidden;
 }
 
 /* Wizwig 모드 Disabled */
 .toastui-editor-mode-switch {
-	display: none !important;
+  display: none !important;
 }
 
 /* 인용 부분 */
 .toastui-editor-contents blockquote {
-	border-left: 4px solid #222;
-	background: #f1f1f1;
-	padding: 10px;
-	overflow-x: auto;
+  border-left: 4px solid #222;
+  background: #f1f1f1;
+  padding: 10px;
+  overflow-x: auto;
 }
 
 .toastui-editor-contents blockquote p {
-	color: #222;
+  color: #222;
 }
 
 /* 코드 영역 */
@@ -95,6 +95,7 @@ color: #ff4473;
   padding: 0;
   color: white;
   font-size: 1rem;
+  font-weight: 400;
   width: 100%;
   background-color: transparent;
   white-space: pre; /* 줄바꿈 없이 공백을 유지하도록 설정 */
