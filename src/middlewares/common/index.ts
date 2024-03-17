@@ -16,15 +16,18 @@ export default async function (to, from, next) {
     store.commit("auth/SET_IS_LOGGED_IN", isLoggedIn);
   } catch (error: any) {
     // 로그인이 만료된 경우
-    console.log(error);
     if (error.message && error.name == "AxiosError") {
       if (error.message == "Network Error") {
         return next({ name: "ServerError" });
       }
       if (error.response && error.response.status == 401) {
+        const errorMessage =
+          error.response.data.message == "Unauthorized"
+            ? "로그인이 만료되었습니다. 다시 로그인 해주세요."
+            : error.response.data.message;
         store.dispatch("auth/logout");
         store.dispatch("auth/openLoginModal");
-        store.commit("error/ADD_MODAL", error.response.data.message);
+        store.commit("error/ADD_MODAL", errorMessage);
         return next();
       }
     }
