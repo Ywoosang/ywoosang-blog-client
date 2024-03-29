@@ -1,38 +1,53 @@
-* {
-  /* border: 1px solid red; */
-}
-
 /* 타이틀부분 */
 .wrapper {
-  margin: 1rem 0 2rem 0;
+  margin: 0 !important;
+}
+.text {
+  font-size: 1.2rem;
+  padding: 0 2px;
 }
 /*  */
-.title-wrapper {
+.logo-wrapper {
   display: flex;
   flex-wrap: wrap;
 }
-.title-wrapper h1 {
-  font-size: 2rem;
+.logo-wrapper h1 {
+  font-size: 4rem;
   margin: 0;
 }
-.title-wrapper h2 {
+.logo-wrapper h2 {
   font-size: 1.3rem;
   display: flex;
   align-items: center;
   margin: 0;
   padding-left: 0.5rem;
 }
+
+.info-wrapper {
+  background-color: #f1f1f1;
+  padding: 0.5rem 1rem;
+  margin-bottom: 3rem;
+  margin-top: 0.5rem;
+  font-size: 0.7rem;
+}
+
+.info-wrapper > div {
+  margin: 0;
+  padding: 2px 0;
+}
+
 /*  */
 .signup-form {
 }
 body {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 .form-group {
   flex: 1;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 2.3rem;
 }
 .form-group label {
   min-width: 80px;
@@ -47,7 +62,7 @@ body {
 }
 .form-group input {
   font-size: 1rem;
-  outline:none;
+  outline: none;
   border: 2px solid rgb(0, 0, 0);
   border-radius: 0;
   padding-left: 5px;
@@ -56,12 +71,11 @@ body {
 
 .email-group {
   position: relative;
-  margin-bottom: 50px;
 }
 .email-group input {
   background: rgb(241, 241, 241);
-  color:rgb(44, 44, 44)
-} 
+  color: rgb(44, 44, 44);
+}
 .email-group .email-lock {
   position: absolute;
   top: 50%;
@@ -69,63 +83,64 @@ body {
   right: 8px;
   font-size: 1.6rem;
 }
- 
-.error-message {
-  height: 20px;
-  text-align: end;
-  font-size: 10px;
-  color: red;
-  margin-bottom: 30px;
-}
 
 .btn-wrapper {
   text-align: center;
+  /* border: 1px solid red; */
+  border-top: 1px solid #ddd;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4rem;
+  background-color: #f0eeee;
 }
-.btn-wrapper button {
-  margin: 0 auto;
-  padding: 10px;
-  border-radius: 5px;
-  margin: 0 0 0 5px;
-  border: 1px solid #ddd;
+.btn-wrapper .btn {
+  background-color: inherit;
+  margin: 0;
+  cursor: pointer;
+  padding: 0 1rem;
+  font-size: 1.4rem;
 }
-.btn-wrapper .submit-btn {
-  background: black;
-  color : white;
-}
-.btn-wrapper .cancel-btn {
-  background: white;
-  color: rgb(74, 74, 74);
-}
-
 /* 태블릿 */
 @media (min-width: 820px) {
   .wrapper {
     margin: 5rem 0 3rem 0;
   }
+  .info-wrapper > div {
+    font-size: 1rem;
+  }
+
+  .btn-wrapper {
+    height: 5rem;
+  }
+
+  .btn-wrapper .btn {
+    font-size: 1.7rem;
+  }
 }
-  
+
 /* 데스크톱 */
 @media (min-width: 1340px) {
-    .form-group input {
-        font-size: 0.8rem;
-    }
-    .form-group label {
-        font-size: 1.2rem;
-        min-width: 100px;
-        line-height: 37px;
-        text-align: center;
-    }
-    .error-message {
-      font-size: 12px;
-      color: red;
-    }
-    .title-wrapper h1{
-      font-size: 3rem;
-      margin: 1rem 0;
-    }
-    .title-wrapper h2{
-      font-size: 2.3rem;
-      margin: 1rem 0;
-      padding-left: 0.5rem;
-    }
+  .form-group input {
+    font-size: 0.8rem;
+  }
+  .form-group label {
+    font-size: 1.2rem;
+    min-width: 100px;
+    line-height: 37px;
+    text-align: center;
+  }
+  .logo-wrapper h1 {
+    font-size: 3rem;
+    margin: 1rem 0;
+  }
+  .logo-wrapper h2 {
+    font-size: 2.3rem;
+    margin: 1rem 0;
+    padding-left: 0.5rem;
+  }
 }
