@@ -1,5 +1,6 @@
 import { UsersRole } from "@/types/enums";
 import { useStore } from "vuex";
+import { isServerError } from "@/utils";
 
 export default async function (to, from, next) {
   // id 가 존재하지만 숫자가 아닌 경우
@@ -15,12 +16,11 @@ export default async function (to, from, next) {
     await store.dispatch("sidebar/fetchSideBar", userRole);
     store.commit("auth/SET_IS_LOGGED_IN", isLoggedIn);
   } catch (error: any) {
-    // 로그인이 만료된 경우
-    if (error.message && error.name == "AxiosError") {
-      if (error.message == "Network Error") {
+    if (error.response) {
+      const statusCode: number = error.response.status;
+      if (isServerError(statusCode)) {
         return next({ name: "ServerError" });
-      }
-      if (error.response && error.response.status == 401) {
+      } else if (statusCode == 401) {
         const errorMessage =
           error.response.data.message == "Unauthorized"
             ? "로그인이 만료되었습니다. 다시 로그인 해주세요."
@@ -30,6 +30,8 @@ export default async function (to, from, next) {
         store.commit("error/ADD_MODAL", errorMessage);
         return next();
       }
+    } else if (error.message == "Network Error") {
+      return next({ name: "NetworkError" });
     }
     return next({ name: "NotFound" });
   }
