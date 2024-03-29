@@ -1,10 +1,8 @@
 import axios, { AxiosError } from "axios";
-import AuthError from "@/exceptions/auth";
-
-const baseURL = process.env.VUE_APP_BACKEND_DOMAIN || "http://localhost:3000";
+import { BASE_URL } from "@/consts";
 
 const service = axios.create({
-  baseURL,
+  baseURL: BASE_URL,
   timeout: 50000,
   withCredentials: true,
 });
@@ -35,7 +33,7 @@ service.interceptors.response.use(
         try {
           // infinite loop 방지를 위해 service 객체를 이용치 말 것
           response = await axios.post(
-            `${baseURL}/auth/refresh`,
+            `${BASE_URL}/auth/refresh`,
             { refreshToken },
             {
               withCredentials: true,
@@ -47,6 +45,7 @@ service.interceptors.response.use(
           response = await axios.request(error.config!);
           return response;
         } catch (refreshError: any) {
+          console.log("refreshToken 이 만료됌");
           return Promise.reject(refreshError);
         }
       }
