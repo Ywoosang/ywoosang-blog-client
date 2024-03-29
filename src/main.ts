@@ -35,7 +35,6 @@ app.use(store);
 app.use(router);
 app.component("font-awesome-icon", FontAwesomeIcon);
 app.config.errorHandler = (error: any, vm, info) => {
-  console.log(error);
   if (error instanceof CommentError) {
     store.commit("error/ADD_MODAL", error.message);
   }
