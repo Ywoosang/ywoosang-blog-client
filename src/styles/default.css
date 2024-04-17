@@ -7,15 +7,13 @@
 
 html {
   font-size: 13px;
+  overflow-y: scroll;
 }
 
 body {
   font-size: 1rem;
   line-height: 1.6;
   margin: 0;
-}
-
-#app {
 }
 
 ul {
@@ -72,11 +70,13 @@ textarea:focus {
   outline: none;
 }
 
-/* transition  */
-.fade-enter-active, .fade-leave-active {
+/* 트랜지션  */
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity 0.8s;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
 
