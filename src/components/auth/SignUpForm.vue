@@ -112,9 +112,7 @@ const submitForm = async () => {
       }
       // 이미 가입한 사용자일 경우
       if (loginRequired) {
-        console.log("로그인 필요");
         const hash = route.query.hash;
-        console.log(`에러후${hash}`);
         await store.dispatch("auth/fetchLogin", hash);
         initValids();
         router.push("/");
