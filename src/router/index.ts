@@ -137,7 +137,15 @@ const routes: RouteRecordRaw[] = [
     ],
   },
   {
-    path: "/500",
+    path: "/:pathMatch(.*)*",
+    meta: {
+      requiresAuth: false,
+    },
+    name: "NotFound",
+    component: NotFound,
+  },
+  {
+    path: "/:pathMatch(.*)*",
     name: "ServerError",
     meta: {
       requiresAuth: false,
@@ -145,24 +153,12 @@ const routes: RouteRecordRaw[] = [
     component: ServerError,
   },
   {
-    path: "/404",
-    name: "NotFound",
-    meta: {
-      requiresAuth: false,
-    },
-    component: NotFound,
-  },
-  {
-    path: "/network-error",
+    path: "/:pathMatch(.*)*",
     name: "NetworkError",
     meta: {
       requiresAuth: false,
     },
     component: NetworkError,
-  },
-  {
-    path: "/:pathMatch(.*)",
-    redirect: "/404",
   },
 ];
 
