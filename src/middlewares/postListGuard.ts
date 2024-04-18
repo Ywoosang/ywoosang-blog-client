@@ -7,8 +7,7 @@ export default async function (to, from, next) {
       (/^\d+$/.test(limit) || limit == undefined)
     )
   ) {
-    // 숫자가 아닌 경우 404 페이지로 이동
-    return next({ path: "/404", replace: false });
+    return next({ name: "NotFound" });
   }
   next();
 }

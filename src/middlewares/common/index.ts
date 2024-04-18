@@ -3,7 +3,6 @@ import { useStore } from "vuex";
 import { isServerError } from "@/utils";
 
 export default async function (to, from, next) {
-  // id 가 존재하지만 숫자가 아닌 경우
   const store = useStore();
   try {
     const id = to.params.id;
@@ -15,6 +14,7 @@ export default async function (to, from, next) {
     const userRole: UsersRole = store.getters["users/getUserRole"];
     await store.dispatch("sidebar/fetchSideBar", userRole);
     store.commit("auth/SET_IS_LOGGED_IN", isLoggedIn);
+    next();
   } catch (error: any) {
     if (error.response) {
       const statusCode: number = error.response.status;
@@ -33,7 +33,6 @@ export default async function (to, from, next) {
     } else if (error.message == "Network Error") {
       return next({ name: "NetworkError" });
     }
-    return next({ name: "NotFound" });
+    next({ name: "NotFound" });
   }
-  next();
 }
