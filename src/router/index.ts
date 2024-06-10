@@ -1,170 +1,170 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory } from 'vue-router';
 
 // Pages
-import SignIn from "@/pages/SignIn.vue";
-import SignUp from "@/pages/SignUp.vue";
-import PostEdit from "@/pages/PostEdit.vue";
-import AllPosts from "@/pages/AllPosts.vue";
-import PostDetail from "@/pages/PostDetail.vue";
-import NotFound from "@/pages/NotFound.vue";
-import ServerError from "@/pages/ServerError.vue";
-import AdminPage from "@/pages/AdminPage.vue";
-import CategoryPosts from "@/pages/CategoryPosts.vue";
-import TagPosts from "@/pages/TagPosts.vue";
-import ProfilePage from "@/pages/ProfilePage.vue";
-import ProfileManage from "@/pages/ProfileManage.vue";
+import SignIn from '@/pages/SignIn.vue';
+import SignUp from '@/pages/SignUp.vue';
+import PostEdit from '@/pages/PostEdit.vue';
+import AllPosts from '@/pages/AllPosts.vue';
+import PostDetail from '@/pages/PostDetail.vue';
+import NotFound from '@/pages/NotFound.vue';
+import ServerError from '@/pages/ServerError.vue';
+import AdminPage from '@/pages/AdminPage.vue';
+import CategoryPosts from '@/pages/CategoryPosts.vue';
+import TagPosts from '@/pages/TagPosts.vue';
+import ProfilePage from '@/pages/ProfilePage.vue';
+import ProfileManage from '@/pages/ProfileManage.vue';
 
 // Layouts
-import BlogLayout from "@/layouts/BlogLayout.vue";
-import AdminLayout from "@/layouts/AdminLayout.vue";
+import BlogLayout from '@/layouts/BlogLayout.vue';
+import AdminLayout from '@/layouts/AdminLayout.vue';
 
 // Navigation Guards
-import postListGuard from "@/middlewares/postListGuard";
-import commonGuard from "@/middlewares/common";
-import adminGuard from "@/middlewares/adminGuard";
-import postDetailGuard from "@/middlewares/postDetailGuard";
-import profileGuard from "@/middlewares/profileGuard";
-import profileManageGuard from "@/middlewares/profileManageGuard";
-import registerGuard from "@/middlewares/registerGuard";
-import loginGuard from "@/middlewares/loginGuard";
-import { RouteRecordRaw } from "vue-router";
-import NetworkError from "@/pages/NetworkError.vue";
+import postListGuard from '@/middlewares/postListGuard';
+import commonGuard from '@/middlewares/common';
+import adminGuard from '@/middlewares/adminGuard';
+import postDetailGuard from '@/middlewares/postDetailGuard';
+import profileGuard from '@/middlewares/profileGuard';
+import profileManageGuard from '@/middlewares/profileManageGuard';
+import registerGuard from '@/middlewares/registerGuard';
+import loginGuard from '@/middlewares/loginGuard';
+import { RouteRecordRaw } from 'vue-router';
+import NetworkError from '@/pages/NetworkError.vue';
 
 const routes: RouteRecordRaw[] = [
   {
-    path: "/",
-    redirect: "/posts",
+    path: '/',
+    redirect: '/posts'
   },
   {
-    path: "/posts",
+    path: '/posts',
     component: BlogLayout,
     children: [
       {
-        path: "",
-        name: "AllPosts",
+        path: '',
+        name: 'AllPosts',
         component: AllPosts,
-        beforeEnter: postListGuard,
+        beforeEnter: postListGuard
       },
       {
-        path: ":id",
-        name: "Post",
+        path: ':id',
+        name: 'Post',
         component: PostDetail,
-        beforeEnter: postDetailGuard,
-      },
-    ],
+        beforeEnter: postDetailGuard
+      }
+    ]
   },
   {
-    path: "/category",
+    path: '/category',
     component: BlogLayout,
     children: [
       {
-        path: ":id",
-        name: "Category",
+        path: ':id',
+        name: 'Category',
         component: CategoryPosts,
-        beforeEnter: postListGuard,
-      },
-    ],
+        beforeEnter: postListGuard
+      }
+    ]
   },
   {
-    path: "/tag",
+    path: '/tag',
     component: BlogLayout,
     children: [
       {
-        path: ":id",
-        name: "Tag",
+        path: ':id',
+        name: 'Tag',
         component: TagPosts,
-        beforeEnter: postListGuard,
-      },
-    ],
+        beforeEnter: postListGuard
+      }
+    ]
   },
   {
-    path: "/admin",
+    path: '/admin',
     component: AdminLayout,
     beforeEnter: adminGuard,
     children: [
       {
-        path: "",
-        name: "Admin",
-        component: AdminPage,
+        path: '',
+        name: 'Admin',
+        component: AdminPage
       },
       {
-        path: "create",
-        name: "Create",
-        component: PostEdit,
+        path: 'create',
+        name: 'Create',
+        component: PostEdit
       },
       {
-        path: "update/:id",
-        name: "Update",
-        component: PostEdit,
-      },
-    ],
+        path: 'update/:id',
+        name: 'Update',
+        component: PostEdit
+      }
+    ]
   },
   {
-    path: "/auth",
+    path: '/auth',
     component: AdminLayout,
     meta: {
-      requiresAuth: false, // 로그인이 필요하지 않음
+      requiresAuth: false // 로그인이 필요하지 않음
     },
     children: [
       {
-        path: "register",
-        name: "Register",
+        path: 'register',
+        name: 'Register',
         component: SignUp,
-        beforeEnter: registerGuard,
+        beforeEnter: registerGuard
       },
       {
-        path: "login",
-        name: "Login",
+        path: 'login',
+        name: 'Login',
         beforeEnter: loginGuard,
-        component: SignIn,
-      },
-    ],
+        component: SignIn
+      }
+    ]
   },
   {
-    path: "/profile",
+    path: '/profile',
     component: BlogLayout,
     children: [
       {
-        path: ":userId/manage",
+        path: ':userId/manage',
         component: ProfileManage,
-        beforeEnter: profileManageGuard,
+        beforeEnter: profileManageGuard
       },
       {
-        path: ":userId",
+        path: ':userId',
         component: ProfilePage,
-        beforeEnter: profileGuard,
-      },
-    ],
+        beforeEnter: profileGuard
+      }
+    ]
   },
   {
-    path: "/:pathMatch(.*)*",
+    path: '/:pathMatch(.*)*',
     meta: {
-      requiresAuth: false,
+      requiresAuth: false
     },
-    name: "NotFound",
-    component: NotFound,
+    name: 'NotFound',
+    component: NotFound
   },
   {
-    path: "/:pathMatch(.*)*",
-    name: "ServerError",
+    path: '/:pathMatch(.*)*',
+    name: 'ServerError',
     meta: {
-      requiresAuth: false,
+      requiresAuth: false
     },
-    component: ServerError,
+    component: ServerError
   },
   {
-    path: "/:pathMatch(.*)*",
-    name: "NetworkError",
+    path: '/:pathMatch(.*)*',
+    name: 'NetworkError',
     meta: {
-      requiresAuth: false,
+      requiresAuth: false
     },
-    component: NetworkError,
-  },
+    component: NetworkError
+  }
 ];
 
 const router = createRouter({
   history: createWebHistory(),
-  routes,
+  routes
 });
 
 router.beforeEach(commonGuard);

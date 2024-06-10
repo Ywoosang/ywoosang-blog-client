@@ -1,12 +1,16 @@
 <template>
-    <div class="pagination-wrapper">
-        <ul class="pagination">
-            <li class="page" v-for="(pageItem, index) in pageList" :key="index">
-                <router-link :to="`/profile/${userId}?page=${pageItem.page}`"
-                    :class="{ current: pageItem.page == pageItem.currentPage }">{{ pageItem.page }}</router-link>
-            </li>
-        </ul>
-    </div>
+  <div class="pagination-wrapper">
+    <ul class="pagination">
+      <li v-for="(pageItem, index) in pageList" :key="index" class="page">
+        <router-link
+          :to="`/profile/${userId}?page=${pageItem.page}`"
+          :class="{ current: pageItem.page == pageItem.currentPage }"
+        >
+          {{ pageItem.page }}
+        </router-link>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script setup lang="ts">

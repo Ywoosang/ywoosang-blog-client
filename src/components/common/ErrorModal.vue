@@ -1,22 +1,18 @@
 <template>
   <div class="modal" style="z-index: 1001">
     <transition-group name="fade" tag="div">
-      <error-content
-        v-for="modal in modalList"
-        :modal="modal"
-        :key="modal.key"
-      ></error-content>
+      <error-content v-for="modal in modalList" :key="modal.key" :modal="modal" />
     </transition-group>
   </div>
 </template>
 
 <script setup lang="ts">
-import ErrorContent from "@/components/common/ErrorContent.vue";
-import { computed } from "vue";
-import { useStore } from "vuex";
+import ErrorContent from '@/components/common/ErrorContent.vue';
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 
 const store = useStore();
-const modalList = computed(() => store.getters["error/getModalList"]);
+const modalList = computed(() => store.getters['error/getModalList']);
 </script>
 
 <style scoped>

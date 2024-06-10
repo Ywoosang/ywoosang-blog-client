@@ -1,15 +1,11 @@
 <template>
-	<main>
-		<post-editor />
-	</main>
+  <main>
+    <post-editor />
+  </main>
 </template>
 
-<script>
+<script setup>
 import PostEditor from '@/components/posts/PostEditor.vue';
-
-export default {
-	components: {
-		PostEditor,
-	},
-};
 </script>
+
+<style></style>

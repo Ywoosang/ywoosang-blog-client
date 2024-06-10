@@ -1,15 +1,11 @@
 <template>
-	<main>
-		<sign-in-form />
-	</main>
+  <main>
+    <sign-in-form />
+  </main>
 </template>
 
-<script>
+<script setup>
 import SignInForm from '@/components/auth/SignInForm.vue';
-
-export default {
-	components: {
-		SignInForm,
-	},
-};
 </script>
+
+<style></style>

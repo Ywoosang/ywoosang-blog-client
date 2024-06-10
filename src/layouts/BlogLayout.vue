@@ -1,14 +1,14 @@
 <template>
-	<div class="container">
-		<blog-header />
-		<section class="section">
-			<blog-sidebar />
-			<router-view/>
-			<div class="filter" v-if="isSidebarOpen"></div>
-			<auth-modal :class="{ none: !isAuthModalOpen }" />
-		</section>
-		<error-modal></error-modal>
-	</div>
+  <div class="container">
+    <blog-header />
+    <section class="section">
+      <blog-sidebar />
+      <router-view />
+      <div v-if="isSidebarOpen" class="filter" />
+      <auth-modal :class="{ none: !isAuthModalOpen }" />
+    </section>
+    <error-modal />
+  </div>
 </template>
 
 <script setup lang="ts">

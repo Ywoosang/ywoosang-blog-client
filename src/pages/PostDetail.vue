@@ -1,27 +1,20 @@
 <template>
-	<main>
-		<post-viewer :post="getPost" />
-		<comment-write :postId="getPost.id" />
-		<comment-list :comments="getComments" />
-	</main>
+  <main>
+    <post-viewer :post="post" />
+    <comment-write :post-id="post.id" />
+    <comment-list :comments="comments" />
+  </main>
 </template>
 
-<script lang="ts">
-import { mapGetters } from 'vuex';
-import { defineComponent } from 'vue';
+<script setup lang="ts">
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 import PostViewer from '@/components/posts/PostViewer.vue';
 import CommentWrite from '@/components/comment/CommentWrite.vue';
 import CommentList from '@/components/comment/CommentList.vue';
 
-export default defineComponent({
-	components: {
-		PostViewer,
-		CommentList,
-		CommentWrite,
-	},
-	computed: {
-		...mapGetters('post', ['getPost']),
-		...mapGetters('comment', ['getComments']),
-	},
-});
+const store = useStore();
+
+const post = computed(() => store.getters['post/getPost']);
+const comments = computed(() => store.getters['comment/getComments']);
 </script>

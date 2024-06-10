@@ -1,8 +1,8 @@
 <template>
-	<main>
-		<profile-info />
-		<activity-pagination />
-	</main>
+  <main>
+    <profile-info />
+    <activity-pagination />
+  </main>
 </template>
 
 <script setup lang="ts">

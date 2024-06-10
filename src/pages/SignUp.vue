@@ -5,16 +5,9 @@
   </main>
 </template>
 
-<script>
-import SignUpForm from "@/components/auth/SignUpForm.vue";
-import RegisterTitle from "@/components/auth/RegisterTitle.vue";
-
-export default {
-  components: {
-    RegisterTitle,
-    SignUpForm,
-  },
-};
+<script setup>
+import SignUpForm from '@/components/auth/SignUpForm.vue';
+import RegisterTitle from '@/components/auth/RegisterTitle.vue';
 </script>
 
 <style scoped>

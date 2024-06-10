@@ -4,13 +4,7 @@
       <div class="user-avatar">
         <img :src="currentProfileImage" alt="프로필 이미지" />
         <div class="upload-layer">
-          <input
-            ref="fileInput"
-            id="file"
-            type="file"
-            @change="handleFileChange"
-            accept="image/*"
-          />
+          <input id="file" ref="fileInput" type="file" accept="image/*" @change="handleFileChange" />
           <label for="file" class="upload-image">업로드</label>
         </div>
       </div>
@@ -20,38 +14,36 @@
 
     <div class="detail-wrapper">
       <div class="nickname-wrapper">
-        <div class="view" v-if="!editMode.nickname">
-          <h2 class="nickname">{{ user.nickname }}</h2>
+        <div v-if="!editMode.nickname" class="view">
+          <h2 class="nickname">
+            {{ user.nickname }}
+          </h2>
           <button class="update-btn" @click="editNickname">
-            <font-awesome-icon
-              icon="fa-regular fa-pen-to-square"
-              class="icon"
-            />
+            <font-awesome-icon icon="fa-regular fa-pen-to-square" class="icon" />
           </button>
         </div>
-        <div class="edit" v-else>
-          <input type="text" v-model="editedUser.nickname" />
-          <button @click="saveNickname" class="save-btn">저장</button>
+        <div v-else class="edit">
+          <input v-model="editedUser.nickname" type="text" />
+          <button class="save-btn" @click="saveNickname">저장</button>
         </div>
       </div>
       <div class="description-wrapper">
-        <div class="view" v-if="!editMode.description">
-          <p class="description">{{ user.description }}</p>
+        <div v-if="!editMode.description" class="view">
+          <p class="description">
+            {{ user.description }}
+          </p>
           <button class="update-btn" @click="editDescription">
-            <font-awesome-icon
-              icon="fa-regular fa-pen-to-square"
-              class="icon"
-            />
+            <font-awesome-icon icon="fa-regular fa-pen-to-square" class="icon" />
           </button>
         </div>
-        <div class="edit" v-else>
+        <div v-else class="edit">
           <textarea
-            type="text"
             ref="descriptionTextarea"
-            @input="adjustTextareaHeight"
             v-model="editedUser.description"
-          ></textarea>
-          <button @click="saveDescription" class="save-btn">저장</button>
+            type="text"
+            @input="adjustTextareaHeight"
+          />
+          <button class="save-btn" @click="saveDescription">저장</button>
         </div>
       </div>
     </div>
@@ -62,7 +54,9 @@
             <h3>이메일 주소</h3>
           </div>
           <div class="content-wrapper">
-            <p class="user-email">{{ user.email }}</p>
+            <p class="user-email">
+              {{ user.email }}
+            </p>
           </div>
         </div>
       </div>
@@ -72,7 +66,9 @@
             <h3>아이디</h3>
           </div>
           <div class="content-wrapper">
-            <p class="user-email">{{ user.userId }}</p>
+            <p class="user-email">
+              {{ user.userId }}
+            </p>
           </div>
         </div>
       </div>
@@ -81,37 +77,29 @@
 </template>
 
 <script setup lang="ts">
-import {
-  computed,
-  watch,
-  nextTick,
-  ref,
-  reactive,
-  onMounted,
-  ComputedRef,
-} from "vue";
-import { useStore } from "vuex";
-import { uploadImageFile } from "@/services/api/file";
-import { User } from "@/types/interfaces";
-import { FILE_BASE_URL } from "@/consts";
+import { computed, watch, nextTick, ref, reactive, onMounted, ComputedRef } from 'vue';
+import { useStore } from 'vuex';
+import { uploadImageFile } from '@/services/api/file';
+import { User } from '@/types/interfaces';
+import { FILE_BASE_URL } from '@/consts';
 
 const store = useStore();
 
-const user: ComputedRef<User> = computed(() => store.getters["users/getUser"]);
-const prevProfileImage = ref<string>("");
-const currentProfileImage = ref<string>("");
+const user: ComputedRef<User> = computed(() => store.getters['users/getUser']);
+const prevProfileImage = ref<string>('');
+const currentProfileImage = ref<string>('');
 const fileInput = ref<HTMLInputElement | null>(null);
 const descriptionTextarea = ref<HTMLTextAreaElement | null>(null);
 const maxFileSize = 1024 * 1024;
 
 const editMode = reactive({
   nickname: false,
-  description: false,
+  description: false
 });
 
 const editedUser = reactive({
-  nickname: "",
-  description: "",
+  nickname: '',
+  description: ''
 });
 
 onMounted(() => {
@@ -121,28 +109,28 @@ onMounted(() => {
 
 watch(
   () => editMode.description,
-  (newValue) => {
+  newValue => {
     if (newValue) {
       nextTick(adjustTextareaHeight);
     }
   }
 );
 
-const handleFileChange = async (event) => {
+const handleFileChange = async event => {
   const file = event.target.files[0];
   if (file) {
     if (file.size <= maxFileSize) {
       const formData = new FormData();
-      formData.append("image", file);
+      formData.append('image', file);
       const response = await uploadImageFile(formData);
       const { data } = response;
       const fileName = data.filename;
       currentProfileImage.value = `${FILE_BASE_URL}/static/temp/${fileName}`;
       console.log(fileName);
     } else {
-      const errorMessage = "파일 용량이 너무 큽니다.";
-      store.commit("error/ADD_MODAL", errorMessage);
-      event.target.value = "";
+      const errorMessage = '파일 용량이 너무 큽니다.';
+      store.commit('error/ADD_MODAL', errorMessage);
+      event.target.value = '';
     }
   }
 };
@@ -150,8 +138,8 @@ const handleFileChange = async (event) => {
 const updateImage = async () => {
   try {
     if (prevProfileImage.value != currentProfileImage.value) {
-      await store.dispatch("users/updateUser", {
-        profileImage: currentProfileImage.value,
+      await store.dispatch('users/updateUser', {
+        profileImage: currentProfileImage.value
       });
       prevProfileImage.value = user.value.profileImage;
       currentProfileImage.value = user.value.profileImage;
@@ -179,8 +167,8 @@ const editDescription = () => {
 const saveNickname = async () => {
   if (editedUser.nickname.trim() != user.value.nickname.trim()) {
     try {
-      await store.dispatch("users/updateUser", {
-        nickname: editedUser.nickname.trim(),
+      await store.dispatch('users/updateUser', {
+        nickname: editedUser.nickname.trim()
       });
     } catch (e) {
       console.log(e);
@@ -192,8 +180,8 @@ const saveNickname = async () => {
 const saveDescription = async () => {
   if (editedUser.description.trim() != user.value.nickname.trim()) {
     try {
-      await store.dispatch("users/updateUser", {
-        description: editedUser.description.trim(),
+      await store.dispatch('users/updateUser', {
+        description: editedUser.description.trim()
       });
     } catch (e) {
       console.log(e);
@@ -203,14 +191,12 @@ const saveDescription = async () => {
 };
 
 const adjustTextareaHeight = () => {
-  descriptionTextarea.value!.style.height = "auto";
-  descriptionTextarea.value!.style.height = `${
-    descriptionTextarea.value!.scrollHeight
-  }px`;
+  descriptionTextarea.value!.style.height = 'auto';
+  descriptionTextarea.value!.style.height = `${descriptionTextarea.value!.scrollHeight}px`;
 };
 </script>
 
 <style scoped>
-@import "@/styles/users/profile.css";
-@import "@/styles/users/edit.css";
+@import '@/styles/users/profile.css';
+@import '@/styles/users/edit.css';
 </style>

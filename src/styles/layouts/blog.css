@@ -55,6 +55,6 @@ main {
   }
   main {
     margin-left: 240px;
-    max-width: calc(1356px - 240px);
+    max-width: calc(1356px - 240px - 240px);
   }
 }

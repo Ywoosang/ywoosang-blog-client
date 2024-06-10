@@ -11,17 +11,17 @@ import headerModule from './modules/header';
 import errorModule from './modules/error';
 
 const store: Store<RootState> = createStore({
-	modules: {
-		sidebar: sidebarModule,
-		auth: authModule,
-		users: usersModule,
-		post: postModule,
-		tag: tagModule,
-		category: categoryModule,
-		comment: commentModule,
-		header: headerModule,
-		error: errorModule
-	},
+  modules: {
+    sidebar: sidebarModule,
+    auth: authModule,
+    users: usersModule,
+    post: postModule,
+    tag: tagModule,
+    category: categoryModule,
+    comment: commentModule,
+    header: headerModule,
+    error: errorModule
+  }
 });
 
 export default store;

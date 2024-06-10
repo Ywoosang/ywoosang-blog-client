@@ -1,9 +1,11 @@
 <template>
   <div class="modal-wrapper">
     <div class="body">
-      <p class="content">{{ modal.content }}</p>
+      <p class="content">
+        {{ modal.content }}
+      </p>
       <div class="progress">
-        <div class="bar" :style="{ width: progressBarWidth }"></div>
+        <div class="bar" :style="{ width: progressBarWidth }" />
       </div>
     </div>
     <span class="close" @click="closeModal">&times;</span>
@@ -11,9 +13,9 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, computed } from "vue";
-import { useStore } from "vuex";
-import { ErrorContent } from "@/types/interfaces";
+import { onMounted, ref, computed } from 'vue';
+import { useStore } from 'vuex';
+import { ErrorContent } from '@/types/interfaces';
 const store = useStore();
 
 const props = defineProps<{
@@ -30,13 +32,13 @@ onMounted(() => {
     progressRef.value -= 1;
     if (progressRef.value <= 0) {
       clearInterval(interval);
-      store.commit("error/REMOVE_MODAL", modal.key);
+      store.commit('error/REMOVE_MODAL', modal.key);
     }
   }, 20); // 매 20ms 마다
 });
 
 const closeModal = () => {
-  store.commit("error/REMOVE_MODAL", modal.key);
+  store.commit('error/REMOVE_MODAL', modal.key);
 };
 </script>
 

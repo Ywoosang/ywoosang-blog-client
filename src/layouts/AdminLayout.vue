@@ -1,12 +1,12 @@
 <template>
   <div class="container">
     <router-view />
-    <error-modal></error-modal>
+    <error-modal />
   </div>
 </template>
 
 <script setup lang="ts">
-import ErrorModal from "../components/common/ErrorModal.vue";
+import ErrorModal from '../components/common/ErrorModal.vue';
 </script>
 
 <style src="@/styles/layouts/admin.css" scoped></style>

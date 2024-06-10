@@ -1,18 +1,11 @@
 <template>
-	<main>
-		<profile-edit />
-	</main>
+  <main>
+    <profile-edit />
+  </main>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
 import ProfileEdit from '@/components/users/ProfileEdit.vue';
-
-export default defineComponent({
-	components: {
-		ProfileEdit,
-	},
-});
 </script>
 
 <style></style>
