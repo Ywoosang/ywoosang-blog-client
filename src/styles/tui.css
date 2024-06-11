@@ -1,20 +1,21 @@
 /* 제목 */
-.toastui-editor-contents > h1 {
-  font-size: 2.1rem;
+.toastui-editor-contents > h1, .toastui-editor-md-heading1 {
+  font-size: 2rem;
   margin: 1.7rem 0 1.3rem 0;
+  padding: 0;
 }
 
-.toastui-editor-contents > h2 {
-  font-size: 1.7rem;
+.toastui-editor-contents > h2,.toastui-editor-md-heading2 {
+  font-size: 1.6rem;
   margin: 1.5rem 0 1.1rem 0;
 }
 
-.toastui-editor-contents > h3 {
+.toastui-editor-contents > h3 , .toastui-editor-md-heading3{
   font-size: 1.4rem;
   margin: 1.3rem 0 0.9rem 0;
 }
-.toastui-editor-contents > h4 {
-  font-size: 1.2rem;
+.toastui-editor-contents > h4 .toastui-editor-md-heading4{
+  font-size: 1.3rem;
   margin: 1.1rem 0 0.7rem 0;
 }
 
@@ -23,8 +24,7 @@
 .toastui-editor-contents > h3,
 .toastui-editor-contents > h4 {
   border: 0;
-  padding: 0.5rem 0;
-  line-height: 2rem;
+  padding: 0.5rem 0 !important;
 }
 
 /* 리스트 */
@@ -40,12 +40,12 @@
 
 /* 일반 게시글 내용 */
 .toastui-editor-contents p {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 }
 
 /* 마크다운 프리뷰 왼쪽 작성부분 */
 .toastui-editor-defaultUI .ProseMirror {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 }
 
 .toastui-editor-contents code {
@@ -94,7 +94,7 @@
   font-family: "Hack", monospace;
   padding: 0;
   color: white;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 400;
   width: 100%;
   background-color: transparent;
@@ -143,4 +143,25 @@
 .token.function,
 .token.class-name {
   color: #e6db74;
+}
+
+/* 태블릿 */
+@media (min-width: 860px) {
+  /* 일반 게시글 내용 */
+  .toastui-editor-contents p {
+    font-size: 1.1rem;
+  }
+
+  /* 마크다운 프리뷰 왼쪽 작성부분 */
+  .toastui-editor-defaultUI .ProseMirror {
+    font-size: 1.1rem;
+  }
+
+  .toastui-editor-contents pre code {
+    font-size: 0.9rem;
+  }
+}
+
+/* 데스크톱 */
+@media (min-width: 1340px) {
 }
