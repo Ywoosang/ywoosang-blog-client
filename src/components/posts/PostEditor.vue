@@ -1,8 +1,16 @@
 <template>
   <div class="editor-wrapper">
     <div class="selection-container">
-      <input v-model="title" class="post-title" placeholder="제목을 입력하세요" />
-      <textarea v-model="description" class="post-description" placeholder="포스트 설명을 입력하세요" />
+      <input
+        v-model="title"
+        class="post-title"
+        placeholder="제목을 입력하세요"
+      />
+      <textarea
+        v-model="description"
+        class="post-description"
+        placeholder="포스트 설명을 입력하세요"
+      ></textarea>
       <div class="settings-wrapper">
         <button
           class="public-btn"
@@ -24,7 +32,11 @@
       <div class="category-wrapper">
         <h3>카테고리</h3>
         <select v-model="categoryId" class="category-select">
-          <option v-for="category in categories" :key="category.id" :value="category.id">
+          <option
+            v-for="category in categories"
+            :key="category.id"
+            :value="category.id"
+          >
             {{ category.name }}
           </option>
         </select>
@@ -44,7 +56,7 @@
         />
       </div>
     </div>
-    <div id="editor" class="editor" />
+    <div id="editor" class="editor"></div>
     <div class="button-container">
       <button class="exit-btn">나가기</button>
       <button class="submit-btn" @click="submitPost">작성하기</button>
@@ -102,7 +114,7 @@ onMounted(async () => {
         categoryId.value = post.category.id;
       }
       status.value = post.status;
-      tagNames.value = post.tags.map(tag => tag.name);
+      tagNames.value = post.tags.map((tag) => tag.name);
       title.value = post.title;
       description.value = post.description;
     } catch (e) {
@@ -121,8 +133,8 @@ onMounted(async () => {
     theme: 'white',
     plugins: [codeSyntaxHighlight],
     hooks: {
-      addImageBlobHook: dropedImageUpload
-    }
+      addImageBlobHook: dropedImageUpload,
+    },
   });
 });
 
@@ -187,7 +199,7 @@ const submitPost = async () => {
   if (!isFormValid) return;
   isPublishing = true;
   while (uploadingFileCount > 0) {
-    await new Promise(resolve => setTimeout(resolve, 200)); // 100ms 마다 확인
+    await new Promise((resolve) => setTimeout(resolve, 200)); // 100ms 마다 확인
   }
   if (isUpdateMode.value) {
     await updatePost(postId);
@@ -209,7 +221,7 @@ const updatePost = async (id: number) => {
       tagNames: tagNames.value,
       status: status.value,
       categoryId: categoryId.value,
-      fileNames: fileNames.value
+      fileNames: fileNames.value,
     };
 
     await update(id, postData);
@@ -226,7 +238,7 @@ const uploadPost = async () => {
       title: title.value,
       description: description.value,
       content,
-      status: status.value
+      status: status.value,
     };
 
     if (categoryId.value) {

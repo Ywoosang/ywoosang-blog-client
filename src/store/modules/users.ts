@@ -3,7 +3,12 @@
 import { ActionTree, GetterTree, Module, MutationTree } from 'vuex';
 import { RootState, UsersState, User } from '@/types/interfaces';
 import { UsersRole } from '@/types/enums';
-import { getUserProfile, getPublicUserProfile, getUserActivities, updateUser } from '@/services/api/users';
+import {
+  getUserProfile,
+  getPublicUserProfile,
+  getUserActivities,
+  updateUser,
+} from '@/services/api/users';
 import { updateProfileDto } from '@/types/dto';
 
 const state: UsersState = {
@@ -13,7 +18,7 @@ const state: UsersState = {
   publicProfile: null,
   activities: [],
   pageList: [],
-  totalActivitiesCount: 0
+  totalActivitiesCount: 0,
 };
 
 export const mutations: MutationTree<UsersState> = {
@@ -37,17 +42,17 @@ export const mutations: MutationTree<UsersState> = {
     const { total, page } = payload;
     const currentPage = page ? page : 1;
     state.pageList = Array.from({
-      length: Math.ceil(total / 8)
+      length: Math.ceil(total / 8),
     }).map((_, index) => {
       return {
         page: index + 1,
-        currentPage
+        currentPage,
       };
     });
   },
   SET_TOTAL_ACTIVITIES_COUNT(state, count) {
     state.totalActivitiesCount = count;
-  }
+  },
 };
 
 export const actions: ActionTree<UsersState, RootState> = {
@@ -76,16 +81,17 @@ export const actions: ActionTree<UsersState, RootState> = {
   async updateUser({ commit }, updateProfileDto: updateProfileDto) {
     const { data } = await updateUser(updateProfileDto);
     commit('SET_USER', data);
-  }
+  },
 };
 
 export const getters: GetterTree<UsersState, RootState> = {
   getUser: (state: UsersState) => state.user,
-  getUserRole: (state: UsersState) => (state.user ? state.user.role : UsersRole.USER),
+  getUserRole: (state: UsersState) =>
+    state.user ? state.user.role : UsersRole.USER,
   getPublicProfile: (state: UsersState) => state.publicProfile,
   getUserActivities: (state: UsersState) => state.activities,
   getPageList: (state: UsersState) => state.pageList,
-  getActivitiesCount: (state: UsersState) => state.totalActivitiesCount
+  getActivitiesCount: (state: UsersState) => state.totalActivitiesCount,
 };
 
 const usersModule: Module<UsersState, RootState> = {
@@ -93,7 +99,7 @@ const usersModule: Module<UsersState, RootState> = {
   state,
   mutations,
   actions,
-  getters
+  getters,
 };
 
 export default usersModule;

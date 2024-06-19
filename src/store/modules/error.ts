@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid'; // ES Modules
 import { MAX_MODAL_COUNT } from '@/consts';
 
 const state: ErrorState = {
-  modalList: []
+  modalList: [],
 };
 
 const mutations: MutationTree<ErrorState> = {
@@ -15,23 +15,23 @@ const mutations: MutationTree<ErrorState> = {
     }
     state.modalList.push({
       key,
-      content
+      content,
     });
   },
   REMOVE_MODAL(state, key) {
-    state.modalList = state.modalList.filter(modal => modal.key != key);
-  }
+    state.modalList = state.modalList.filter((modal) => modal.key != key);
+  },
 };
 
 const getters: GetterTree<ErrorState, RootState> = {
-  getModalList: state => state.modalList
+  getModalList: (state) => state.modalList,
 };
 
 const errorModule: Module<ErrorState, RootState> = {
   namespaced: true,
   state,
   mutations,
-  getters
+  getters,
 };
 
 export default errorModule;

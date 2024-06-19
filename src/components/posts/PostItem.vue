@@ -2,16 +2,20 @@
   <div class="post-container">
     <article v-for="post in props.posts" :key="post.id" class="post">
       <div class="admin-tool">
-        <button v-if="userRole == UsersRole.ADMIN" @click="deletePost(post.id)">삭제</button>
-        <button v-if="userRole == UsersRole.ADMIN" @click="updatePost(post.id)">수정</button>
+        <button v-if="userRole == UsersRole.ADMIN" @click="deletePost(post.id)">
+          삭제
+        </button>
+        <button v-if="userRole == UsersRole.ADMIN" @click="updatePost(post.id)">
+          수정
+        </button>
       </div>
       <h2>
         <router-link
           :to="{
             name: 'Post',
             params: {
-              id: post.id
-            }
+              id: post.id,
+            },
           }"
         >
           {{ post.title }}
@@ -24,7 +28,12 @@
         {{ post.description }}
       </p>
       <div class="tags">
-        <router-link v-for="tag in post.tags" :key="tag.id" :to="`/tag/${tag.id}`" class="tag">
+        <router-link
+          v-for="tag in post.tags"
+          :key="tag.id"
+          :to="`/tag/${tag.id}`"
+          class="tag"
+        >
           {{ tag.name }}
         </router-link>
       </div>
@@ -50,8 +59,8 @@ const props = defineProps({
   posts: {
     type: Array as () => Post[],
     required: true,
-    default: () => []
-  }
+    default: () => [],
+  },
 });
 
 const deletePost = async (id: number) => {

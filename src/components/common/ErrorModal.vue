@@ -1,7 +1,11 @@
 <template>
   <div class="modal" style="z-index: 1001">
     <transition-group name="fade" tag="div">
-      <error-content v-for="modal in modalList" :key="modal.key" :modal="modal" />
+      <error-content
+        v-for="modal in modalList"
+        :key="modal.key"
+        :modal="modal"
+      />
     </transition-group>
   </div>
 </template>

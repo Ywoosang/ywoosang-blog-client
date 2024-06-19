@@ -3,7 +3,7 @@
     class="side-bar"
     :class="{
       'sidebar-open': isSidebarOpen,
-      'sidebar-closed': !isSidebarOpen
+      'sidebar-closed': !isSidebarOpen,
     }"
   >
     <div class="my-menu">
@@ -13,7 +13,9 @@
         </button>
       </div>
       <div class="im github">
-        <a href="https://github.com/Ywoosang">GitHub <font-awesome-icon icon="fa-brands fa-square-github" /></a>
+        <a href="https://github.com/Ywoosang"
+          >GitHub <font-awesome-icon icon="fa-brands fa-square-github"
+        /></a>
       </div>
     </div>
     <div class="category-header">
@@ -21,16 +23,24 @@
     </div>
     <ul class="category-list">
       <li>
-        <router-link to="/posts">
-          <span class="category-name" :class="{ selected: !selectedCategoryId }">전체보기</span>
+        <router-link to="/">
+          <span
+            class="category-name"
+            :class="{
+              selected: $route.name == 'AllPosts',
+            }"
+            >전체보기</span
+          >
           <span class="category-count">({{ postCount }})</span>
         </router-link>
       </li>
       <li v-for="category in sidebarCategories" :key="category.id">
-        <router-link :to="'/category/' + category.id">
-          <span class="category-name" :class="{ selected: selectedCategoryId === category.id }">{{
-            category.name
-          }}</span>
+        <router-link :to="`/category/${category.id}`">
+          <span
+            class="category-name"
+            :class="{ selected: isSelectedCategory(category.id) }"
+            >{{ category.name }}</span
+          >
           <span class="category-count">({{ category.postCount }})</span>
         </router-link>
       </li>
@@ -39,7 +49,11 @@
       <h2>태그({{ sidebarTags.length }})</h2>
     </div>
     <ul class="tag-list">
-      <li v-for="tag in sidebarTags" :key="tag.id" :class="{ selected: selectedTagId === tag.id }">
+      <li
+        v-for="tag in sidebarTags"
+        :key="tag.id"
+        :class="{ selected: isSelectedTag(tag.id) }"
+      >
         <router-link :to="'/tag/' + tag.id">
           {{ tag.name }}
         </router-link>
@@ -51,18 +65,36 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useStore } from 'vuex';
+import { useRoute } from 'vue-router';
 
+const route = useRoute();
 const store = useStore();
 
+// 사이드바 상태
 const isSidebarOpen = computed(() => store.getters['sidebar/getSidebarStatus']);
-const sidebarCategories = computed(() => store.getters['sidebar/getSidebarCategories']);
-const sidebarTags = computed(() => store.getters['sidebar/getSidebarTags']);
-const selectedCategoryId = computed(() => store.getters['sidebar/getSelectedCategoryId']);
+const toggleSidebar = () => store.commit('sidebar/SET_SIDEBAR');
+
+// 현재 위치
+const selectedCategoryId = computed(
+  () => store.getters['sidebar/getSelectedCategoryId'],
+);
 const selectedTagId = computed(() => store.getters['sidebar/getSelectedTagId']);
+
+// 전체 게시글 개수
 const postCount = computed(() => store.getters['sidebar/getPostCount']);
 
-const toggleSidebar = () => {
-  store.commit('sidebar/SET_SIDEBAR');
+// 카테고리/태그 목록
+const sidebarTags = computed(() => store.getters['sidebar/getSidebarTags']);
+const sidebarCategories = computed(
+  () => store.getters['sidebar/getSidebarCategories'],
+);
+
+const isSelectedCategory = (id: number) => {
+  return route.name == 'Category' && selectedCategoryId.value == id;
+};
+
+const isSelectedTag = (id: number) => {
+  return route.name == 'Tag' && selectedTagId.value == id;
 };
 </script>
 

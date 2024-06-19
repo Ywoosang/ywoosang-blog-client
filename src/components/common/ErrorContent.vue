@@ -5,7 +5,7 @@
         {{ modal.content }}
       </p>
       <div class="progress">
-        <div class="bar" :style="{ width: progressBarWidth }" />
+        <div class="bar" :style="{ width: progressBarWidth }"></div>
       </div>
     </div>
     <span class="close" @click="closeModal">&times;</span>

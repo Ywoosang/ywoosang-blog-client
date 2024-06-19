@@ -6,11 +6,13 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, computed, watch } from 'vue';
-import { useRoute } from 'vue-router';
+import { onMounted, computed } from 'vue';
+import { onBeforeRouteUpdate, useRoute } from 'vue-router';
 import { useStore } from 'vuex';
 import PostItem from '@/components/posts/PostItem.vue';
 import PostPagination from '@/components/posts/PostPagination.vue';
+import { getPageNumber } from '@/utils';
+import RouteQuery from '@/types/route-query';
 
 const store = useStore();
 const route = useRoute();
@@ -20,42 +22,31 @@ const getTag = computed(() => store.getters['tag/getTag']);
 const getPageList = computed(() => store.getters['tag/getPageList']);
 const getPostList = computed(() => (getTag.value ? getTag.value.posts : []));
 
-async function setTag() {
-  const userRole = getUserRole.value;
-  // 쿼리파라미터 추출 방식 개선 필요
-  const pageParam = route.query.page as string;
-  const limitParam = route.query.limit as string;
-  const id = route.params.id as string;
-  const page = pageParam ? parseInt(pageParam) : 1;
-  const limit = limitParam ? parseInt(limitParam) : 15;
+onMounted(async () => {
+  const page: number = getPageNumber(route.query.page as RouteQuery);
+  const tagId: number = parseInt(route.params.id as string);
+  await setTag(page, tagId);
+  store.commit('sidebar/SET_SELECTED_TAG_ID', tagId);
+});
+
+onBeforeRouteUpdate(async (to, from) => {
+  if (to.query.page !== from.query.page || to.params.id !== from.params.id) {
+    const tagId: number = parseInt(to.params.id as string);
+    const page: number = getPageNumber(to.query.page as RouteQuery);
+    await setTag(tagId, page);
+    store.commit('sidebar/SET_SELECTED_TAG_ID', tagId);
+  }
+});
+
+async function setTag(tagId: number, page: number) {
   try {
-    await store.dispatch('tag/fetchTag', { id, userRole, page, limit });
+    await store.dispatch('tag/fetchTag', {
+      id: tagId,
+      userRole: getUserRole.value,
+      page,
+    });
   } catch (e) {
     console.error(e);
   }
 }
-
-function setSelectedTagId(id) {
-  store.commit('sidebar/SET_SELECTED_TAG_ID', parseInt(id));
-}
-
-onMounted(async () => {
-  await setTag();
-  setSelectedTagId(route.params.id);
-});
-
-watch(
-  route,
-  async (to, from) => {
-    const toPage = to.query.page || 1;
-    const toLimit = to.query.limit || 15;
-    const fromPage = from.query.page || 1;
-    const fromLimit = from.query.limit || 15;
-    if (toPage !== fromPage || toLimit !== fromLimit || to.params.id !== from.params.id) {
-      await setTag();
-      setSelectedTagId(to.params.id);
-    }
-  },
-  { deep: true }
-);
 </script>

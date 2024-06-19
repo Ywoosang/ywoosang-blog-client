@@ -1,9 +1,16 @@
 <template>
   <div class="wrapper">
     <div class="write">
-      <textarea ref="commentTextarea" v-model="content" placeholder="답글을 작성하세요" @input="adjustTextareaHeight" />
+      <textarea
+        ref="commentTextarea"
+        v-model="content"
+        placeholder="답글을 작성하세요"
+        @input="adjustTextareaHeight"
+      ></textarea>
       <div class="btn-wrapper">
-        <button v-if="editMode" class="submit" @click="submitReplay">수정</button>
+        <button v-if="editMode" class="submit" @click="submitReplay">
+          수정
+        </button>
         <button v-else class="submit" @click="submitReplay">답글 달기</button>
         <button class="close" @click="$emit('close')">취소</button>
       </div>
@@ -20,28 +27,28 @@ const emits = defineEmits(['close']);
 const props = defineProps({
   parentCommentId: {
     type: Number,
-    default: null
+    default: null,
   },
   replyToId: {
     type: Number,
-    default: null
+    default: null,
   },
   editMode: {
     type: Boolean,
-    default: false
+    default: false,
   },
   id: {
     type: Number,
-    default: null
+    default: null,
   },
   isComment: {
     type: Boolean,
-    default: true
+    default: true,
   },
   initialValue: {
     type: String,
-    default: ''
-  }
+    default: '',
+  },
 });
 
 let content: string = '';
@@ -58,7 +65,7 @@ const submitReplay = async () => {
     parentCommentId: props.parentCommentId,
     id: props.id,
     content: content,
-    replyToId: props.replyToId
+    replyToId: props.replyToId,
   };
   if (!props.editMode) {
     const replyId = await store.dispatch('comment/createReply', payload);

@@ -4,18 +4,28 @@
     <div v-if="categories.length" class="existing-categories">
       <ul>
         <li v-for="category in categories" :key="category.id" class="category">
-          <span v-if="category.id !== editingCategoryId">{{ category.name }}</span>
+          <span v-if="category.id !== editingCategoryId">{{
+            category.name
+          }}</span>
           <input
             v-if="category.id === editingCategoryId"
             v-model="editedCategoryName"
             @keyup.enter="confirmEdit(category.id)"
           />
           <div class="btn-wrapper">
-            <button v-if="category.id === editingCategoryId" class="confirm" @click="confirmEdit(category.id)">
+            <button
+              v-if="category.id === editingCategoryId"
+              class="confirm"
+              @click="confirmEdit(category.id)"
+            >
               확인
             </button>
-            <button v-else class="edit" @click="startEdit(category.id)">수정</button>
-            <button class="remove" @click="removeCategory(category.id)">삭제</button>
+            <button v-else class="edit" @click="startEdit(category.id)">
+              수정
+            </button>
+            <button class="remove" @click="removeCategory(category.id)">
+              삭제
+            </button>
           </div>
         </li>
       </ul>
@@ -23,7 +33,12 @@
     <!-- 새로운 카테고리 생성 폼 -->
     <div class="new-category">
       <form class="category-form" @submit.prevent="uploadCategory">
-        <input id="categoryName" v-model="newCategoryName" type="text" required />
+        <input
+          id="categoryName"
+          v-model="newCategoryName"
+          type="text"
+          required
+        />
         <button type="submit">생성</button>
       </form>
     </div>
@@ -31,7 +46,12 @@
 </template>
 
 <script setup lang="ts">
-import { createCategory, deleteCategory, getCategories, updateCategory } from '@/services/api/category';
+import {
+  createCategory,
+  deleteCategory,
+  getCategories,
+  updateCategory,
+} from '@/services/api/category';
 import { ref, onMounted } from 'vue';
 import { Category } from '@/types/interfaces';
 
@@ -50,7 +70,7 @@ onMounted(async () => {
 // 카테고리 이름 수정 시작
 const startEdit = (categoryId: number) => {
   editingCategoryId.value = categoryId;
-  const category = categories.value.find(c => c.id === categoryId);
+  const category = categories.value.find((c) => c.id === categoryId);
   editedCategoryName.value = category!.name;
 };
 
@@ -59,7 +79,7 @@ const confirmEdit = async (categoryId: number) => {
     const name = editedCategoryName.value;
     const data = { name };
     await updateCategory(categoryId, data);
-    categories.value = categories.value.map(category => {
+    categories.value = categories.value.map((category) => {
       if (category.id === categoryId) {
         category.name = name;
       }
@@ -88,7 +108,7 @@ const uploadCategory = async () => {
 const removeCategory = async (id: number) => {
   try {
     await deleteCategory(id);
-    categories.value = categories.value.filter(category => category.id != id);
+    categories.value = categories.value.filter((category) => category.id != id);
   } catch (e) {
     console.log(e);
   }

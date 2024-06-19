@@ -15,7 +15,7 @@ import ProfilePage from '@/pages/ProfilePage.vue';
 import ProfileManage from '@/pages/ProfileManage.vue';
 
 // Layouts
-import BlogLayout from '@/layouts/BlogLayout.vue';
+import DefaultLayout from '@/layouts/DefaultLayout.vue';
 import AdminLayout from '@/layouts/AdminLayout.vue';
 
 // Navigation Guards
@@ -33,49 +33,45 @@ import NetworkError from '@/pages/NetworkError.vue';
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    redirect: '/posts'
-  },
-  {
-    path: '/posts',
-    component: BlogLayout,
+    component: DefaultLayout,
     children: [
       {
         path: '',
         name: 'AllPosts',
         component: AllPosts,
-        beforeEnter: postListGuard
+        beforeEnter: postListGuard,
       },
       {
         path: ':id',
         name: 'Post',
         component: PostDetail,
-        beforeEnter: postDetailGuard
-      }
-    ]
+        beforeEnter: postDetailGuard,
+      },
+    ],
   },
   {
     path: '/category',
-    component: BlogLayout,
+    component: DefaultLayout,
     children: [
       {
         path: ':id',
         name: 'Category',
         component: CategoryPosts,
-        beforeEnter: postListGuard
-      }
-    ]
+        beforeEnter: postListGuard,
+      },
+    ],
   },
   {
     path: '/tag',
-    component: BlogLayout,
+    component: DefaultLayout,
     children: [
       {
         path: ':id',
         name: 'Tag',
         component: TagPosts,
-        beforeEnter: postListGuard
-      }
-    ]
+        beforeEnter: postListGuard,
+      },
+    ],
   },
   {
     path: '/admin',
@@ -85,86 +81,86 @@ const routes: RouteRecordRaw[] = [
       {
         path: '',
         name: 'Admin',
-        component: AdminPage
+        component: AdminPage,
       },
       {
         path: 'create',
         name: 'Create',
-        component: PostEdit
+        component: PostEdit,
       },
       {
         path: 'update/:id',
         name: 'Update',
-        component: PostEdit
-      }
-    ]
+        component: PostEdit,
+      },
+    ],
   },
   {
     path: '/auth',
     component: AdminLayout,
     meta: {
-      requiresAuth: false // 로그인이 필요하지 않음
+      requiresAuth: false, // 로그인이 필요하지 않음
     },
     children: [
       {
         path: 'register',
         name: 'Register',
         component: SignUp,
-        beforeEnter: registerGuard
+        beforeEnter: registerGuard,
       },
       {
         path: 'login',
         name: 'Login',
         beforeEnter: loginGuard,
-        component: SignIn
-      }
-    ]
+        component: SignIn,
+      },
+    ],
   },
   {
     path: '/profile',
-    component: BlogLayout,
+    component: DefaultLayout,
     children: [
       {
         path: ':userId/manage',
         component: ProfileManage,
-        beforeEnter: profileManageGuard
+        beforeEnter: profileManageGuard,
       },
       {
         path: ':userId',
         component: ProfilePage,
-        beforeEnter: profileGuard
-      }
-    ]
+        beforeEnter: profileGuard,
+      },
+    ],
   },
   {
     path: '/:pathMatch(.*)*',
     meta: {
-      requiresAuth: false
+      requiresAuth: false,
     },
     name: 'NotFound',
-    component: NotFound
+    component: NotFound,
   },
   {
     path: '/:pathMatch(.*)*',
     name: 'ServerError',
     meta: {
-      requiresAuth: false
+      requiresAuth: false,
     },
-    component: ServerError
+    component: ServerError,
   },
   {
     path: '/:pathMatch(.*)*',
     name: 'NetworkError',
     meta: {
-      requiresAuth: false
+      requiresAuth: false,
     },
-    component: NetworkError
-  }
+    component: NetworkError,
+  },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
+  routes,
 });
 
 router.beforeEach(commonGuard);

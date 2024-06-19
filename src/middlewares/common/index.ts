@@ -8,8 +8,8 @@ export default async function (to, from, next) {
   try {
     const id = to.params.id;
     if (to.meta.requiresAuth == false) return next();
+    // id 값이 숫자가 아니라면 404 페이지로 이동
     if (id && !/^\d+$/.test(id)) return next({ name: 'NotFound' });
-
     const user = await store.dispatch('users/fetchUser');
     const isLoggedIn: boolean = user ? true : false;
     const userRole: UsersRole = store.getters['users/getUserRole'];

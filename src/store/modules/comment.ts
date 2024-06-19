@@ -1,11 +1,17 @@
 import { Module, MutationTree, ActionTree, GetterTree } from 'vuex';
-import { getComments, createComment, createReply, deleteComment, updateComment } from '@/services/api/comment';
+import {
+  getComments,
+  createComment,
+  createReply,
+  deleteComment,
+  updateComment,
+} from '@/services/api/comment';
 import { RootState, CommentState, Comment } from '@/types/interfaces';
 import { CreateCommentDto, CreateReplyDto } from '@/types/dto';
 import { validateCommentLength } from '@/utils';
 
 const state: CommentState = {
-  comments: []
+  comments: [],
 };
 
 export const mutations: MutationTree<CommentState> = {
@@ -17,7 +23,7 @@ export const mutations: MutationTree<CommentState> = {
   },
   // 배열 변경 감지 https://jh-7.tistory.com/19
   SET_NEW_REPLY(state, reply) {
-    state.comments = state.comments.map(comment => {
+    state.comments = state.comments.map((comment) => {
       if (comment.id == reply.parentCommentId) {
         if (!comment.replies) {
           comment.replies = [];
@@ -35,33 +41,33 @@ export const mutations: MutationTree<CommentState> = {
     // }
   },
   REMOVE_COMMENT(state, comment) {
-    state.comments = state.comments.filter(c => c.id != comment.id);
+    state.comments = state.comments.filter((c) => c.id != comment.id);
   },
   REMOVE_REPLY(state, reply) {
-    state.comments = state.comments.map(comment => {
+    state.comments = state.comments.map((comment) => {
       if (comment.id == reply.parentCommentId) {
-        comment.replies = comment.replies.filter(r => r.id != reply.id);
+        comment.replies = comment.replies.filter((r) => r.id != reply.id);
       }
       return comment;
     });
   },
   UPDATE_COMMENT(state, comment) {
-    state.comments = state.comments.map(c => {
+    state.comments = state.comments.map((c) => {
       if (c.id == comment.id) c.content = comment.content;
       return c;
     });
   },
   UPDATE_REPLY(state, reply) {
-    state.comments = state.comments.map(comment => {
+    state.comments = state.comments.map((comment) => {
       if (comment.id == reply.parentCommentId) {
-        comment.replies = comment.replies.map(r => {
+        comment.replies = comment.replies.map((r) => {
           if (r.id == reply.id) r.content = reply.content;
           return r;
         });
       }
       return comment;
     });
-  }
+  },
 };
 
 export const actions: ActionTree<CommentState, RootState> = {
@@ -75,7 +81,7 @@ export const actions: ActionTree<CommentState, RootState> = {
     validateCommentLength(content);
     const createCommentDto: CreateCommentDto = {
       content,
-      postId
+      postId,
     };
     const { data } = await createComment(createCommentDto);
     commit('SET_NEW_COMMENT', data);
@@ -86,7 +92,7 @@ export const actions: ActionTree<CommentState, RootState> = {
     validateCommentLength(content);
     const createReplyDto: CreateReplyDto = {
       content,
-      replyToId
+      replyToId,
     };
     const { data } = await createReply(parentCommentId, createReplyDto);
     commit('SET_NEW_REPLY', data);
@@ -115,11 +121,11 @@ export const actions: ActionTree<CommentState, RootState> = {
     const response = await updateComment(id, { content });
     const comment: Comment = response.data;
     commit('UPDATE_COMMENT', comment);
-  }
+  },
 };
 
 const getters: GetterTree<CommentState, RootState> = {
-  getComments: state => state.comments
+  getComments: (state) => state.comments,
 };
 
 const categoryModule: Module<CommentState, RootState> = {
@@ -127,7 +133,7 @@ const categoryModule: Module<CommentState, RootState> = {
   state,
   mutations,
   actions,
-  getters
+  getters,
 };
 
 export default categoryModule;

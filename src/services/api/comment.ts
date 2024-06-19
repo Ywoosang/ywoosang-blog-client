@@ -1,10 +1,10 @@
 import request from '@/services/axios-interceptor';
 
-export const createComment = data => {
+export const createComment = (data) => {
   return request({
     url: '/comments',
     method: 'POST',
-    data
+    data,
   });
 };
 
@@ -12,21 +12,21 @@ export const createReply = (parentCommentId, data) => {
   return request({
     url: `/comments/${parentCommentId}/replies`,
     method: 'POST',
-    data
+    data,
   });
 };
 
-export const getComments = postId => {
+export const getComments = (postId) => {
   return request({
     url: `/comments/posts/${postId}`,
-    method: 'GET'
+    method: 'GET',
   });
 };
 
-export const deleteComment = commentId => {
+export const deleteComment = (commentId) => {
   return request({
     url: `/comments/${commentId}`,
-    method: 'DELETE'
+    method: 'DELETE',
   });
 };
 
@@ -34,6 +34,6 @@ export const updateComment = (commentId, data) => {
   return request({
     url: `/comments/${commentId}`,
     method: 'PUT',
-    data
+    data,
   });
 };

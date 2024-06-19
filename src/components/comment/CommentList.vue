@@ -5,7 +5,11 @@
         <comment-item :comment="comment" />
         <div class="reply-area">
           <ul class="reply-list">
-            <li v-for="reply in comment.replies" :key="reply.id" class="reply-box">
+            <li
+              v-for="reply in comment.replies"
+              :key="reply.id"
+              class="reply-box"
+            >
               <comment-reply :reply="reply" />
             </li>
           </ul>
@@ -27,8 +31,8 @@ const route = useRoute();
 const { comments } = defineProps({
   comments: {
     type: Array as PropType<Comment[]>,
-    default: () => []
-  }
+    default: () => [],
+  },
 });
 
 onMounted(() => {

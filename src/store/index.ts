@@ -20,8 +20,8 @@ const store: Store<RootState> = createStore({
     category: categoryModule,
     comment: commentModule,
     header: headerModule,
-    error: errorModule
-  }
+    error: errorModule,
+  },
 });
 
 export default store;

@@ -4,7 +4,13 @@
       <div class="user-avatar">
         <img :src="currentProfileImage" alt="프로필 이미지" />
         <div class="upload-layer">
-          <input id="file" ref="fileInput" type="file" accept="image/*" @change="handleFileChange" />
+          <input
+            id="file"
+            ref="fileInput"
+            type="file"
+            accept="image/*"
+            @change="handleFileChange"
+          />
           <label for="file" class="upload-image">업로드</label>
         </div>
       </div>
@@ -19,7 +25,10 @@
             {{ user.nickname }}
           </h2>
           <button class="update-btn" @click="editNickname">
-            <font-awesome-icon icon="fa-regular fa-pen-to-square" class="icon" />
+            <font-awesome-icon
+              icon="fa-regular fa-pen-to-square"
+              class="icon"
+            />
           </button>
         </div>
         <div v-else class="edit">
@@ -33,7 +42,10 @@
             {{ user.description }}
           </p>
           <button class="update-btn" @click="editDescription">
-            <font-awesome-icon icon="fa-regular fa-pen-to-square" class="icon" />
+            <font-awesome-icon
+              icon="fa-regular fa-pen-to-square"
+              class="icon"
+            />
           </button>
         </div>
         <div v-else class="edit">
@@ -42,7 +54,7 @@
             v-model="editedUser.description"
             type="text"
             @input="adjustTextareaHeight"
-          />
+          ></textarea>
           <button class="save-btn" @click="saveDescription">저장</button>
         </div>
       </div>
@@ -77,7 +89,15 @@
 </template>
 
 <script setup lang="ts">
-import { computed, watch, nextTick, ref, reactive, onMounted, ComputedRef } from 'vue';
+import {
+  computed,
+  watch,
+  nextTick,
+  ref,
+  reactive,
+  onMounted,
+  ComputedRef,
+} from 'vue';
 import { useStore } from 'vuex';
 import { uploadImageFile } from '@/services/api/file';
 import { User } from '@/types/interfaces';
@@ -94,12 +114,12 @@ const maxFileSize = 1024 * 1024;
 
 const editMode = reactive({
   nickname: false,
-  description: false
+  description: false,
 });
 
 const editedUser = reactive({
   nickname: '',
-  description: ''
+  description: '',
 });
 
 onMounted(() => {
@@ -109,14 +129,14 @@ onMounted(() => {
 
 watch(
   () => editMode.description,
-  newValue => {
+  (newValue) => {
     if (newValue) {
       nextTick(adjustTextareaHeight);
     }
-  }
+  },
 );
 
-const handleFileChange = async event => {
+const handleFileChange = async (event) => {
   const file = event.target.files[0];
   if (file) {
     if (file.size <= maxFileSize) {
@@ -139,7 +159,7 @@ const updateImage = async () => {
   try {
     if (prevProfileImage.value != currentProfileImage.value) {
       await store.dispatch('users/updateUser', {
-        profileImage: currentProfileImage.value
+        profileImage: currentProfileImage.value,
       });
       prevProfileImage.value = user.value.profileImage;
       currentProfileImage.value = user.value.profileImage;
@@ -168,7 +188,7 @@ const saveNickname = async () => {
   if (editedUser.nickname.trim() != user.value.nickname.trim()) {
     try {
       await store.dispatch('users/updateUser', {
-        nickname: editedUser.nickname.trim()
+        nickname: editedUser.nickname.trim(),
       });
     } catch (e) {
       console.log(e);
@@ -181,7 +201,7 @@ const saveDescription = async () => {
   if (editedUser.description.trim() != user.value.nickname.trim()) {
     try {
       await store.dispatch('users/updateUser', {
-        description: editedUser.description.trim()
+        description: editedUser.description.trim(),
       });
     } catch (e) {
       console.log(e);

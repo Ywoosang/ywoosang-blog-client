@@ -12,19 +12,38 @@
           </div>
         </router-link>
         <div v-if="isAuthorized" class="btn-wrapper">
-          <button v-if="!editMode" class="btn-top update-btn" @click="startEdit">수정</button>
-          <button class="btn-top delete-btn" @click="deleteComment">삭제</button>
+          <button
+            v-if="!editMode"
+            class="btn-top update-btn"
+            @click="startEdit"
+          >
+            수정
+          </button>
+          <button class="btn-top delete-btn" @click="deleteComment">
+            삭제
+          </button>
         </div>
       </div>
     </div>
-    <reply-write v-if="editMode" :id="comment.id" :edit-mode="true" :initial-value="comment.content" @close="endEdit" />
+    <reply-write
+      v-if="editMode"
+      :id="comment.id"
+      :edit-mode="true"
+      :initial-value="comment.content"
+      @close="endEdit"
+    />
     <div v-else class="content">
       {{ comment.content }}
     </div>
     <div class="tool">
       <button class="create-btn" @click="openForm">답글 달기</button>
     </div>
-    <reply-write v-if="isOpen" :parent-comment-id="comment.id" :reply-to-id="comment.user.id" @close="closeForm" />
+    <reply-write
+      v-if="isOpen"
+      :parent-comment-id="comment.id"
+      :reply-to-id="comment.user.id"
+      @close="closeForm"
+    />
   </div>
 </template>
 
@@ -49,7 +68,10 @@ const editMode = ref(false);
 const user = computed(() => store.getters['users/getUser']);
 
 const isAuthorized = computed(() => {
-  return user.value && (props.comment!.user.id === user.value.id || user.value.role === 'ADMIN');
+  return (
+    user.value &&
+    (props.comment!.user.id === user.value.id || user.value.role === 'ADMIN')
+  );
 });
 
 const deleteComment = async () => {
