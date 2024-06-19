@@ -2,16 +2,22 @@ import { Module, MutationTree, GetterTree, ActionTree } from 'vuex';
 import { RootState, SidebarState } from '@/types/interfaces';
 import { UsersRole } from '@/types/enums';
 import { getSidebarTags, getSidebarPublicTags } from '@/services/api/tag';
-import { getSidebarCategories, getSidebarPublicCategories } from '@/services/api/category';
+import {
+  getSidebarCategories,
+  getSidebarPublicCategories,
+} from '@/services/api/category';
 import { getPublicCount, getTotalCount } from '@/services/api/post';
 
 const state: SidebarState = {
   isOpen: false,
   categories: [],
   tags: [],
-  selectedCategoryId: null,
-  selectedTagId: null,
-  postCount: 0
+  // 선택된 카테고리 아이디
+  selectedCategoryId: -1,
+  // 선택된 태그 아이디
+  selectedTagId: -1,
+  // 전체 글 개수
+  postCount: 0,
 };
 
 const mutations: MutationTree<SidebarState> = {
@@ -28,13 +34,11 @@ const mutations: MutationTree<SidebarState> = {
     state.postCount = count;
   },
   SET_SELECTED_CATEGORY_ID(state, id: number) {
-    state.selectedTagId = -1;
     state.selectedCategoryId = id;
   },
   SET_SELECTED_TAG_ID(state, id: number) {
-    state.selectedCategoryId = -1;
     state.selectedTagId = id;
-  }
+  },
 };
 
 const getters: GetterTree<SidebarState, RootState> = {
@@ -47,27 +51,25 @@ const getters: GetterTree<SidebarState, RootState> = {
   getSidebarTags(state) {
     return state.tags;
   },
-  getSelectedCategoryId(state) {
-    return state.selectedCategoryId;
-  },
-  getSelectedTagId: state => state.selectedTagId,
-  getPostCount(state) {
-    return state.postCount;
-  }
+  getSelectedCategoryId: (state) => state.selectedCategoryId,
+  getSelectedTagId: (state) => state.selectedTagId,
+  getPostCount: (state) => state.postCount,
 };
 
 const actions: ActionTree<SidebarState, RootState> = {
   async fetchSideBar({ commit }, payload) {
     const userRole = payload;
-    const postCountPromise = userRole == UsersRole.ADMIN ? getTotalCount() : getPublicCount();
-    const tagPromise = userRole === UsersRole.ADMIN ? getSidebarTags() : getSidebarPublicTags();
-    const categoryPromise = userRole === UsersRole.ADMIN ? getSidebarCategories() : getSidebarPublicCategories();
+    const postCountPromise =
+      userRole == UsersRole.ADMIN ? getTotalCount() : getPublicCount();
+    const tagPromise =
+      userRole === UsersRole.ADMIN ? getSidebarTags() : getSidebarPublicTags();
+    const categoryPromise =
+      userRole === UsersRole.ADMIN
+        ? getSidebarCategories()
+        : getSidebarPublicCategories();
 
-    const [postCountResponse, tagResponse, categoryResponse] = await Promise.all([
-      postCountPromise,
-      tagPromise,
-      categoryPromise
-    ]);
+    const [postCountResponse, tagResponse, categoryResponse] =
+      await Promise.all([postCountPromise, tagPromise, categoryPromise]);
 
     const tags = tagResponse.data.tags;
     const categories = categoryResponse.data.categories;
@@ -75,7 +77,7 @@ const actions: ActionTree<SidebarState, RootState> = {
     commit('SET_TOTAL_POST_COUNT', postCount);
     commit('SET_SIDEBAR_TAGS', tags);
     commit('SET_SIDEBAR_CATEGORIES', categories);
-  }
+  },
 };
 
 const sidebarModule: Module<SidebarState, RootState> = {
@@ -83,7 +85,7 @@ const sidebarModule: Module<SidebarState, RootState> = {
   state,
   mutations,
   getters,
-  actions
+  actions,
 };
 
 export default sidebarModule;

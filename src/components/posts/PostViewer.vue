@@ -6,11 +6,21 @@
         <div class="date-wrapper">
           <span class="created-date">{{ formatDate(post.createdAt) }}</span>
           <span v-if="post.createdAt !== post.updatedAt" class="updated-date"
-          >(업데이트){{ formatDate(post.updatedAt) }}</span
+            >(업데이트){{ formatDate(post.updatedAt) }}</span
           >
           <div class="admin-tool">
-            <button v-if="userRole == UsersRole.ADMIN" @click="deletePost(post.id)">삭제</button>
-            <button v-if="userRole == UsersRole.ADMIN" @click="updatePost(post.id)">수정</button>
+            <button
+              v-if="userRole == UsersRole.ADMIN"
+              @click="deletePost(post.id)"
+            >
+              삭제
+            </button>
+            <button
+              v-if="userRole == UsersRole.ADMIN"
+              @click="updatePost(post.id)"
+            >
+              수정
+            </button>
           </div>
         </div>
         <div class="tag-wrapper">
@@ -25,7 +35,7 @@
       </div>
     </div>
     <div class="post-content">
-      <div id="viewer" style="font-size: 16px" />
+      <div id="viewer" style="font-size: 16px"></div>
     </div>
   </div>
 </template>
@@ -49,8 +59,8 @@ const router = useRouter();
 const props = defineProps({
   post: {
     type: Object as () => Post,
-    required: true
-  }
+    required: true,
+  },
 });
 
 const userRole = computed(() => store.getters['users/getUserRole']);
@@ -59,7 +69,7 @@ onMounted(() => {
   new Viewer({
     el: document.querySelector('#viewer') as HTMLElement,
     initialValue: props.post.content,
-    plugins: [[codeSyntaxHighlight, {}]]
+    plugins: [[codeSyntaxHighlight, {}]],
   });
 });
 

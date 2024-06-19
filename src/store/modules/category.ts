@@ -5,51 +5,51 @@ import { UsersRole } from '@/types/enums';
 
 const state: CategoryState = {
   category: null,
-  pageList: []
+  pageList: [],
 };
 
 export const mutations: MutationTree<CategoryState> = {
   SET_PAGE_LIST(state, payload) {
-    const { total, page, limit } = payload;
+    const { total, page } = payload;
     const currentPage = page ? page : 1;
-    const postsPerPage = limit ? limit : 1;
+    const postsPerPage = 8;
     state.pageList = Array.from({
-      length: Math.ceil(total / postsPerPage)
+      length: Math.ceil(total / postsPerPage),
     }).map((_, index) => {
       return {
         page: index + 1,
-        currentPage
+        currentPage,
       };
     });
   },
   SET_CATEGORY(state, category) {
     state.category = category;
-  }
+  },
 };
 
 export const actions: ActionTree<CategoryState, RootState> = {
   async fetchCategory({ commit }, payload) {
     try {
-      const { id, userRole, page, limit } = payload;
+      const { id, userRole, page } = payload;
       let response;
       if (userRole == UsersRole.ADMIN) {
-        response = await getCategory(id, page, limit);
+        response = await getCategory(id, page);
       } else {
-        response = await getPublicCategory(id, page, limit);
+        response = await getPublicCategory(id, page);
       }
       const category: Category = response.data;
       const total = category.posts?.length;
       commit('SET_CATEGORY', category);
-      commit('SET_PAGE_LIST', { total, page, limit });
+      commit('SET_PAGE_LIST', { total, page });
     } catch (e) {
       console.log(e);
     }
-  }
+  },
 };
 
 const getters: GetterTree<CategoryState, RootState> = {
   getCategory: (state: CategoryState) => state.category,
-  getPageList: (state: CategoryState) => state.pageList
+  getPageList: (state: CategoryState) => state.pageList,
 };
 
 const categoryModule: Module<CategoryState, RootState> = {
@@ -57,7 +57,7 @@ const categoryModule: Module<CategoryState, RootState> = {
   state,
   mutations,
   actions,
-  getters
+  getters,
 };
 
 export default categoryModule;

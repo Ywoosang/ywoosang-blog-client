@@ -4,7 +4,7 @@
     <section class="section">
       <blog-sidebar />
       <router-view />
-      <div v-if="isSidebarOpen" class="filter" />
+      <div v-if="isSidebarOpen" class="filter"></div>
       <auth-modal :class="{ none: !isAuthModalOpen }" />
     </section>
     <error-modal />

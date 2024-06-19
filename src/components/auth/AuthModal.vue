@@ -17,7 +17,11 @@
             <section class="email">
               <h4>이메일로 {{ modalContent.title }}</h4>
               <form v-if="!isEmailSent" @submit.prevent="sendEmail">
-                <input v-model="email" type="text" placeholder="이메일을 입력하세요." />
+                <input
+                  v-model="email"
+                  type="text"
+                  placeholder="이메일을 입력하세요."
+                />
                 <button type="submit">
                   {{ modalContent.title }}
                 </button>
@@ -91,7 +95,7 @@ const sendEmail = async () => {
       return;
     }
     const authEmailDto = {
-      email: email.value
+      email: email.value,
     };
     const { data } = await sendAuthEmail(authEmailDto);
     errorMessage.value = null;
@@ -116,13 +120,13 @@ const modalContent = computed(() => {
     data = {
       title: '회원가입',
       prompt: '이미 가입 하셨나요?',
-      btnTitle: '로그인'
+      btnTitle: '로그인',
     };
   } else if (modalStatus.value === ModalStatus.SIGNIN) {
     data = {
       title: '로그인',
       prompt: '아직 가입 전이신가요?',
-      btnTitle: '회원가입'
+      btnTitle: '회원가입',
     };
   }
   return data;

@@ -69,8 +69,8 @@ export interface SidebarState {
   isOpen: boolean;
   categories: [];
   tags: [];
-  selectedCategoryId: null | number;
-  selectedTagId: null | number;
+  selectedCategoryId: number;
+  selectedTagId: number;
   postCount: number;
 }
 
@@ -84,7 +84,10 @@ export interface ErrorState {
 
 export interface UsersState {
   user: User | null;
-  publicProfile: Pick<User, 'id' | 'description' | 'nickname' | 'profileImage' | 'userId'> | null;
+  publicProfile: Pick<
+    User,
+    'id' | 'description' | 'nickname' | 'profileImage' | 'userId'
+  > | null;
   activities: any;
   pageList: any;
   totalActivitiesCount: number;
@@ -95,6 +98,7 @@ export interface Page {
   page: number;
 }
 
+// 게시물
 export interface PostState {
   postList: null | Post[];
   // 총 게시물 개수
@@ -117,6 +121,7 @@ export interface CategoryState {
   pageList: Page[];
 }
 
+// 댓글
 export interface CommentState {
   comments: any;
 }

@@ -40,7 +40,11 @@
     <div class="activity-wrapper">
       <h1>작성한 댓글({{ totalActivitesCount }})</h1>
       <ul class="activity-list">
-        <li v-for="(activity, index) in userActivities" :key="index" class="activity">
+        <li
+          v-for="(activity, index) in userActivities"
+          :key="index"
+          class="activity"
+        >
           <div class="info">
             <p>
               게시물에
@@ -56,7 +60,10 @@
             </div>
           </div>
           <div class="title">
-            <router-link :to="`/posts/${activity.post.id}`" style="font-weight: bold">
+            <router-link
+              :to="`/posts/${activity.post.id}`"
+              style="font-weight: bold"
+            >
               {{ activity.post.title }}
             </router-link>
           </div>
@@ -76,17 +83,26 @@ const store = useStore();
 const route = useRoute();
 const user = computed(() => store.getters['users/getPublicProfile']);
 const userActivities = computed(() => store.getters['users/getUserActivities']);
-const totalActivitesCount = computed(() => store.getters['users/getActivitiesCount']);
+const totalActivitesCount = computed(
+  () => store.getters['users/getActivitiesCount'],
+);
 
 onMounted(async () => {
   const page = route.query.page || 1;
   const limit = route.query.limit || 8;
-  await store.dispatch('users/fetchUserActivities', { userId: user.value.userId, page, limit });
+  await store.dispatch('users/fetchUserActivities', {
+    userId: user.value.userId,
+    page,
+    limit,
+  });
 });
 
-watch(route, async to => {
+watch(route, async (to) => {
   const page = to?.query.page || 1;
-  await store.dispatch('users/fetchUserActivities', { userId: user.value.userId, page });
+  await store.dispatch('users/fetchUserActivities', {
+    userId: user.value.userId,
+    page,
+  });
 });
 </script>
 

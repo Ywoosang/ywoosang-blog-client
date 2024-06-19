@@ -5,13 +5,29 @@ import store from './store';
 import CommentError from '@/exceptions/comment';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faBars, faXmark, faLock, faLockOpen, faCheck, faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import {
+  faBars,
+  faXmark,
+  faLock,
+  faLockOpen,
+  faCheck,
+  faCaretDown,
+} from '@fortawesome/free-solid-svg-icons';
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { faSquareGithub } from '@fortawesome/free-brands-svg-icons';
 import '@/styles/default.css';
 import '@/styles/tui.css';
 
-library.add(faBars, faXmark, faLock, faLockOpen, faSquareGithub, faPenToSquare, faCheck, faCaretDown);
+library.add(
+  faBars,
+  faXmark,
+  faLock,
+  faLockOpen,
+  faSquareGithub,
+  faPenToSquare,
+  faCheck,
+  faCaretDown,
+);
 
 const app = createApp(App);
 

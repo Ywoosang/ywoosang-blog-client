@@ -1,7 +1,12 @@
 <template>
   <div class="wrapper">
     <div class="write">
-      <textarea ref="commentTextarea" v-model="content" placeholder="댓글을 작성하세요" @input="adjustTextareaHeight" />
+      <textarea
+        ref="commentTextarea"
+        v-model="content"
+        placeholder="댓글을 작성하세요"
+        @input="adjustTextareaHeight"
+      ></textarea>
       <div class="btn-wrapper">
         <button class="create" @click="submitComment">댓글 작성</button>
       </div>
@@ -22,7 +27,7 @@ const submitComment = async () => {
   const postId = store.getters['post/getPost'].id;
   const payload: CreateCommentDto = {
     content: content.value,
-    postId
+    postId,
   };
   const commentId = await store.dispatch('comment/createComment', payload);
   content.value = '';

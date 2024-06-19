@@ -7,15 +7,30 @@
     </div>
     <div class="form-group">
       <label for="userId">아이디</label>
-      <input id="userId" v-model="userId" type="text" placeholder="아이디를 입력해 주세요" />
+      <input
+        id="userId"
+        v-model="userId"
+        type="text"
+        placeholder="아이디를 입력해 주세요"
+      />
     </div>
     <div class="form-group">
       <label for="nickname">닉네임</label>
-      <input id="nickname" v-model="nickname" type="text" placeholder="닉네임을 입력해 주세요" />
+      <input
+        id="nickname"
+        v-model="nickname"
+        type="text"
+        placeholder="닉네임을 입력해 주세요"
+      />
     </div>
     <div class="form-group">
       <label for="description">소개</label>
-      <input id="description" v-model="description" type="text" placeholder="본인을 소개해 주세요" />
+      <input
+        id="description"
+        v-model="description"
+        type="text"
+        placeholder="본인을 소개해 주세요"
+      />
     </div>
     <div class="btn-wrapper">
       <button class="btn" type="submit">회원가입</button>
@@ -43,17 +58,17 @@ const description = ref<string>('');
 // 유효성 검사
 const idValid = reactive({
   valid: true,
-  message: ''
+  message: '',
 });
 
 const nicknameValid = reactive({
   valid: true,
-  message: ''
+  message: '',
 });
 
 const descriptionValid = reactive({
   valid: true,
-  message: ''
+  message: '',
 });
 
 // 미들웨어에서 설정한 회원가입할 사용자 이메일
@@ -66,7 +81,7 @@ const submitForm = async () => {
       email: store.getters['auth/getEmail'],
       userId: userId.value,
       nickname: nickname.value,
-      description: description.value
+      description: description.value,
     };
     await signUp(data);
     const hash = route.query.hash;
@@ -79,7 +94,7 @@ const submitForm = async () => {
       const details = e.response.data.details;
       let loginRequired = false;
       if (Array.isArray(details)) {
-        details.forEach(detail => {
+        details.forEach((detail) => {
           switch (detail.field) {
             case 'userId':
               idValid.valid = false;
@@ -154,7 +169,7 @@ const formValidCheck = (): boolean => {
   validateDescription();
   let isAllFormValid = true;
   const validateResults = [idValid, nicknameValid, descriptionValid];
-  validateResults.forEach(field => {
+  validateResults.forEach((field) => {
     if (!field.valid) {
       isAllFormValid = false;
       store.commit('error/ADD_MODAL', field.message);

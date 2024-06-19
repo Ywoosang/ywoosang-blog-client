@@ -2,7 +2,10 @@
   <div class="pagination-wrapper">
     <ul class="pagination">
       <li v-for="(pageItem, index) in props.pageList" :key="index" class="page">
-        <router-link :to="'posts?page=' + pageItem.page" :class="{ current: pageItem.page == pageItem.currentPage }">
+        <router-link
+          :to="'posts?page=' + pageItem.page"
+          :class="{ current: pageItem.page == pageItem.currentPage }"
+        >
           {{ pageItem.page }}
         </router-link>
       </li>
@@ -18,8 +21,8 @@ const props = defineProps({
   pageList: {
     type: Array as () => Page[],
     required: true,
-    default: () => []
-  }
+    default: () => [],
+  },
 });
 </script>
 

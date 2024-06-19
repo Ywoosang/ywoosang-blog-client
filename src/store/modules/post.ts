@@ -1,6 +1,11 @@
 import { Module, MutationTree, ActionTree, GetterTree } from 'vuex';
 import { RootState, PostState, Post } from '@/types/interfaces';
-import { getPublicPosts, getPosts, getPost, getPublicPost } from '@/services/api/post';
+import {
+  getPublicPosts,
+  getPosts,
+  getPost,
+  getPublicPost,
+} from '@/services/api/post';
 import { UsersRole } from '@/types/enums';
 
 const state: PostState = {
@@ -9,7 +14,7 @@ const state: PostState = {
   pageList: [],
   // 게시물 조회
   post: null,
-  editingPost: null
+  editingPost: null,
 };
 
 export const mutations: MutationTree<PostState> = {
@@ -23,11 +28,11 @@ export const mutations: MutationTree<PostState> = {
     const { total, page } = payload;
     const currentPage = page ? page : 1;
     state.pageList = Array.from({
-      length: Math.ceil(total / 8)
+      length: Math.ceil(total / 8),
     }).map((_, index) => {
       return {
         page: index + 1,
-        currentPage
+        currentPage,
       };
     });
   },
@@ -37,23 +42,27 @@ export const mutations: MutationTree<PostState> = {
   },
   SET_EDITING_POST(state, post) {
     state.editingPost = post;
-  }
+  },
 };
 
 export const actions: ActionTree<PostState, RootState> = {
+  // 서버에서 게시글 목록을 불러온다.
   async fetchPostList({ commit }, payload) {
     const { userRole, page } = payload;
+
     let response;
     if (userRole == UsersRole.ADMIN) {
       response = await getPosts(page);
     } else {
-      response = await getPublicPosts(page);
+      response = await getPublicPosts(Math.abs(page));
     }
     const { posts, total } = response.data;
+
     commit('SET_POST_LIST', posts);
     commit('SET_TOTAL', total);
     commit('SET_PAGE_LIST', { total, page });
   },
+  //
   async fetchPost({ commit }, payload) {
     let response;
     const { userRole, id } = payload;
@@ -71,7 +80,7 @@ export const actions: ActionTree<PostState, RootState> = {
     const response = await getPost(id);
     const post = response.data;
     commit('SET_EDITING_POST', post);
-  }
+  },
 };
 
 const getters: GetterTree<PostState, RootState> = {
@@ -79,7 +88,7 @@ const getters: GetterTree<PostState, RootState> = {
   getTotal: (state: PostState) => state.total,
   getPageList: (state: PostState) => state.pageList,
   getPost: (state: PostState) => state.post,
-  getEditingPost: (state: PostState) => state.editingPost
+  getEditingPost: (state: PostState) => state.editingPost,
 };
 
 const postModule: Module<PostState, RootState> = {
@@ -87,7 +96,7 @@ const postModule: Module<PostState, RootState> = {
   state,
   mutations,
   actions,
-  getters
+  getters,
 };
 
 export default postModule;

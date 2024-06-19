@@ -1,19 +1,19 @@
 export enum UsersRole {
   ADMIN = 'ADMIN',
-  USER = 'USER'
+  USER = 'USER',
 }
 
 export enum UsersStatus {
   PENDING_VERIFICATION = 'PENDING_VERIFICATION',
-  ACTIVE = 'ACTIVE'
+  ACTIVE = 'ACTIVE',
 }
 
 export const enum PostStatus {
   PRIVATE = 'PRIVATE',
-  PUBLIC = 'PUBLIC'
+  PUBLIC = 'PUBLIC',
 }
 
 export const enum ModalStatus {
   SIGNIN = 0,
-  SIGNUP = 1
+  SIGNUP = 1,
 }

@@ -12,7 +12,13 @@
           </div>
         </router-link>
         <div v-if="isAuthorized" class="btn-wrapper">
-          <button v-if="!editMode" class="btn-top update-btn" @click="startEdit">수정</button>
+          <button
+            v-if="!editMode"
+            class="btn-top update-btn"
+            @click="startEdit"
+          >
+            수정
+          </button>
           <button class="btn-top delete-btn" @click="deleteReply">삭제</button>
         </div>
       </div>
@@ -89,7 +95,10 @@ const deleteReply = async () => {
 };
 
 const isAuthorized = computed(() => {
-  return user.value && (reply.user.id === user.value.id || user.value.role === 'ADMIN');
+  return (
+    user.value &&
+    (reply.user.id === user.value.id || user.value.role === 'ADMIN')
+  );
 });
 </script>
 

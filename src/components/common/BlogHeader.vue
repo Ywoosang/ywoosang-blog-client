@@ -1,7 +1,9 @@
 <template>
   <header>
     <div class="logo-container" :class="{ visible: isSidebarOpen }">
-      <a href="/" class="logo"> 윤우상<span style="font-weight: 300">블로그</span> </a>
+      <a href="/" class="logo">
+        윤우상<span style="font-weight: 300">블로그</span>
+      </a>
     </div>
     <div class="side-bar-btn">
       <span @click="setSidebar">
@@ -9,8 +11,12 @@
       </span>
     </div>
     <div v-if="!isLoggedIn" class="user-actions">
-      <button class="r-btn btn-signin" @click="openModal(signInStatus)">로그인</button>
-      <button class="r-btn btn-signup" @click="openModal(signUpStatus)">회원가입</button>
+      <button class="r-btn btn-signin" @click="openModal(signInStatus)">
+        로그인
+      </button>
+      <button class="r-btn btn-signup" @click="openModal(signUpStatus)">
+        회원가입
+      </button>
     </div>
     <div v-if="isLoggedIn && user" class="user-profile">
       <div class="avatar-wrapper">
@@ -24,8 +30,15 @@
           <router-link v-if="isAdmin" to="/admin" class="menu-item">
             관리<span class="btn admin">admin</span>
           </router-link>
-          <router-link :to="'/profile/' + user.userId" class="menu-item"> 활동내역 </router-link>
-          <router-link :to="'/profile/' + user.userId + '/manage'" class="menu-item"> 설정 </router-link>
+          <router-link :to="'/profile/' + user.userId" class="menu-item">
+            활동내역
+          </router-link>
+          <router-link
+            :to="'/profile/' + user.userId + '/manage'"
+            class="menu-item"
+          >
+            설정
+          </router-link>
           <button class="menu-item" @click="signout">로그아웃</button>
         </div>
       </div>
@@ -43,7 +56,9 @@ const store = useStore();
 const signInStatus = ModalStatus.SIGNIN;
 const signUpStatus = ModalStatus.SIGNUP;
 const isLoggedIn = computed(() => store.getters['auth/isLoggedIn']);
-const isDropdownOpen = computed(() => store.getters['header/getDropdownStatus']);
+const isDropdownOpen = computed(
+  () => store.getters['header/getDropdownStatus'],
+);
 const user = computed(() => store.getters['users/getUser']);
 const isAdmin = computed(() => user.value?.role === UsersRole.ADMIN);
 const isSidebarOpen = computed(() => store.getters['sidebar/getSidebarStatus']);

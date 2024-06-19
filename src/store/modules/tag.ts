@@ -6,7 +6,7 @@ import { Tag } from '@/types/interfaces';
 
 const state: TagState = {
   tag: null,
-  pageList: []
+  pageList: [],
 };
 
 export const mutations: MutationTree<TagState> = {
@@ -15,42 +15,42 @@ export const mutations: MutationTree<TagState> = {
     const currentPage = page ? page : 1;
     const postsPerPage = limit ? limit : 1;
     state.pageList = Array.from({
-      length: Math.ceil(total / postsPerPage)
+      length: Math.ceil(total / postsPerPage),
     }).map((_, index) => {
       return {
         page: index + 1,
-        currentPage
+        currentPage,
       };
     });
   },
   SET_TAG(state, tag) {
     state.tag = tag;
-  }
+  },
 };
 
 export const actions: ActionTree<TagState, RootState> = {
   async fetchTag({ commit }, payload) {
     try {
-      const { id, userRole, page, limit } = payload;
+      const { id, userRole, page } = payload;
       let response;
       if (userRole == UsersRole.ADMIN) {
-        response = await getTag(id, page, limit);
+        response = await getTag(id, page);
       } else {
-        response = await getPublicTag(id, page, limit);
+        response = await getPublicTag(id, page);
       }
       const tag: Tag = response.data;
       const total = tag.posts?.length;
       commit('SET_TAG', tag);
-      commit('SET_PAGE_LIST', { total, page, limit });
+      commit('SET_PAGE_LIST', { total, page });
     } catch (e) {
       console.log(e);
     }
-  }
+  },
 };
 
 const getters: GetterTree<TagState, RootState> = {
   getTag: (state: TagState) => state.tag,
-  getPageList: (state: TagState) => state.pageList
+  getPageList: (state: TagState) => state.pageList,
 };
 
 const tagModule: Module<TagState, RootState> = {
@@ -58,7 +58,7 @@ const tagModule: Module<TagState, RootState> = {
   state,
   mutations,
   actions,
-  getters
+  getters,
 };
 
 export default tagModule;

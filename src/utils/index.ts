@@ -1,4 +1,5 @@
 import CommentError from '@/exceptions/comment';
+import RouteQuery from '@/types/route-query';
 
 export const isServerError = (statusCode: number) => {
   return statusCode >= 500 && statusCode < 600;
@@ -12,7 +13,9 @@ export const formatDate = (date: string) => {
   const currentDate: Date = new Date();
   const targetDate: Date = new Date(date);
 
-  const diffInSeconds: number = Math.floor((currentDate.getTime() - targetDate.getTime()) / 1000);
+  const diffInSeconds: number = Math.floor(
+    (currentDate.getTime() - targetDate.getTime()) / 1000,
+  );
 
   if (diffInSeconds < 60) {
     return '방금 전';
@@ -55,4 +58,8 @@ export const validateCommentLength = (content: string): void => {
   if (content.length > maxLength) {
     throw new CommentError('댓글 내용이 너무 깁니다.');
   }
+};
+
+export const getPageNumber = (queryPage: RouteQuery): number => {
+  return queryPage ? parseInt(queryPage) : 1;
 };

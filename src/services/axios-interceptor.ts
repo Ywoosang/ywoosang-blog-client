@@ -4,11 +4,11 @@ import { BASE_URL } from '@/consts';
 const service = axios.create({
   baseURL: BASE_URL,
   timeout: 50000,
-  withCredentials: true
+  withCredentials: true,
 });
 
 service.interceptors.request.use(
-  config => {
+  (config) => {
     const accessToken = localStorage.getItem('accessToken');
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
@@ -16,13 +16,13 @@ service.interceptors.request.use(
 
     return config;
   },
-  error => {
+  (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 service.interceptors.response.use(
-  response => {
+  (response) => {
     return response;
   },
   async (error: AxiosError) => {
@@ -36,8 +36,8 @@ service.interceptors.response.use(
             `${BASE_URL}/auth/refresh`,
             { refreshToken },
             {
-              withCredentials: true
-            }
+              withCredentials: true,
+            },
           );
           const newAccessToken = response.data.accessToken;
           localStorage.setItem('accessToken', newAccessToken);
@@ -52,7 +52,7 @@ service.interceptors.response.use(
       return Promise.reject(error);
     }
     return Promise.reject(error);
-  }
+  },
 );
 
 export default service;

@@ -3,43 +3,49 @@ import request from '@/services/axios-interceptor';
 export const getSidebarCategories = () => {
   return request({
     url: '/categories',
-    method: 'GET'
+    method: 'GET',
   });
 };
 
 export const getSidebarPublicCategories = () => {
   return request({
     url: '/categories/public',
-    method: 'GET'
+    method: 'GET',
   });
 };
 
-export const getCategory = (id, page, limit) => {
+export const getCategory = (id, page) => {
   return request({
-    url: `/categories/${id}?page=${page}&limit=${limit}`,
-    method: 'GET'
+    url: `/categories/${id}`,
+    method: 'GET',
+    params: {
+      page,
+    },
   });
 };
 
-export const getPublicCategory = (id, page, limit) => {
+export const getPublicCategory = (id, page) => {
   return request({
-    url: `/categories/public/${id}?page=${page}&limit=${limit}`,
-    method: 'GET'
+    url: `/categories/public/${id}`,
+    method: 'GET',
+    params: {
+      page,
+    },
   });
 };
 
 export const getCategories = () => {
   return request({
     url: '/categories/list',
-    method: 'GET'
+    method: 'GET',
   });
 };
 
-export const createCategory = data => {
+export const createCategory = (data) => {
   return request({
     url: '/categories',
     method: 'POST',
-    data
+    data,
   });
 };
 
@@ -47,13 +53,13 @@ export const updateCategory = (id, data) => {
   return request({
     url: `categories/${id}`,
     method: 'PUT',
-    data
+    data,
   });
 };
 
-export const deleteCategory = id => {
+export const deleteCategory = (id) => {
   return request({
     url: `/categories/${id}`,
-    method: 'DELETE'
+    method: 'DELETE',
   });
 };

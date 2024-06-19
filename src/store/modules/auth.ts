@@ -8,7 +8,7 @@ const state: AuthState = {
   isLoggedIn: null,
   modalStatus: ModalStatus.SIGNIN,
   //
-  email: null
+  email: null,
 };
 
 const mutations: MutationTree<AuthState> = {
@@ -29,7 +29,7 @@ const mutations: MutationTree<AuthState> = {
   },
   SET_EMAIL(state, email: string) {
     state.email = email;
-  }
+  },
 };
 
 const actions = {
@@ -39,7 +39,7 @@ const actions = {
   },
   async fetchLogin({ commit }, hash: string) {
     const authLoginDto = {
-      hash
+      hash,
     };
     const response = await signIn(authLoginDto);
     const { accessToken, refreshToken } = response.data;
@@ -55,14 +55,14 @@ const actions = {
   logout({ commit }) {
     commit('SET_IS_LOGGED_IN', false);
     localStorage.clear();
-  }
+  },
 };
 
 const getters: GetterTree<AuthState, RootState> = {
   isLoggedIn: (state: AuthState) => state.isLoggedIn,
   isModalOpen: (state: AuthState) => state.isModalOpen,
   getModalStatus: (state: AuthState) => state.modalStatus,
-  getEmail: (state: AuthState) => state.email
+  getEmail: (state: AuthState) => state.email,
 };
 
 const authModule: Module<AuthState, RootState> = {
@@ -70,7 +70,7 @@ const authModule: Module<AuthState, RootState> = {
   state,
   mutations,
   actions,
-  getters
+  getters,
 };
 
 export default authModule;
