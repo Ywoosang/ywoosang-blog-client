@@ -1,0 +1,98 @@
+/* CSS Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 전역 폰트 사이즈 및 라인 높이 설정 */
+html {
+  font-size: 14px; /* 모바일 기본 폰트 사이즈 */
+}
+
+body {
+  line-height: 1.4;
+  font-family: Arial, sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* h 태그, p 태그 폰트 사이즈 및 라인 높이 설정 */
+h1 {
+  font-size: 2rem;
+  line-height: 2.4rem;
+}
+
+h2 {
+  font-size: 1.75rem;
+  line-height: 2.1rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+  line-height: 1.8rem;
+}
+
+h4 {
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+}
+
+h5 {
+  font-size: 1rem;
+  line-height: 1.2rem;
+}
+
+h6 {
+  font-size: 0.875rem;
+  line-height: 1.05rem;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.4rem;
+}
+
+/* 데스크탑 폰트 사이즈 및 라인 높이 설정 */
+@media (min-width: 600px) {
+  html {
+    font-size: 16px; /* 데스크탑 기본 폰트 사이즈 */
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    line-height: 3rem;
+  }
+
+  h2 {
+    font-size: 2.25rem;
+    line-height: 2.7rem;
+  }
+
+  h3 {
+    font-size: 2rem;
+    line-height: 2.4rem;
+  }
+
+  h4 {
+    font-size: 1.75rem;
+    line-height: 2.1rem;
+  }
+
+  h5 {
+    font-size: 1.5rem;
+    line-height: 1.8rem;
+  }
+
+  h6 {
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+  }
+
+  p {
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+  }
+}
