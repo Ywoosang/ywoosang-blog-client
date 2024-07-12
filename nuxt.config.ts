@@ -22,4 +22,16 @@ export default defineNuxtConfig({
     //   animations: [],
     // },
   },
+  nitro: {
+    routeRules: {
+      // 관리자 모드는 CSR 로 처리
+      // toast-ui editor 가 SSR 을 지원하지 않아 reload시 에러가 나는것을 방지
+      '/admin/**': {
+        ssr: false,
+      },
+    },
+  },
+  build: {
+    transpile: ['@toast-ui/editor'],
+  },
 });

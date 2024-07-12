@@ -66,7 +66,9 @@ const isPublic = ref(true);
 const router = useRouter();
 
 onMounted(() => {
-  editor.value = toastEditorInstance(editor.value, '100vh');
+  const content = '###테스트\n####테스트2';
+
+  editor.value = toastEditorInstance(editor.value, '100vh', content);
 });
 
 const submitPost = () => {

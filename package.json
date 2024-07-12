@@ -14,13 +14,20 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.16.11",
+    "@toast-ui/editor": "^3.2.2",
+    "@toast-ui/editor-plugin-code-syntax-highlight": "^3.1.0",
+    "axios": "^1.7.2",
+    "marked": "^13.0.0",
     "nuxt": "^3.12.2",
+    "prismjs": "^1.29.0",
     "quasar": "^2.16.4",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
+    "@types/dompurify": "^3.0.5",
+    "@types/prismjs": "^1.26.4",
     "@typescript-eslint/eslint-plugin": "^7.13.1",
     "@typescript-eslint/parser": "^7.13.1",
     "eslint": "^8.57.0",

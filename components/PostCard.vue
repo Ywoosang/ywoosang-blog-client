@@ -1,6 +1,6 @@
 <template>
   <q-card
-    style="max-width: 800px; border-bottom: 1px solid #ddd"
+    style="border-bottom: 1px solid #ddd"
     class="post_item column q-mb-md no-shadow full-width no-border-radius"
   >
     <div class="row no-wrap reverse">

@@ -2,7 +2,7 @@
   <q-layout view="hHh LpR fFf">
     <BlogHeader />
     <BlogSidebar />
-    <q-page-container>
+    <q-page-container class="row justify-center">
       <slot></slot>
     </q-page-container>
     <q-drawer :width="240" show-if-above side="right" />

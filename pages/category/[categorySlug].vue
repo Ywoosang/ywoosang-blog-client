@@ -1,5 +1,5 @@
 <template>
-  <q-page padding class="column items-center">
+  <q-page padding class="column items-center" style="max-width: 900px">
     <PostCard v-for="i in 8" :key="i" />
   </q-page>
 </template>

@@ -1,0 +1,10 @@
+.toastui-editor-contents ol > li::before {
+  content: '.' counter(li);
+  margin-left: -28px;
+  width: 24px;
+  text-align: right;
+  direction: rtl;
+  color: #aaa;
+  font-size: 16px;
+  margin-top: 3px;
+}
